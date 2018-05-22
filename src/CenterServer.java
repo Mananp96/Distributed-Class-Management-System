@@ -1,6 +1,12 @@
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class CenterServer implements CenterServerInterface {
+public class CenterServer extends UnicastRemoteObject implements CenterServerInterface {
+
+	public CenterServer() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public boolean createTRecord(String firstName, String lastName, String address, String phone,
