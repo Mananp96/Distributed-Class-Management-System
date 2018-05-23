@@ -10,11 +10,18 @@ import java.util.UUID;
  */
 public class Record {
 	
-	public String recordId;
 	
-	public String firstName;
+	private String recordId;
 	
-	public String lastName;
+	private String firstName;
+	
+	private String lastName;
+	
+	public Record(String recordId, String firstName, String lastName) {
+		this.recordId = recordId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 
 	public String getRecordId() {
 		return recordId;
