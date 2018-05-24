@@ -16,6 +16,15 @@ public class TeacherRecord extends Record {
 	
 	public Location location;
 
+	public TeacherRecord(String recordId, String firstName, String lastName, String address, String phone,
+			String[] specialization, Location location) {
+		super(recordId, firstName, lastName);
+		this.address = address;
+		this.phone = phone;
+		this.specialization = specialization;
+		this.location = location;
+	}
+
 	public String getAddress() {
 		return address;
 	}

@@ -17,17 +17,16 @@ public class Server {
 	public static void main(String[] args) throws Exception {
 		
 			
-		CenterServer mtl = new CenterServer();
-		CenterServer lvl = new CenterServer();
-		CenterServer ddl = new CenterServer();
+		CenterServerInterface mtl = new CenterServer("MTL");
+		CenterServerInterface lvl = new CenterServer("LVL");
+		CenterServerInterface ddl = new CenterServer("DDL");
 		
 		
 		Registry registry = LocateRegistry.createRegistry(2964);
 		registry.bind("MTL", mtl);
 		registry.bind("LVL", lvl);
 		registry.bind("DDL", ddl);
-		
-		
+				
 		System.out.println("Server Started");
 	}
 

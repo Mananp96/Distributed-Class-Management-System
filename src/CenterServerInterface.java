@@ -11,16 +11,16 @@ public interface CenterServerInterface extends Remote {
 		String[] specialization,
 		Location location,
 		String managerId
-	) throws RemoteException;
+	) throws RemoteException,RequiredValueException;
 	
 	public boolean createSRecord(
 		String firstName,
 		String lastName,
-		String[] coirseRegistered,
+		String[] courseRegistered,
 		Status status,
 		String statusDate,
 		String managerId
-	) throws RemoteException;
+	) throws RemoteException,RequiredValueException;
 	
 	public String getRecordCount(String managerId) throws RemoteException;
 	
@@ -29,5 +29,5 @@ public interface CenterServerInterface extends Remote {
 		String fieldName,
 		String[] newValue,
 		String managerId
-	) throws RemoteException;
+	) throws RemoteException,RequiredValueException;
 }
