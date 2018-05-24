@@ -21,7 +21,7 @@ public class ClientManager {
 		
 	public static void main(String[] args) throws IOException{
 		String managerId = userInput("Enter Manager ID:");
-		CenterServer centerServer = new CenterServer();
+		CenterServer centerServer = new CenterServer("MTL");
 		
 		menu();
 		Location location;
