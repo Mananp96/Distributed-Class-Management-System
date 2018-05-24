@@ -19,7 +19,7 @@ public class ClientManager {
 		return s.nextLine();
 	}
 		
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException, RequiredValueException{
 		String managerId = userInput("Enter Manager ID:");
 		CenterServer centerServer = new CenterServer("MTL");
 		
