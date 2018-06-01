@@ -116,9 +116,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                 list.add(record);
                 return true;
             } else {
-                if (list != null) {
-                    list.add(record);
-                }
+                list.add(record);
                 this.recordData.put(firstCharacter, list);
                 return true;
             }
