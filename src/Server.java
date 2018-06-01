@@ -74,19 +74,27 @@ public class Server {
         }
     }
 
-    private void addTeachersToServer() throws IOException, ParseException {
+    private void addTeachersToServer() throws IOException, ParseException, RequiredValueException {
         JSONParser parser = new JSONParser();
         JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("resources/teacherData.json"));
         for (Object object : jsonArray) {
+            Location location;
             JSONObject teacher = (JSONObject) object;
             String firstName = (String) teacher.get("firstName");
             String lastName = (String) teacher.get("lastName");
             String recordId = (String) teacher.get("id");
             String address = (String) teacher.get("address");
-            String location = (String) teacher.get("location");
+            String loc = (String) teacher.get("location");
             String phone = (String) teacher.get("phone");
             String specialization = (String) teacher.get("specialization");
 
+            if(loc.equalsIgnoreCase("MLT")){
+                location = Location.MTL;
+            }else if(loc.equalsIgnoreCase("LVL")){
+                location = Location.LVL;
+            }else{
+                location = Location.DDO;
+            }
 
             if (teacher.get("location").toString().substring(0, 3).equalsIgnoreCase("MTL")) {
                 ((CenterServer) this.mtl).createTRecord(firstName,lastName,address,phone,specialization,location,"default",recordId);
