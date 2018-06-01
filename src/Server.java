@@ -55,7 +55,7 @@ public class Server {
             String firstName = (String) student.get("firstName");
             String lastName = (String) student.get("lastName");
             String recordId = (String) student.get("id");
-            String[] courses = (String[]) student.get("coursesRegistered");
+            String[] courses = (String[]) student.get("coursesRegistered").toString().replace("},{", " ,").split(" ");;
             String statusDate = (String) student.get("statusDate");
             String stat = (String) student.get("status");
             if (Objects.equals(stat, "Active")) {

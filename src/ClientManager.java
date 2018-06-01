@@ -25,28 +25,32 @@ public class ClientManager {
 			boolean regionCheck = (serverRegion.equalsIgnoreCase("MTL") || serverRegion.equalsIgnoreCase("LVL") || serverRegion.equalsIgnoreCase("DDO"));
 			
 			boolean idCheck = false;
+
 			
 			try {
 				if(lengthCheck) {
 					String id = managerId.substring(3,7);
-					int number = Integer.parseInt(id);
+					Integer.parseInt(id);
 					idCheck = true;
 				}
-			} catch (Exception e) {}
+			} catch (Exception ignored) {}
 			
 			if(!(lengthCheck && regionCheck && idCheck)) {
 				System.out.println("Invalid Manager ID \n Please try again...");
 			} else { 
 				region = serverRegion.toUpperCase();
 				this.managerId = managerId;
-				break; 
+                Registry registry = LocateRegistry.getRegistry(2964);
+                server = (CenterServerInterface) registry.lookup(region);
+				if(server.managerExists(this.managerId)){
+				    break;
+                }
+                System.out.println("Invalid Manager ID \n Please try again...");
 			}
 		}
 		
-		if(! region.isEmpty()) {
-			Registry registry = LocateRegistry.getRegistry(2964);
-		
-			server = (CenterServerInterface) registry.lookup(region);
+		if(!region.isEmpty()) {
+
 			while (true) {
 				System.out.println("********************************");
 				System.out.println("1. Add Teacher Record");

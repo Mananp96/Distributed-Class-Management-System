@@ -30,4 +30,6 @@ public interface CenterServerInterface extends Remote {
 		String[] newValue,
 		String managerId
 	) throws RemoteException,RequiredValueException;
+
+	public boolean managerExists(String id) throws RemoteException;
 }

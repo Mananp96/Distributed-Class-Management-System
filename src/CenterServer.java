@@ -3,6 +3,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 public class CenterServer extends UnicastRemoteObject implements CenterServerInterface {
@@ -18,6 +19,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 		super();
 		this.name = name;
 		recordData = new HashMap<String,ArrayList<Record>>();
+		serverManagerList = new ArrayList<Manager>();
 	}
 
 	
@@ -128,12 +130,21 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         }
     }
 
-    public boolean addManagerToList(Manager manager){
+
+    public void addManagerToList(Manager manager){
 	    if (manager !=null){
             serverManagerList.add(manager);
-            return true;
         }
-	    return false;
+    }
+
+    @Override
+    public boolean managerExists(String id) throws RemoteException{
+        for (Manager manager: serverManagerList){
+            if(manager.getManagerID().equals(id)){
+                return true;
+            }
+        }
+        return false;
     }
 
 
