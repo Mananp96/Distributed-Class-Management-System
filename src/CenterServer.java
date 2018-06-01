@@ -9,7 +9,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 	
 	
 	private HashMap<String, ArrayList<Record>> recordData;
-	
+
 	private String name;
 
 	public CenterServer(String name) throws SecurityException, IOException {
@@ -50,23 +50,8 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 		
 		String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 		
-		
-		if(this.recordData.containsKey(firstCharacter)) {
-			ArrayList<Record> list = this.recordData.get(firstCharacter);
-			if(list != null && list.size() > 0) {
-				list.add(record);
-				return true;
-			} else {
-				list.add(record);
-				this.recordData.put(firstCharacter, list);
-				return true;
-			}
-		} else {
-			ArrayList<Record> list = new ArrayList<Record>();
-			list.add(record);
-			this.recordData.put(firstCharacter, list);
-			return true;
-		}
+		return addToRecordData(firstCharacter, record);
+
 	}
 
 	@Override
@@ -97,22 +82,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 		
 		String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 		
-		if(this.recordData.containsKey(firstCharacter)) {
-			ArrayList<Record> list = this.recordData.get(firstCharacter);
-			if(list != null && list.size() > 0) {
-				list.add(record);
-				return true;
-			} else {
-				list.add(record);
-				this.recordData.put(firstCharacter, list);
-				return true;
-			}
-		} else {
-			ArrayList<Record> list = new ArrayList<Record>();
-			list.add(record);
-			this.recordData.put(firstCharacter, list);
-			return true;
-		}
+		return addToRecordData(firstCharacter, record);
 	}
 
 	@Override
@@ -134,5 +104,26 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
 		return 10000 + random.nextInt(89999);
 	}
+
+    private boolean addToRecordData(String firstCharacter, Record record) {
+        if(this.recordData.containsKey(firstCharacter)) {
+            ArrayList<Record> list = this.recordData.get(firstCharacter);
+            if(list != null && list.size() > 0) {
+                list.add(record);
+                return true;
+            } else {
+                if (list != null) {
+                    list.add(record);
+                }
+                this.recordData.put(firstCharacter, list);
+                return true;
+            }
+        } else {
+            ArrayList<Record> list = new ArrayList<Record>();
+            list.add(record);
+            this.recordData.put(firstCharacter, list);
+            return true;
+        }
+    }
 
 }
