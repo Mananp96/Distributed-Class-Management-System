@@ -106,8 +106,7 @@ public class ClientManager {
 		String lastName = userInput("Enter Last Name:");
 		String address = userInput("Enter Address:");
 		String phone = userInput("Enter Phone:");
-		String spec = userInput("Enter Specialization:");
-		String[] specialization = spec.split(",");
+		String specialization = userInput("Enter Specialization:");
 		String loc = userInput("Enter Server location:");
 
 		if (loc == "MTL") {

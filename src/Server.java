@@ -20,7 +20,6 @@ public class Server {
     private CenterServerInterface ddo;
 
 
-
     /**
      * @param args
      */

@@ -22,7 +22,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
 	
 	public boolean createTRecord(String firstName, String lastName, String address, String phone,
-			String[] specialization, Location location, String managerId, String recordId) throws RemoteException,RequiredValueException {
+			String specialization, Location location, String managerId, String recordId) throws RemoteException,RequiredValueException {
 		
 		if(firstName == null || firstName.isEmpty()) {
 			throw new RequiredValueException("First name required");
@@ -40,8 +40,8 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 			throw new RequiredValueException("Phone required");
 		}
 		
-		if(specialization == null || specialization.length < 1) {
-			throw new RequiredValueException("Registed Course required");
+		if(specialization == null || specialization.isEmpty()) {
+			throw new RequiredValueException("Specialization required");
 		}
 		
 		if(location == null) {
@@ -139,7 +139,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
 	@Override
 	public boolean createTRecord(String firstName, String lastName, String address, String phone,
-			String[] specialization, Location location, String managerId)
+			String specialization, Location location, String managerId)
 			throws RemoteException, RequiredValueException {
 		return this.createTRecord(firstName, lastName, address, phone, specialization, location, managerId, "TR"+generateNumber());
 	}
