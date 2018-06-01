@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -21,9 +20,9 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 		recordData = new HashMap<String,ArrayList<Record>>();
 	}
 
-	@Override
+	
 	public boolean createTRecord(String firstName, String lastName, String address, String phone,
-			String[] specialization, Location location, String managerId) throws RemoteException,RequiredValueException {
+			String[] specialization, Location location, String managerId, String recordId) throws RemoteException,RequiredValueException {
 		
 		if(firstName == null || firstName.isEmpty()) {
 			throw new RequiredValueException("First name required");
@@ -49,7 +48,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 			throw new RequiredValueException("Status required");
 		}
 
-		Record record = new TeacherRecord("TR"+generateNumber(),firstName,lastName,address,phone,specialization,location);
+		Record record = new TeacherRecord(recordId,firstName,lastName,address,phone,specialization,location);
 		
 		String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 		
@@ -57,9 +56,9 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
 	}
 
-	@Override
+	
 	public boolean createSRecord(String firstName, String lastName, String[] courseRegistered, Status status,
-			String statusDate, String managerId) throws RemoteException,RequiredValueException {
+			String statusDate, String managerId, String recordId) throws RemoteException,RequiredValueException {
 		
 		if(firstName == null || firstName.isEmpty()) {
 			throw new RequiredValueException("First name required");
@@ -81,7 +80,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 			throw new RequiredValueException("Status required");
 		}
 
-		Record record = new StudentRecord("SR"+generateNumber(),firstName,lastName,courseRegistered,status,statusDate);
+		Record record = new StudentRecord(recordId,firstName,lastName,courseRegistered,status,statusDate);
 		
 		String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 		
@@ -136,4 +135,19 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         }
 	    return false;
     }
+
+
+	@Override
+	public boolean createTRecord(String firstName, String lastName, String address, String phone,
+			String[] specialization, Location location, String managerId)
+			throws RemoteException, RequiredValueException {
+		return this.createTRecord(firstName, lastName, address, phone, specialization, location, managerId, "TR"+generateNumber());
+	}
+
+
+	@Override
+	public boolean createSRecord(String firstName, String lastName, String[] courseRegistered, Status status,
+			String statusDate, String managerId) throws RemoteException, RequiredValueException {
+		return this.createSRecord(firstName, lastName, courseRegistered, status, statusDate, managerId, "SR"+generateNumber());
+	}
 }
