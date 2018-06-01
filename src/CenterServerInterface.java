@@ -8,7 +8,7 @@ public interface CenterServerInterface extends Remote {
 		String lastName,
 		String address,
 		String phone,
-		String[] specialization,
+		String specialization,
 		Location location,
 		String managerId
 	) throws RemoteException,RequiredValueException;

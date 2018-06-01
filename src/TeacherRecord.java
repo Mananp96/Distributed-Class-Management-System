@@ -12,12 +12,12 @@ public class TeacherRecord extends Record {
 	
 	public String phone;
 	
-	public String[] specialization;
+	public String specialization;
 	
 	public Location location;
 
 	public TeacherRecord(String recordId, String firstName, String lastName, String address, String phone,
-			String[] specialization, Location location) {
+			String specialization, Location location) {
 		super(recordId, firstName, lastName);
 		this.address = address;
 		this.phone = phone;
@@ -41,11 +41,11 @@ public class TeacherRecord extends Record {
 		this.phone = phone;
 	}
 
-	public String[] getSpecialization() {
+	public String getSpecialization() {
 		return specialization;
 	}
 
-	public void setSpecialization(String[] specialization) {
+	public void setSpecialization(String specialization) {
 		this.specialization = specialization;
 	}
 
