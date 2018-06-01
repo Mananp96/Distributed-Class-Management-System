@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 	private HashMap<String, ArrayList<Record>> recordData;
 
 	private String name;
+
+	private ArrayList<Manager> serverManagerList;
 
 	public CenterServer(String name) throws SecurityException, IOException {
 		super();
@@ -126,4 +129,11 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         }
     }
 
+    public boolean addManagerToList(Manager manager){
+	    if (manager !=null){
+            serverManagerList.add(manager);
+            return true;
+        }
+	    return false;
+    }
 }

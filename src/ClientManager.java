@@ -1,8 +1,14 @@
-import java.io.IOException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ClientManager {
@@ -15,6 +21,7 @@ public class ClientManager {
 
 	public void menu() throws RemoteException, NotBoundException {
 		while(true) {
+
 			String managerId = userInput("Enter Manager ID:");
 			
 			String serverRegion = managerId.substring(0, 3);
@@ -133,7 +140,7 @@ public class ClientManager {
 			status = Status.INACTIVE;
 		}
 		String statusDate = userInput("Enter Status Date:");
-		server.createSRecord(firstName, lastName, courseRegistered, status, statusDate, statusDate);
+		server.createSRecord(firstName, lastName, courseRegistered, status, statusDate, managerId);
 	}
 
 	private void editRecord() {
