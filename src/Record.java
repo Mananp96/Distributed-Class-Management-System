@@ -45,4 +45,10 @@ public class Record {
 		this.lastName = lastName;
 	}
 
+
+	public String toString()
+	{
+		return String.format("RecordID:%s FirstName:%s LastName:%s", this.getRecordId(), this.getFirstName(), this.getLastName());
+	}
+
 }

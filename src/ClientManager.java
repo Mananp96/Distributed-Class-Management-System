@@ -40,10 +40,17 @@ public class ClientManager {
 			} else { 
 				region = serverRegion.toUpperCase();
 				this.managerId = managerId;
+
+				LoggerFactory.Log(this.managerId, "Registering manager");
                 Registry registry = LocateRegistry.getRegistry(2964);
-                server = (CenterServerInterface) registry.lookup(region);
+
+				LoggerFactory.Log(this.managerId, "Lookingup server");
+
+				server = (CenterServerInterface) registry.lookup(region);
 				if(server.managerExists(this.managerId)){
-				    break;
+					LoggerFactory.Log(this.managerId, "Server detected");
+
+					break;
                 }
                 System.out.println("Invalid Manager ID \n Please try again...");
 			}
@@ -103,6 +110,9 @@ public class ClientManager {
 
 
 	private void addTeacherRecord() throws RemoteException, RequiredValueException {
+
+		LoggerFactory.Log(this.managerId, "Adding Teacher");
+
 		Location location;
 		Status status;
 		System.out.println("----------Add Teacher Record----------");
@@ -120,10 +130,22 @@ public class ClientManager {
 		} else {
 			location = Location.DDO;
 		}
-		server.createTRecord(firstName, lastName, address, phone, specialization, location, managerId);
+
+
+		Boolean result = server.createTRecord(firstName, lastName, address, phone, specialization, location, managerId);
+
+		String str = String.format("FirstName:%s LastName:%s Address:%s Phone:%s Specialization:%s Location:%s", firstName, lastName, address, phone, specialization, location.name());
+		if(result)
+			LoggerFactory.Log(this.managerId,String.format("Teacher record added:%s", str));
+		else
+			LoggerFactory.Log(this.managerId,String.format("Teacher record did not add:%s", str));
+
 	}
 
 	private void addStudentRecord() throws RemoteException, RequiredValueException {
+
+		LoggerFactory.Log(this.managerId, "Adding Student");
+
 		Status status;
 		System.out.println("----------Add Student Record----------");
 		String firstName = userInput("Enter First Name:");
@@ -137,7 +159,15 @@ public class ClientManager {
 			status = Status.INACTIVE;
 		}
 		String statusDate = userInput("Enter Status Date:");
-		server.createSRecord(firstName, lastName, courseRegistered, status, statusDate, managerId);
+
+		Boolean result = server.createSRecord(firstName, lastName, courseRegistered, status, statusDate, managerId);
+
+		String str = String.format("FirstName:%s LastName:%s Status:%s StatusDate:%s coursesRegistered:%s", firstName, lastName, status.name(), String.join(",", courseRegistered));
+		if(result)
+			LoggerFactory.Log(this.managerId,String.format("Student record added:%s", str));
+		else
+			LoggerFactory.Log(this.managerId,String.format("Student record did not add:%s", str));
+
 	}
 
 	private void editRecord() {

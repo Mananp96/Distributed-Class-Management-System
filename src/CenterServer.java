@@ -25,68 +25,101 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 	
 	public boolean createTRecord(String firstName, String lastName, String address, String phone,
 			String specialization, Location location, String managerId, String recordId) throws RemoteException,RequiredValueException {
-		
+
+		LoggerFactory.LogServer("Creating Teacher");
+		LoggerFactory.LogServer("Validating teacher fields");
 		if(firstName == null || firstName.isEmpty()) {
+			LoggerFactory.LogServer("First name required");
 			throw new RequiredValueException("First name required");
 		}
 		
 		if(lastName == null || lastName.isEmpty()) {
+			LoggerFactory.LogServer("Last name required");
 			throw new RequiredValueException("Last name required");
 		}
 		
 		if(address == null || address.isEmpty()) {
+			LoggerFactory.LogServer("Address required");
 			throw new RequiredValueException("Address required");
 		}
 		
 		if(phone == null || phone.isEmpty()) {
+			LoggerFactory.LogServer("Phone required");
 			throw new RequiredValueException("Phone required");
 		}
 		
 		if(specialization == null || specialization.isEmpty()) {
+			LoggerFactory.LogServer("Specialization required");
 			throw new RequiredValueException("Specialization required");
 		}
 		
 		if(location == null) {
+			LoggerFactory.LogServer("Status required");
 			throw new RequiredValueException("Status required");
 		}
 
 		Record record = new TeacherRecord(recordId,firstName,lastName,address,phone,specialization,location);
 		
 		String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
-		
-		return addToRecordData(firstCharacter, record);
+
+		LoggerFactory.LogServer("Teacher Record Created");
+
+		LoggerFactory.LogServer("Adding Teacher Record");
+		Boolean result = addToRecordData(firstCharacter, record);
+
+		if(result)
+			LoggerFactory.LogServer(String.format("Teacher record added:%s", record.toString()));
+		else
+			LoggerFactory.LogServer(String.format("Teacher record did not add:%s", record.toString()));
+
+
+		return result;
 
 	}
 
 	
 	public boolean createSRecord(String firstName, String lastName, String[] courseRegistered, Status status,
 			String statusDate, String managerId, String recordId) throws RemoteException,RequiredValueException {
-		
+
+		LoggerFactory.LogServer("Creating Student");
+
 		if(firstName == null || firstName.isEmpty()) {
+			LoggerFactory.LogServer("First name required");
 			throw new RequiredValueException("First name required");
 		}
 		
 		if(lastName == null || lastName.isEmpty()) {
+			LoggerFactory.LogServer("Last name required");
 			throw new RequiredValueException("Last name required");
 		}
 		
 		if(statusDate == null || statusDate.isEmpty()) {
+			LoggerFactory.LogServer("Status Date required");
 			throw new RequiredValueException("Status Date required");
 		}
 		
 		if(courseRegistered == null || courseRegistered.length < 1) {
+			LoggerFactory.LogServer("Registed Course required");
 			throw new RequiredValueException("Registed Course required");
 		}
 		
 		if(status == null) {
+			LoggerFactory.LogServer("Status required");
 			throw new RequiredValueException("Status required");
 		}
 
+		LoggerFactory.LogServer("Student Record Created");
 		Record record = new StudentRecord(recordId,firstName,lastName,courseRegistered,status,statusDate);
 		
 		String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 		
-		return addToRecordData(firstCharacter, record);
+		boolean result = addToRecordData(firstCharacter, record);
+
+		if(result)
+			LoggerFactory.LogServer(String.format("Student record added:%s", record.toString()));
+		else
+			LoggerFactory.LogServer(String.format("Student record did not add:%s", record.toString()));
+		return result;
 	}
 
 	@Override
@@ -132,6 +165,8 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
     public void addManagerToList(Manager manager){
 	    if (manager !=null){
             serverManagerList.add(manager);
+
+			LoggerFactory.LogServer(String.format("Manager Added:%s", manager.toString()));
         }
     }
 

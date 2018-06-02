@@ -30,13 +30,21 @@ public class Server {
 
     private void runServer() throws Exception {
 
+	    LoggerFactory.LogServer("Staring Server");
+
+        LoggerFactory.LogServer("Initialing Centers");
+
         this.mtl = new CenterServer("MTL");
         this.lvl = new CenterServer("LVL");
         this.ddo = new CenterServer("DDO");
 
+
+
         this.addManagersToServer();
         this.addTeachersToServer();
         this.addStudentsToServer();
+
+        LoggerFactory.LogServer("Centers initialed");
 
         Registry registry = LocateRegistry.createRegistry(2964);
         registry.bind("MTL", this.mtl);
@@ -44,9 +52,14 @@ public class Server {
         registry.bind("DDL", this.ddo);
 
         System.out.println("Server Started");
+
+        LoggerFactory.LogServer("Server Started");
+
     }
 
     private void addStudentsToServer() throws IOException, ParseException, RequiredValueException {
+        LoggerFactory.LogServer("Start adding default students");
+
         JSONParser parser = new JSONParser();
         JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("resources/studentData.json"));
         for (Object object : jsonArray) {
@@ -72,9 +85,14 @@ public class Server {
                 ((CenterServer) this.ddo).createSRecord(firstName,lastName, courses, status,statusDate,"default",recordId);
             }
         }
+
+        LoggerFactory.LogServer("Default students added");
     }
 
     private void addTeachersToServer() throws IOException, ParseException, RequiredValueException {
+
+        LoggerFactory.LogServer("Start adding default teachers");
+
         JSONParser parser = new JSONParser();
         JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("resources/teacherData.json"));
         for (Object object : jsonArray) {
@@ -104,9 +122,15 @@ public class Server {
                 ((CenterServer) this.ddo).createTRecord(firstName,lastName,address,phone,specialization,location,"default",recordId);
             }
         }
+
+        LoggerFactory.LogServer("Default teachers added");
+
     }
 
     private void addManagersToServer() throws IOException, ParseException {
+
+        LoggerFactory.LogServer("Start adding default managers");
+
         JSONParser parser = new JSONParser();
         JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("resources/managerData.json"));
         for (Object object : jsonArray) {
@@ -131,6 +155,9 @@ public class Server {
                                 manager.get("lastName").toString()));
             }
         }
+
+        LoggerFactory.LogServer("Default managers added");
+
     }
 
 }

@@ -33,5 +33,8 @@ public class Manager {
         this.lastName = lastName;
     }
 
-
+    public  String toString()
+    {
+        return String.format("ManagerID:%s FirstName:%s LastName:%s", this.getManagerID(), this.getFirstName(), this.getLastName());
+    }
 }

@@ -47,4 +47,10 @@ public class StudentRecord extends Record {
 	public void setStatusDate(String statusDate) {
 		this.statusDate = statusDate;
 	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s Status:%s StatusDate:%s coursesRegistered:%s", super.toString(), this.getStatus().name(), this.getStatusDate(), String.join(",", this.getCoursesRegistered()));
+	}
 }

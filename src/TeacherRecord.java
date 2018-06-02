@@ -56,5 +56,10 @@ public class TeacherRecord extends Record {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s Address:%s Phone:%s Specialization:%s Location:%s", super.toString(), this.getAddress(), this.getPhone(), this.getSpecialization(), this.getLocation().name());
+	}
 }
