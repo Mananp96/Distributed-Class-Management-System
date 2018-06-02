@@ -1,0 +1,1336 @@
+2018-06-02 11:56:05 Staring Server
+2018-06-02 11:56:05 Initialing Centers
+2018-06-02 11:56:05 UDP server Started in DDO region
+2018-06-02 11:56:05 UDP server Started in MTL region
+2018-06-02 11:56:05 Start adding default managers
+2018-06-02 11:56:05 UDP server Started in LVL region
+2018-06-02 11:56:05 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 11:56:05 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 11:56:05 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 11:56:05 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 11:56:05 Default managers added
+2018-06-02 11:56:05 Start adding default teachers
+2018-06-02 11:56:05 Creating Teacher
+2018-06-02 11:56:05 Validating teacher fields
+2018-06-02 11:56:05 Teacher Record Created
+2018-06-02 11:56:05 Adding Teacher Record
+2018-06-02 11:56:05 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 11:56:05 Creating Teacher
+2018-06-02 11:56:05 Validating teacher fields
+2018-06-02 11:56:05 Teacher Record Created
+2018-06-02 11:56:05 Adding Teacher Record
+2018-06-02 11:56:05 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 11:56:05 Creating Teacher
+2018-06-02 11:56:05 Validating teacher fields
+2018-06-02 11:56:05 Teacher Record Created
+2018-06-02 11:56:05 Adding Teacher Record
+2018-06-02 11:56:05 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 11:56:05 Creating Teacher
+2018-06-02 11:56:05 Validating teacher fields
+2018-06-02 11:56:05 Teacher Record Created
+2018-06-02 11:56:05 Adding Teacher Record
+2018-06-02 11:56:05 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 11:56:05 Creating Teacher
+2018-06-02 11:56:05 Validating teacher fields
+2018-06-02 11:56:05 Teacher Record Created
+2018-06-02 11:56:05 Adding Teacher Record
+2018-06-02 11:56:05 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 11:56:05 Creating Teacher
+2018-06-02 11:56:05 Validating teacher fields
+2018-06-02 11:56:05 Teacher Record Created
+2018-06-02 11:56:05 Adding Teacher Record
+2018-06-02 11:56:05 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 11:56:05 Creating Teacher
+2018-06-02 11:56:05 Validating teacher fields
+2018-06-02 11:56:05 Teacher Record Created
+2018-06-02 11:56:05 Adding Teacher Record
+2018-06-02 11:56:05 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 11:56:05 Creating Teacher
+2018-06-02 11:56:05 Validating teacher fields
+2018-06-02 11:56:05 Teacher Record Created
+2018-06-02 11:56:05 Adding Teacher Record
+2018-06-02 11:56:05 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 11:56:05 Creating Teacher
+2018-06-02 11:56:05 Validating teacher fields
+2018-06-02 11:56:05 Teacher Record Created
+2018-06-02 11:56:05 Adding Teacher Record
+2018-06-02 11:56:05 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 11:56:05 Creating Teacher
+2018-06-02 11:56:05 Validating teacher fields
+2018-06-02 11:56:05 Teacher Record Created
+2018-06-02 11:56:05 Adding Teacher Record
+2018-06-02 11:56:05 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 11:56:05 Default teachers added
+2018-06-02 11:56:05 Start adding default students
+2018-06-02 11:56:05 Creating Student
+2018-06-02 11:56:05 Student Record Created
+2018-06-02 11:56:05 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 11:56:05 Creating Student
+2018-06-02 11:56:05 Student Record Created
+2018-06-02 11:56:05 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 11:56:06 Creating Student
+2018-06-02 11:56:06 Student Record Created
+2018-06-02 11:56:06 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 11:56:06 Creating Student
+2018-06-02 11:56:06 Student Record Created
+2018-06-02 11:56:06 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 11:56:06 Creating Student
+2018-06-02 11:56:06 Student Record Created
+2018-06-02 11:56:06 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 11:56:06 Creating Student
+2018-06-02 11:56:06 Student Record Created
+2018-06-02 11:56:06 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 11:56:06 Creating Student
+2018-06-02 11:56:06 Student Record Created
+2018-06-02 11:56:06 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 11:56:06 Creating Student
+2018-06-02 11:56:06 Student Record Created
+2018-06-02 11:56:06 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 11:56:06 Creating Student
+2018-06-02 11:56:06 Student Record Created
+2018-06-02 11:56:06 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 11:56:06 Creating Student
+2018-06-02 11:56:06 Student Record Created
+2018-06-02 11:56:06 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 11:56:06 Default students added
+2018-06-02 11:56:06 Centers initialed
+2018-06-02 11:56:06 Server Started
+2018-06-02 11:57:37 Staring Server
+2018-06-02 11:57:38 Initialing Centers
+2018-06-02 11:57:38 UDP server Started in MTL region in this port6797
+2018-06-02 11:57:38 UDP server Started in LVL region in this port6798
+2018-06-02 11:57:38 Start adding default managers
+2018-06-02 11:57:38 UDP server Started in DDO region in this port6799
+2018-06-02 11:57:38 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 11:57:38 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 11:57:38 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 11:57:38 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 11:57:38 Default managers added
+2018-06-02 11:57:38 Start adding default teachers
+2018-06-02 11:57:38 Creating Teacher
+2018-06-02 11:57:38 Validating teacher fields
+2018-06-02 11:57:38 Teacher Record Created
+2018-06-02 11:57:38 Adding Teacher Record
+2018-06-02 11:57:38 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 11:57:38 Creating Teacher
+2018-06-02 11:57:38 Validating teacher fields
+2018-06-02 11:57:38 Teacher Record Created
+2018-06-02 11:57:38 Adding Teacher Record
+2018-06-02 11:57:38 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 11:57:38 Creating Teacher
+2018-06-02 11:57:38 Validating teacher fields
+2018-06-02 11:57:38 Teacher Record Created
+2018-06-02 11:57:38 Adding Teacher Record
+2018-06-02 11:57:38 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 11:57:38 Creating Teacher
+2018-06-02 11:57:38 Validating teacher fields
+2018-06-02 11:57:38 Teacher Record Created
+2018-06-02 11:57:38 Adding Teacher Record
+2018-06-02 11:57:38 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 11:57:38 Creating Teacher
+2018-06-02 11:57:38 Validating teacher fields
+2018-06-02 11:57:38 Teacher Record Created
+2018-06-02 11:57:38 Adding Teacher Record
+2018-06-02 11:57:38 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 11:57:38 Creating Teacher
+2018-06-02 11:57:38 Validating teacher fields
+2018-06-02 11:57:38 Teacher Record Created
+2018-06-02 11:57:38 Adding Teacher Record
+2018-06-02 11:57:38 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 11:57:38 Creating Teacher
+2018-06-02 11:57:38 Validating teacher fields
+2018-06-02 11:57:38 Teacher Record Created
+2018-06-02 11:57:38 Adding Teacher Record
+2018-06-02 11:57:38 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 11:57:38 Creating Teacher
+2018-06-02 11:57:38 Validating teacher fields
+2018-06-02 11:57:38 Teacher Record Created
+2018-06-02 11:57:38 Adding Teacher Record
+2018-06-02 11:57:38 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 11:57:38 Creating Teacher
+2018-06-02 11:57:38 Validating teacher fields
+2018-06-02 11:57:38 Teacher Record Created
+2018-06-02 11:57:38 Adding Teacher Record
+2018-06-02 11:57:38 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 11:57:38 Creating Teacher
+2018-06-02 11:57:38 Validating teacher fields
+2018-06-02 11:57:38 Teacher Record Created
+2018-06-02 11:57:38 Adding Teacher Record
+2018-06-02 11:57:38 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 11:57:38 Default teachers added
+2018-06-02 11:57:38 Start adding default students
+2018-06-02 11:57:38 Creating Student
+2018-06-02 11:57:38 Student Record Created
+2018-06-02 11:57:38 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 11:57:38 Creating Student
+2018-06-02 11:57:38 Student Record Created
+2018-06-02 11:57:38 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 11:57:38 Creating Student
+2018-06-02 11:57:38 Student Record Created
+2018-06-02 11:57:39 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 11:57:39 Creating Student
+2018-06-02 11:57:39 Student Record Created
+2018-06-02 11:57:39 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 11:57:39 Creating Student
+2018-06-02 11:57:39 Student Record Created
+2018-06-02 11:57:39 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 11:57:39 Creating Student
+2018-06-02 11:57:39 Student Record Created
+2018-06-02 11:57:39 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 11:57:39 Creating Student
+2018-06-02 11:57:39 Student Record Created
+2018-06-02 11:57:39 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 11:57:39 Creating Student
+2018-06-02 11:57:39 Student Record Created
+2018-06-02 11:57:39 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 11:57:39 Creating Student
+2018-06-02 11:57:39 Student Record Created
+2018-06-02 11:57:39 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 11:57:39 Creating Student
+2018-06-02 11:57:39 Student Record Created
+2018-06-02 11:57:39 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 11:57:39 Default students added
+2018-06-02 11:57:39 Centers initialed
+2018-06-02 11:57:39 Server Started
+2018-06-02 12:00:55 Staring Server
+2018-06-02 12:00:55 Initialing Centers
+2018-06-02 12:00:55 UDP server Started in LVL region in this port 6798
+2018-06-02 12:00:55 UDP server Started in DDO region in this port 6799
+2018-06-02 12:00:55 Start adding default managers
+2018-06-02 12:00:55 UDP server Started in MTL region in this port 6797
+2018-06-02 12:00:55 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:00:55 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:00:55 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:00:55 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:00:55 Default managers added
+2018-06-02 12:00:55 Start adding default teachers
+2018-06-02 12:00:55 Creating Teacher
+2018-06-02 12:00:55 Validating teacher fields
+2018-06-02 12:00:55 Teacher Record Created
+2018-06-02 12:00:56 Adding Teacher Record
+2018-06-02 12:00:56 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:00:56 Creating Teacher
+2018-06-02 12:00:56 Validating teacher fields
+2018-06-02 12:00:56 Teacher Record Created
+2018-06-02 12:00:56 Adding Teacher Record
+2018-06-02 12:00:56 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:00:56 Creating Teacher
+2018-06-02 12:00:56 Validating teacher fields
+2018-06-02 12:00:56 Teacher Record Created
+2018-06-02 12:00:56 Adding Teacher Record
+2018-06-02 12:00:56 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:00:56 Creating Teacher
+2018-06-02 12:00:56 Validating teacher fields
+2018-06-02 12:00:56 Teacher Record Created
+2018-06-02 12:00:56 Adding Teacher Record
+2018-06-02 12:00:56 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:00:56 Creating Teacher
+2018-06-02 12:00:56 Validating teacher fields
+2018-06-02 12:00:56 Teacher Record Created
+2018-06-02 12:00:56 Adding Teacher Record
+2018-06-02 12:00:56 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:00:56 Creating Teacher
+2018-06-02 12:00:56 Validating teacher fields
+2018-06-02 12:00:56 Teacher Record Created
+2018-06-02 12:00:56 Adding Teacher Record
+2018-06-02 12:00:56 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:00:56 Creating Teacher
+2018-06-02 12:00:56 Validating teacher fields
+2018-06-02 12:00:56 Teacher Record Created
+2018-06-02 12:00:56 Adding Teacher Record
+2018-06-02 12:00:56 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:00:56 Creating Teacher
+2018-06-02 12:00:56 Validating teacher fields
+2018-06-02 12:00:56 Teacher Record Created
+2018-06-02 12:00:56 Adding Teacher Record
+2018-06-02 12:00:56 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:00:56 Creating Teacher
+2018-06-02 12:00:56 Validating teacher fields
+2018-06-02 12:00:56 Teacher Record Created
+2018-06-02 12:00:56 Adding Teacher Record
+2018-06-02 12:00:56 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:00:56 Creating Teacher
+2018-06-02 12:00:56 Validating teacher fields
+2018-06-02 12:00:56 Teacher Record Created
+2018-06-02 12:00:56 Adding Teacher Record
+2018-06-02 12:00:56 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:00:56 Default teachers added
+2018-06-02 12:00:56 Start adding default students
+2018-06-02 12:00:56 Creating Student
+2018-06-02 12:00:56 Student Record Created
+2018-06-02 12:00:56 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:00:56 Creating Student
+2018-06-02 12:00:56 Student Record Created
+2018-06-02 12:00:56 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:00:56 Creating Student
+2018-06-02 12:00:56 Student Record Created
+2018-06-02 12:00:56 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:00:56 Creating Student
+2018-06-02 12:00:56 Student Record Created
+2018-06-02 12:00:56 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:00:56 Creating Student
+2018-06-02 12:00:56 Student Record Created
+2018-06-02 12:00:56 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:00:56 Creating Student
+2018-06-02 12:00:56 Student Record Created
+2018-06-02 12:00:56 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:00:56 Creating Student
+2018-06-02 12:00:56 Student Record Created
+2018-06-02 12:00:56 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:00:56 Creating Student
+2018-06-02 12:00:56 Student Record Created
+2018-06-02 12:00:56 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:00:56 Creating Student
+2018-06-02 12:00:56 Student Record Created
+2018-06-02 12:00:56 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:00:56 Creating Student
+2018-06-02 12:00:56 Student Record Created
+2018-06-02 12:00:56 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:00:56 Default students added
+2018-06-02 12:00:56 Centers initialed
+2018-06-02 12:00:56 Server Started
+2018-06-02 12:00:58 Staring Server
+2018-06-02 12:00:58 Initialing Centers
+2018-06-02 12:00:59 Unable to start udp server in LVL region
+2018-06-02 12:00:59 Unable to start udp server in MTL region
+2018-06-02 12:00:59 Start adding default managers
+2018-06-02 12:00:59 Unable to start udp server in DDO region
+2018-06-02 12:00:59 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:00:59 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:00:59 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:00:59 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:00:59 Default managers added
+2018-06-02 12:00:59 Start adding default teachers
+2018-06-02 12:00:59 Creating Teacher
+2018-06-02 12:00:59 Validating teacher fields
+2018-06-02 12:00:59 Teacher Record Created
+2018-06-02 12:00:59 Adding Teacher Record
+2018-06-02 12:00:59 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:00:59 Creating Teacher
+2018-06-02 12:00:59 Validating teacher fields
+2018-06-02 12:00:59 Teacher Record Created
+2018-06-02 12:00:59 Adding Teacher Record
+2018-06-02 12:00:59 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:00:59 Creating Teacher
+2018-06-02 12:00:59 Validating teacher fields
+2018-06-02 12:00:59 Teacher Record Created
+2018-06-02 12:00:59 Adding Teacher Record
+2018-06-02 12:00:59 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:00:59 Creating Teacher
+2018-06-02 12:00:59 Validating teacher fields
+2018-06-02 12:00:59 Teacher Record Created
+2018-06-02 12:00:59 Adding Teacher Record
+2018-06-02 12:00:59 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:00:59 Creating Teacher
+2018-06-02 12:00:59 Validating teacher fields
+2018-06-02 12:00:59 Teacher Record Created
+2018-06-02 12:00:59 Adding Teacher Record
+2018-06-02 12:00:59 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:00:59 Creating Teacher
+2018-06-02 12:00:59 Validating teacher fields
+2018-06-02 12:00:59 Teacher Record Created
+2018-06-02 12:00:59 Adding Teacher Record
+2018-06-02 12:00:59 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:00:59 Creating Teacher
+2018-06-02 12:00:59 Validating teacher fields
+2018-06-02 12:00:59 Teacher Record Created
+2018-06-02 12:00:59 Adding Teacher Record
+2018-06-02 12:00:59 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:00:59 Creating Teacher
+2018-06-02 12:00:59 Validating teacher fields
+2018-06-02 12:00:59 Teacher Record Created
+2018-06-02 12:00:59 Adding Teacher Record
+2018-06-02 12:00:59 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:00:59 Creating Teacher
+2018-06-02 12:00:59 Validating teacher fields
+2018-06-02 12:00:59 Teacher Record Created
+2018-06-02 12:00:59 Adding Teacher Record
+2018-06-02 12:00:59 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:00:59 Creating Teacher
+2018-06-02 12:00:59 Validating teacher fields
+2018-06-02 12:00:59 Teacher Record Created
+2018-06-02 12:00:59 Adding Teacher Record
+2018-06-02 12:00:59 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:00:59 Default teachers added
+2018-06-02 12:00:59 Start adding default students
+2018-06-02 12:00:59 Creating Student
+2018-06-02 12:00:59 Student Record Created
+2018-06-02 12:00:59 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:00:59 Creating Student
+2018-06-02 12:00:59 Student Record Created
+2018-06-02 12:00:59 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:00:59 Creating Student
+2018-06-02 12:00:59 Student Record Created
+2018-06-02 12:00:59 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:00:59 Creating Student
+2018-06-02 12:00:59 Student Record Created
+2018-06-02 12:00:59 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:00:59 Creating Student
+2018-06-02 12:01:00 Student Record Created
+2018-06-02 12:01:00 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:00 Creating Student
+2018-06-02 12:01:00 Student Record Created
+2018-06-02 12:01:00 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:00 Creating Student
+2018-06-02 12:01:00 Student Record Created
+2018-06-02 12:01:00 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:01:00 Creating Student
+2018-06-02 12:01:00 Student Record Created
+2018-06-02 12:01:00 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:01:00 Creating Student
+2018-06-02 12:01:00 Student Record Created
+2018-06-02 12:01:00 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:01:00 Creating Student
+2018-06-02 12:01:00 Student Record Created
+2018-06-02 12:01:00 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:00 Default students added
+2018-06-02 12:01:00 Centers initialed
+2018-06-02 12:01:27 Staring Server
+2018-06-02 12:01:27 Initialing Centers
+2018-06-02 12:01:28 Start adding default managers
+2018-06-02 12:01:28 UDP server Started in MTL region in this port 6797
+2018-06-02 12:01:28 UDP server Started in DDO region in this port 6799
+2018-06-02 12:01:28 UDP server Started in LVL region in this port 6798
+2018-06-02 12:01:28 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:01:28 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:01:28 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:01:28 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:01:28 Default managers added
+2018-06-02 12:01:28 Start adding default teachers
+2018-06-02 12:01:28 Creating Teacher
+2018-06-02 12:01:28 Validating teacher fields
+2018-06-02 12:01:28 Teacher Record Created
+2018-06-02 12:01:28 Adding Teacher Record
+2018-06-02 12:01:28 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:01:28 Creating Teacher
+2018-06-02 12:01:28 Validating teacher fields
+2018-06-02 12:01:28 Teacher Record Created
+2018-06-02 12:01:28 Adding Teacher Record
+2018-06-02 12:01:28 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:01:28 Creating Teacher
+2018-06-02 12:01:28 Validating teacher fields
+2018-06-02 12:01:28 Teacher Record Created
+2018-06-02 12:01:28 Adding Teacher Record
+2018-06-02 12:01:28 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:01:28 Creating Teacher
+2018-06-02 12:01:28 Validating teacher fields
+2018-06-02 12:01:28 Teacher Record Created
+2018-06-02 12:01:28 Adding Teacher Record
+2018-06-02 12:01:28 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:01:28 Creating Teacher
+2018-06-02 12:01:28 Validating teacher fields
+2018-06-02 12:01:28 Teacher Record Created
+2018-06-02 12:01:28 Adding Teacher Record
+2018-06-02 12:01:28 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:01:28 Creating Teacher
+2018-06-02 12:01:28 Validating teacher fields
+2018-06-02 12:01:28 Teacher Record Created
+2018-06-02 12:01:28 Adding Teacher Record
+2018-06-02 12:01:28 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:01:28 Creating Teacher
+2018-06-02 12:01:28 Validating teacher fields
+2018-06-02 12:01:28 Teacher Record Created
+2018-06-02 12:01:28 Adding Teacher Record
+2018-06-02 12:01:28 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:01:28 Creating Teacher
+2018-06-02 12:01:28 Validating teacher fields
+2018-06-02 12:01:28 Teacher Record Created
+2018-06-02 12:01:28 Adding Teacher Record
+2018-06-02 12:01:28 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:01:28 Creating Teacher
+2018-06-02 12:01:28 Validating teacher fields
+2018-06-02 12:01:28 Teacher Record Created
+2018-06-02 12:01:28 Adding Teacher Record
+2018-06-02 12:01:28 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:01:28 Creating Teacher
+2018-06-02 12:01:28 Validating teacher fields
+2018-06-02 12:01:28 Teacher Record Created
+2018-06-02 12:01:28 Adding Teacher Record
+2018-06-02 12:01:28 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:01:28 Default teachers added
+2018-06-02 12:01:28 Start adding default students
+2018-06-02 12:01:28 Creating Student
+2018-06-02 12:01:28 Student Record Created
+2018-06-02 12:01:28 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:28 Creating Student
+2018-06-02 12:01:28 Student Record Created
+2018-06-02 12:01:28 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:01:28 Creating Student
+2018-06-02 12:01:28 Student Record Created
+2018-06-02 12:01:28 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:01:28 Creating Student
+2018-06-02 12:01:28 Student Record Created
+2018-06-02 12:01:28 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:28 Creating Student
+2018-06-02 12:01:28 Student Record Created
+2018-06-02 12:01:28 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:28 Creating Student
+2018-06-02 12:01:28 Student Record Created
+2018-06-02 12:01:28 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:28 Creating Student
+2018-06-02 12:01:28 Student Record Created
+2018-06-02 12:01:28 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:01:28 Creating Student
+2018-06-02 12:01:28 Student Record Created
+2018-06-02 12:01:28 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:01:28 Creating Student
+2018-06-02 12:01:28 Student Record Created
+2018-06-02 12:01:28 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:01:28 Creating Student
+2018-06-02 12:01:28 Student Record Created
+2018-06-02 12:01:28 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:28 Default students added
+2018-06-02 12:01:28 Centers initialed
+2018-06-02 12:01:28 Server Started
+2018-06-02 12:01:31 Staring Server
+2018-06-02 12:01:31 Initialing Centers
+2018-06-02 12:01:32 Unable to start udp server in DDO region
+2018-06-02 12:01:32 Unable to start udp server in LVL region
+2018-06-02 12:01:32 Start adding default managers
+2018-06-02 12:01:32 Unable to start udp server in MTL region
+2018-06-02 12:01:32 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:01:32 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:01:32 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:01:32 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:01:32 Default managers added
+2018-06-02 12:01:32 Start adding default teachers
+2018-06-02 12:01:32 Creating Teacher
+2018-06-02 12:01:32 Validating teacher fields
+2018-06-02 12:01:32 Teacher Record Created
+2018-06-02 12:01:32 Adding Teacher Record
+2018-06-02 12:01:32 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:01:32 Creating Teacher
+2018-06-02 12:01:32 Validating teacher fields
+2018-06-02 12:01:32 Teacher Record Created
+2018-06-02 12:01:32 Adding Teacher Record
+2018-06-02 12:01:32 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:01:32 Creating Teacher
+2018-06-02 12:01:32 Validating teacher fields
+2018-06-02 12:01:32 Teacher Record Created
+2018-06-02 12:01:32 Adding Teacher Record
+2018-06-02 12:01:32 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:01:32 Creating Teacher
+2018-06-02 12:01:32 Validating teacher fields
+2018-06-02 12:01:32 Teacher Record Created
+2018-06-02 12:01:32 Adding Teacher Record
+2018-06-02 12:01:32 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:01:32 Creating Teacher
+2018-06-02 12:01:32 Validating teacher fields
+2018-06-02 12:01:32 Teacher Record Created
+2018-06-02 12:01:32 Adding Teacher Record
+2018-06-02 12:01:32 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:01:32 Creating Teacher
+2018-06-02 12:01:32 Validating teacher fields
+2018-06-02 12:01:32 Teacher Record Created
+2018-06-02 12:01:32 Adding Teacher Record
+2018-06-02 12:01:32 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:01:32 Creating Teacher
+2018-06-02 12:01:32 Validating teacher fields
+2018-06-02 12:01:32 Teacher Record Created
+2018-06-02 12:01:32 Adding Teacher Record
+2018-06-02 12:01:32 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:01:32 Creating Teacher
+2018-06-02 12:01:32 Validating teacher fields
+2018-06-02 12:01:32 Teacher Record Created
+2018-06-02 12:01:32 Adding Teacher Record
+2018-06-02 12:01:32 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:01:32 Creating Teacher
+2018-06-02 12:01:32 Validating teacher fields
+2018-06-02 12:01:32 Teacher Record Created
+2018-06-02 12:01:32 Adding Teacher Record
+2018-06-02 12:01:32 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:01:32 Creating Teacher
+2018-06-02 12:01:32 Validating teacher fields
+2018-06-02 12:01:32 Teacher Record Created
+2018-06-02 12:01:32 Adding Teacher Record
+2018-06-02 12:01:32 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:01:32 Default teachers added
+2018-06-02 12:01:32 Start adding default students
+2018-06-02 12:01:32 Creating Student
+2018-06-02 12:01:32 Student Record Created
+2018-06-02 12:01:32 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:32 Creating Student
+2018-06-02 12:01:32 Student Record Created
+2018-06-02 12:01:32 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:01:32 Creating Student
+2018-06-02 12:01:32 Student Record Created
+2018-06-02 12:01:32 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:01:32 Creating Student
+2018-06-02 12:01:32 Student Record Created
+2018-06-02 12:01:32 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:32 Creating Student
+2018-06-02 12:01:32 Student Record Created
+2018-06-02 12:01:32 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:32 Creating Student
+2018-06-02 12:01:32 Student Record Created
+2018-06-02 12:01:32 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:32 Creating Student
+2018-06-02 12:01:32 Student Record Created
+2018-06-02 12:01:32 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:01:32 Creating Student
+2018-06-02 12:01:32 Student Record Created
+2018-06-02 12:01:32 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:01:32 Creating Student
+2018-06-02 12:01:32 Student Record Created
+2018-06-02 12:01:32 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:01:32 Creating Student
+2018-06-02 12:01:32 Student Record Created
+2018-06-02 12:01:32 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:01:32 Default students added
+2018-06-02 12:01:33 Centers initialed
+2018-06-02 12:01:58 Reeived request in MTL from MTL0001 for get record count
+2018-06-02 12:01:58 Record count in MTL: 8
+2018-06-02 12:01:58 Request sent to get record data from DESKTOP-MEPO64E:6798
+2018-06-02 12:01:58 Received request in LVL from /192.168.56.1:65493 with this data GET_RECORD_COUNT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+2018-06-02 12:01:58 Received this response INVALID_REQUEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          from DESKTOP-MEPO64E:6798
+2018-06-02 12:01:58 Received request in DDO from /192.168.56.1:65494 with this data GET_RECORD_COUNT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+2018-06-02 12:01:58 Request sent to get record data from DESKTOP-MEPO64E:6799
+2018-06-02 12:01:58 Received this response INVALID_REQUEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          from DESKTOP-MEPO64E:6799
+2018-06-02 12:02:48 Staring Server
+2018-06-02 12:02:48 Initialing Centers
+2018-06-02 12:02:49 UDP server Started in MTL region in this port 6797
+2018-06-02 12:02:49 UDP server Started in DDO region in this port 6799
+2018-06-02 12:02:49 Start adding default managers
+2018-06-02 12:02:49 UDP server Started in LVL region in this port 6798
+2018-06-02 12:02:49 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:02:49 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:02:49 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:02:49 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:02:49 Default managers added
+2018-06-02 12:02:49 Start adding default teachers
+2018-06-02 12:02:49 Creating Teacher
+2018-06-02 12:02:49 Validating teacher fields
+2018-06-02 12:02:49 Teacher Record Created
+2018-06-02 12:02:49 Adding Teacher Record
+2018-06-02 12:02:49 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:02:49 Creating Teacher
+2018-06-02 12:02:49 Validating teacher fields
+2018-06-02 12:02:49 Teacher Record Created
+2018-06-02 12:02:49 Adding Teacher Record
+2018-06-02 12:02:49 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:02:49 Creating Teacher
+2018-06-02 12:02:49 Validating teacher fields
+2018-06-02 12:02:49 Teacher Record Created
+2018-06-02 12:02:49 Adding Teacher Record
+2018-06-02 12:02:49 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:02:49 Creating Teacher
+2018-06-02 12:02:49 Validating teacher fields
+2018-06-02 12:02:49 Teacher Record Created
+2018-06-02 12:02:49 Adding Teacher Record
+2018-06-02 12:02:49 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:02:49 Creating Teacher
+2018-06-02 12:02:49 Validating teacher fields
+2018-06-02 12:02:49 Teacher Record Created
+2018-06-02 12:02:49 Adding Teacher Record
+2018-06-02 12:02:49 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:02:49 Creating Teacher
+2018-06-02 12:02:49 Validating teacher fields
+2018-06-02 12:02:49 Teacher Record Created
+2018-06-02 12:02:49 Adding Teacher Record
+2018-06-02 12:02:49 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:02:49 Creating Teacher
+2018-06-02 12:02:49 Validating teacher fields
+2018-06-02 12:02:49 Teacher Record Created
+2018-06-02 12:02:49 Adding Teacher Record
+2018-06-02 12:02:49 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:02:49 Creating Teacher
+2018-06-02 12:02:49 Validating teacher fields
+2018-06-02 12:02:49 Teacher Record Created
+2018-06-02 12:02:49 Adding Teacher Record
+2018-06-02 12:02:49 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:02:49 Creating Teacher
+2018-06-02 12:02:49 Validating teacher fields
+2018-06-02 12:02:49 Teacher Record Created
+2018-06-02 12:02:49 Adding Teacher Record
+2018-06-02 12:02:49 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:02:49 Creating Teacher
+2018-06-02 12:02:49 Validating teacher fields
+2018-06-02 12:02:49 Teacher Record Created
+2018-06-02 12:02:49 Adding Teacher Record
+2018-06-02 12:02:49 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:02:49 Default teachers added
+2018-06-02 12:02:49 Start adding default students
+2018-06-02 12:02:49 Creating Student
+2018-06-02 12:02:49 Student Record Created
+2018-06-02 12:02:49 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:02:49 Creating Student
+2018-06-02 12:02:49 Student Record Created
+2018-06-02 12:02:49 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:02:49 Creating Student
+2018-06-02 12:02:49 Student Record Created
+2018-06-02 12:02:49 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:02:49 Creating Student
+2018-06-02 12:02:49 Student Record Created
+2018-06-02 12:02:49 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:02:49 Creating Student
+2018-06-02 12:02:49 Student Record Created
+2018-06-02 12:02:49 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:02:49 Creating Student
+2018-06-02 12:02:49 Student Record Created
+2018-06-02 12:02:49 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:02:49 Creating Student
+2018-06-02 12:02:49 Student Record Created
+2018-06-02 12:02:49 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:02:49 Creating Student
+2018-06-02 12:02:49 Student Record Created
+2018-06-02 12:02:49 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:02:50 Creating Student
+2018-06-02 12:02:50 Student Record Created
+2018-06-02 12:02:50 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:02:50 Creating Student
+2018-06-02 12:02:50 Student Record Created
+2018-06-02 12:02:50 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:02:50 Default students added
+2018-06-02 12:02:50 Centers initialed
+2018-06-02 12:02:50 Server Started
+2018-06-02 12:03:01 Reeived request in MTL from MTL0001 for get record count
+2018-06-02 12:03:01 Record count in MTL: 8
+2018-06-02 12:03:01 Request sent to get record data from DESKTOP-MEPO64E:6798
+2018-06-02 12:03:01 Received request in LVL from /192.168.56.1:57173 with this data GET_RECORD_COUNT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+2018-06-02 12:03:01 Received this response INVALID_REQUEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          from DESKTOP-MEPO64E:6798
+2018-06-02 12:03:01 Request sent to get record data from DESKTOP-MEPO64E:6799
+2018-06-02 12:03:01 Received request in DDO from /192.168.56.1:57174 with this data GET_RECORD_COUNT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+2018-06-02 12:03:01 Received this response INVALID_REQUEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          from DESKTOP-MEPO64E:6799
+2018-06-02 12:05:15 Staring Server
+2018-06-02 12:05:15 Initialing Centers
+2018-06-02 12:05:16 UDP server Started in MTL region in this port 6797
+2018-06-02 12:05:16 UDP server Started in LVL region in this port 6798
+2018-06-02 12:05:16 Start adding default managers
+2018-06-02 12:05:16 UDP server Started in DDO region in this port 6799
+2018-06-02 12:05:16 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:05:16 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:05:16 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:05:16 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:05:16 Default managers added
+2018-06-02 12:05:16 Start adding default teachers
+2018-06-02 12:05:16 Creating Teacher
+2018-06-02 12:05:16 Validating teacher fields
+2018-06-02 12:05:16 Teacher Record Created
+2018-06-02 12:05:16 Adding Teacher Record
+2018-06-02 12:05:16 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:05:16 Creating Teacher
+2018-06-02 12:05:16 Validating teacher fields
+2018-06-02 12:05:16 Teacher Record Created
+2018-06-02 12:05:16 Adding Teacher Record
+2018-06-02 12:05:16 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:05:16 Creating Teacher
+2018-06-02 12:05:16 Validating teacher fields
+2018-06-02 12:05:16 Teacher Record Created
+2018-06-02 12:05:16 Adding Teacher Record
+2018-06-02 12:05:16 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:05:16 Creating Teacher
+2018-06-02 12:05:16 Validating teacher fields
+2018-06-02 12:05:16 Teacher Record Created
+2018-06-02 12:05:16 Adding Teacher Record
+2018-06-02 12:05:16 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:05:16 Creating Teacher
+2018-06-02 12:05:16 Validating teacher fields
+2018-06-02 12:05:16 Teacher Record Created
+2018-06-02 12:05:16 Adding Teacher Record
+2018-06-02 12:05:16 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:05:16 Creating Teacher
+2018-06-02 12:05:16 Validating teacher fields
+2018-06-02 12:05:16 Teacher Record Created
+2018-06-02 12:05:16 Adding Teacher Record
+2018-06-02 12:05:16 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:05:16 Creating Teacher
+2018-06-02 12:05:16 Validating teacher fields
+2018-06-02 12:05:16 Teacher Record Created
+2018-06-02 12:05:16 Adding Teacher Record
+2018-06-02 12:05:16 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:05:16 Creating Teacher
+2018-06-02 12:05:16 Validating teacher fields
+2018-06-02 12:05:16 Teacher Record Created
+2018-06-02 12:05:16 Adding Teacher Record
+2018-06-02 12:05:16 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:05:16 Creating Teacher
+2018-06-02 12:05:16 Validating teacher fields
+2018-06-02 12:05:16 Teacher Record Created
+2018-06-02 12:05:16 Adding Teacher Record
+2018-06-02 12:05:16 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:05:16 Creating Teacher
+2018-06-02 12:05:16 Validating teacher fields
+2018-06-02 12:05:16 Teacher Record Created
+2018-06-02 12:05:16 Adding Teacher Record
+2018-06-02 12:05:16 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:05:16 Default teachers added
+2018-06-02 12:05:16 Start adding default students
+2018-06-02 12:05:16 Creating Student
+2018-06-02 12:05:16 Student Record Created
+2018-06-02 12:05:16 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:05:16 Creating Student
+2018-06-02 12:05:16 Student Record Created
+2018-06-02 12:05:16 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:05:16 Creating Student
+2018-06-02 12:05:16 Student Record Created
+2018-06-02 12:05:16 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:05:16 Creating Student
+2018-06-02 12:05:16 Student Record Created
+2018-06-02 12:05:16 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:05:16 Creating Student
+2018-06-02 12:05:16 Student Record Created
+2018-06-02 12:05:16 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:05:16 Creating Student
+2018-06-02 12:05:16 Student Record Created
+2018-06-02 12:05:16 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:05:16 Creating Student
+2018-06-02 12:05:16 Student Record Created
+2018-06-02 12:05:16 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:05:16 Creating Student
+2018-06-02 12:05:16 Student Record Created
+2018-06-02 12:05:16 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:05:16 Creating Student
+2018-06-02 12:05:16 Student Record Created
+2018-06-02 12:05:16 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:05:16 Creating Student
+2018-06-02 12:05:16 Student Record Created
+2018-06-02 12:05:16 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:05:16 Default students added
+2018-06-02 12:05:16 Centers initialed
+2018-06-02 12:05:17 Server Started
+2018-06-02 12:05:30 Reeived request in MTL from MTL0001 for get record count
+2018-06-02 12:05:30 Record count in MTL: 8
+2018-06-02 12:05:30 Request sent to get record data from DESKTOP-MEPO64E:6798
+2018-06-02 12:05:30 Received request in LVL from /192.168.56.1:62627 with this data GET_RECORD_COUNT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+2018-06-02 12:05:30 Received this response INVALID_REQUEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          from DESKTOP-MEPO64E:6798
+2018-06-02 12:05:30 Request sent to get record data from DESKTOP-MEPO64E:6799
+2018-06-02 12:05:30 Received request in DDO from /192.168.56.1:62628 with this data GET_RECORD_COUNT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+2018-06-02 12:05:30 Received this response INVALID_REQUEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          from DESKTOP-MEPO64E:6799
+2018-06-02 12:10:44 Staring Server
+2018-06-02 12:10:44 Initialing Centers
+2018-06-02 12:10:45 UDP server Started in MTL region in this port 6797
+2018-06-02 12:10:45 UDP server Started in DDO region in this port 6799
+2018-06-02 12:10:45 Start adding default managers
+2018-06-02 12:10:45 UDP server Started in LVL region in this port 6798
+2018-06-02 12:10:45 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:10:45 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:10:45 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:10:45 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:10:45 Default managers added
+2018-06-02 12:10:45 Start adding default teachers
+2018-06-02 12:10:45 Creating Teacher
+2018-06-02 12:10:45 Validating teacher fields
+2018-06-02 12:10:45 Teacher Record Created
+2018-06-02 12:10:45 Adding Teacher Record
+2018-06-02 12:10:45 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:10:45 Creating Teacher
+2018-06-02 12:10:45 Validating teacher fields
+2018-06-02 12:10:45 Teacher Record Created
+2018-06-02 12:10:45 Adding Teacher Record
+2018-06-02 12:10:45 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:10:45 Creating Teacher
+2018-06-02 12:10:45 Validating teacher fields
+2018-06-02 12:10:45 Teacher Record Created
+2018-06-02 12:10:45 Adding Teacher Record
+2018-06-02 12:10:45 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:10:45 Creating Teacher
+2018-06-02 12:10:45 Validating teacher fields
+2018-06-02 12:10:45 Teacher Record Created
+2018-06-02 12:10:45 Adding Teacher Record
+2018-06-02 12:10:45 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:10:45 Creating Teacher
+2018-06-02 12:10:45 Validating teacher fields
+2018-06-02 12:10:45 Teacher Record Created
+2018-06-02 12:10:45 Adding Teacher Record
+2018-06-02 12:10:45 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:10:45 Creating Teacher
+2018-06-02 12:10:45 Validating teacher fields
+2018-06-02 12:10:45 Teacher Record Created
+2018-06-02 12:10:45 Adding Teacher Record
+2018-06-02 12:10:45 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:10:45 Creating Teacher
+2018-06-02 12:10:45 Validating teacher fields
+2018-06-02 12:10:45 Teacher Record Created
+2018-06-02 12:10:45 Adding Teacher Record
+2018-06-02 12:10:45 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:10:45 Creating Teacher
+2018-06-02 12:10:45 Validating teacher fields
+2018-06-02 12:10:45 Teacher Record Created
+2018-06-02 12:10:45 Adding Teacher Record
+2018-06-02 12:10:45 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:10:45 Creating Teacher
+2018-06-02 12:10:45 Validating teacher fields
+2018-06-02 12:10:45 Teacher Record Created
+2018-06-02 12:10:45 Adding Teacher Record
+2018-06-02 12:10:45 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:10:45 Creating Teacher
+2018-06-02 12:10:45 Validating teacher fields
+2018-06-02 12:10:45 Teacher Record Created
+2018-06-02 12:10:45 Adding Teacher Record
+2018-06-02 12:10:45 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:10:45 Default teachers added
+2018-06-02 12:10:45 Start adding default students
+2018-06-02 12:10:45 Creating Student
+2018-06-02 12:10:45 Student Record Created
+2018-06-02 12:10:45 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:10:45 Creating Student
+2018-06-02 12:10:45 Student Record Created
+2018-06-02 12:10:45 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:10:45 Creating Student
+2018-06-02 12:10:45 Student Record Created
+2018-06-02 12:10:45 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:10:45 Creating Student
+2018-06-02 12:10:45 Student Record Created
+2018-06-02 12:10:45 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:10:45 Creating Student
+2018-06-02 12:10:45 Student Record Created
+2018-06-02 12:10:45 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:10:45 Creating Student
+2018-06-02 12:10:45 Student Record Created
+2018-06-02 12:10:45 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:10:45 Creating Student
+2018-06-02 12:10:45 Student Record Created
+2018-06-02 12:10:45 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:10:45 Creating Student
+2018-06-02 12:10:45 Student Record Created
+2018-06-02 12:10:45 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:10:45 Creating Student
+2018-06-02 12:10:45 Student Record Created
+2018-06-02 12:10:45 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:10:45 Creating Student
+2018-06-02 12:10:45 Student Record Created
+2018-06-02 12:10:45 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:10:45 Default students added
+2018-06-02 12:10:45 Centers initialed
+2018-06-02 12:10:46 Server Started
+2018-06-02 12:10:56 Reeived request in MTL from MTL0001 for get record count
+2018-06-02 12:10:56 Record count in MTL: 8
+2018-06-02 12:10:56 Request sent to get record data from DESKTOP-MEPO64E:6798
+2018-06-02 12:10:56 Received request in LVL from /192.168.56.1:53400 with this data [B@95d3be4
+2018-06-02 12:10:56 Received this response [B@60552668 from DESKTOP-MEPO64E:6798
+2018-06-02 12:10:56 Request sent to get record data from DESKTOP-MEPO64E:6799
+2018-06-02 12:10:56 Received request in DDO from /192.168.56.1:53401 with this data [B@75892bc5
+2018-06-02 12:10:56 Received this response [B@57fa64bc from DESKTOP-MEPO64E:6799
+2018-06-02 12:12:05 Staring Server
+2018-06-02 12:12:05 Initialing Centers
+2018-06-02 12:12:06 UDP server Started in DDO region in this port 6799
+2018-06-02 12:12:06 UDP server Started in LVL region in this port 6798
+2018-06-02 12:12:06 Start adding default managers
+2018-06-02 12:12:06 UDP server Started in MTL region in this port 6797
+2018-06-02 12:12:06 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:12:06 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:12:06 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:12:06 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:12:06 Default managers added
+2018-06-02 12:12:06 Start adding default teachers
+2018-06-02 12:12:06 Creating Teacher
+2018-06-02 12:12:06 Validating teacher fields
+2018-06-02 12:12:06 Teacher Record Created
+2018-06-02 12:12:06 Adding Teacher Record
+2018-06-02 12:12:06 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:12:06 Creating Teacher
+2018-06-02 12:12:06 Validating teacher fields
+2018-06-02 12:12:06 Teacher Record Created
+2018-06-02 12:12:06 Adding Teacher Record
+2018-06-02 12:12:06 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:12:06 Creating Teacher
+2018-06-02 12:12:06 Validating teacher fields
+2018-06-02 12:12:06 Teacher Record Created
+2018-06-02 12:12:06 Adding Teacher Record
+2018-06-02 12:12:06 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:12:06 Creating Teacher
+2018-06-02 12:12:06 Validating teacher fields
+2018-06-02 12:12:06 Teacher Record Created
+2018-06-02 12:12:06 Adding Teacher Record
+2018-06-02 12:12:06 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:12:06 Creating Teacher
+2018-06-02 12:12:06 Validating teacher fields
+2018-06-02 12:12:06 Teacher Record Created
+2018-06-02 12:12:06 Adding Teacher Record
+2018-06-02 12:12:06 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:12:06 Creating Teacher
+2018-06-02 12:12:06 Validating teacher fields
+2018-06-02 12:12:06 Teacher Record Created
+2018-06-02 12:12:06 Adding Teacher Record
+2018-06-02 12:12:06 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:12:06 Creating Teacher
+2018-06-02 12:12:06 Validating teacher fields
+2018-06-02 12:12:06 Teacher Record Created
+2018-06-02 12:12:06 Adding Teacher Record
+2018-06-02 12:12:06 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:12:06 Creating Teacher
+2018-06-02 12:12:06 Validating teacher fields
+2018-06-02 12:12:06 Teacher Record Created
+2018-06-02 12:12:06 Adding Teacher Record
+2018-06-02 12:12:06 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:12:06 Creating Teacher
+2018-06-02 12:12:06 Validating teacher fields
+2018-06-02 12:12:06 Teacher Record Created
+2018-06-02 12:12:06 Adding Teacher Record
+2018-06-02 12:12:06 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:12:06 Creating Teacher
+2018-06-02 12:12:06 Validating teacher fields
+2018-06-02 12:12:06 Teacher Record Created
+2018-06-02 12:12:06 Adding Teacher Record
+2018-06-02 12:12:06 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:12:06 Default teachers added
+2018-06-02 12:12:06 Start adding default students
+2018-06-02 12:12:06 Creating Student
+2018-06-02 12:12:06 Student Record Created
+2018-06-02 12:12:06 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:12:06 Creating Student
+2018-06-02 12:12:06 Student Record Created
+2018-06-02 12:12:06 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:12:06 Creating Student
+2018-06-02 12:12:06 Student Record Created
+2018-06-02 12:12:06 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:12:06 Creating Student
+2018-06-02 12:12:06 Student Record Created
+2018-06-02 12:12:06 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:12:06 Creating Student
+2018-06-02 12:12:06 Student Record Created
+2018-06-02 12:12:06 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:12:06 Creating Student
+2018-06-02 12:12:06 Student Record Created
+2018-06-02 12:12:06 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:12:06 Creating Student
+2018-06-02 12:12:06 Student Record Created
+2018-06-02 12:12:06 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:12:06 Creating Student
+2018-06-02 12:12:06 Student Record Created
+2018-06-02 12:12:06 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:12:06 Creating Student
+2018-06-02 12:12:06 Student Record Created
+2018-06-02 12:12:06 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:12:06 Creating Student
+2018-06-02 12:12:06 Student Record Created
+2018-06-02 12:12:06 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:12:06 Default students added
+2018-06-02 12:12:06 Centers initialed
+2018-06-02 12:12:06 Server Started
+2018-06-02 12:12:15 Reeived request in MTL from MTL0001 for get record count
+2018-06-02 12:12:15 Record count in MTL: 8
+2018-06-02 12:12:15 Request sent to get record data from DESKTOP-MEPO64E:6798
+2018-06-02 12:12:15 Received request in LVL from /192.168.56.1:51041 with this data [B@485f0ab9
+2018-06-02 12:12:15 Received this response INVALID_REQUEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          from DESKTOP-MEPO64E:6798
+2018-06-02 12:12:15 Received request in DDO from /192.168.56.1:51042 with this data [B@17eb2d8f
+2018-06-02 12:12:15 Request sent to get record data from DESKTOP-MEPO64E:6799
+2018-06-02 12:12:15 Received this response INVALID_REQUEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          from DESKTOP-MEPO64E:6799
+2018-06-02 12:13:22 Staring Server
+2018-06-02 12:13:22 Initialing Centers
+2018-06-02 12:13:23 UDP server Started in DDO region in this port 6799
+2018-06-02 12:13:23 UDP server Started in MTL region in this port 6797
+2018-06-02 12:13:23 Start adding default managers
+2018-06-02 12:13:23 UDP server Started in LVL region in this port 6798
+2018-06-02 12:13:23 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:13:23 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:13:23 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:13:23 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:13:23 Default managers added
+2018-06-02 12:13:23 Start adding default teachers
+2018-06-02 12:13:23 Creating Teacher
+2018-06-02 12:13:23 Validating teacher fields
+2018-06-02 12:13:23 Teacher Record Created
+2018-06-02 12:13:23 Adding Teacher Record
+2018-06-02 12:13:23 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:13:23 Creating Teacher
+2018-06-02 12:13:23 Validating teacher fields
+2018-06-02 12:13:23 Teacher Record Created
+2018-06-02 12:13:23 Adding Teacher Record
+2018-06-02 12:13:23 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:13:23 Creating Teacher
+2018-06-02 12:13:23 Validating teacher fields
+2018-06-02 12:13:23 Teacher Record Created
+2018-06-02 12:13:23 Adding Teacher Record
+2018-06-02 12:13:23 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:13:23 Creating Teacher
+2018-06-02 12:13:23 Validating teacher fields
+2018-06-02 12:13:23 Teacher Record Created
+2018-06-02 12:13:23 Adding Teacher Record
+2018-06-02 12:13:23 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:13:23 Creating Teacher
+2018-06-02 12:13:23 Validating teacher fields
+2018-06-02 12:13:23 Teacher Record Created
+2018-06-02 12:13:23 Adding Teacher Record
+2018-06-02 12:13:23 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:13:23 Creating Teacher
+2018-06-02 12:13:23 Validating teacher fields
+2018-06-02 12:13:23 Teacher Record Created
+2018-06-02 12:13:23 Adding Teacher Record
+2018-06-02 12:13:23 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:13:23 Creating Teacher
+2018-06-02 12:13:23 Validating teacher fields
+2018-06-02 12:13:23 Teacher Record Created
+2018-06-02 12:13:23 Adding Teacher Record
+2018-06-02 12:13:23 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:13:23 Creating Teacher
+2018-06-02 12:13:23 Validating teacher fields
+2018-06-02 12:13:23 Teacher Record Created
+2018-06-02 12:13:23 Adding Teacher Record
+2018-06-02 12:13:23 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:13:23 Creating Teacher
+2018-06-02 12:13:23 Validating teacher fields
+2018-06-02 12:13:23 Teacher Record Created
+2018-06-02 12:13:23 Adding Teacher Record
+2018-06-02 12:13:23 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:13:23 Creating Teacher
+2018-06-02 12:13:23 Validating teacher fields
+2018-06-02 12:13:23 Teacher Record Created
+2018-06-02 12:13:23 Adding Teacher Record
+2018-06-02 12:13:23 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:13:23 Default teachers added
+2018-06-02 12:13:23 Start adding default students
+2018-06-02 12:13:23 Creating Student
+2018-06-02 12:13:23 Student Record Created
+2018-06-02 12:13:23 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:13:23 Creating Student
+2018-06-02 12:13:23 Student Record Created
+2018-06-02 12:13:23 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:13:23 Creating Student
+2018-06-02 12:13:23 Student Record Created
+2018-06-02 12:13:23 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:13:24 Creating Student
+2018-06-02 12:13:24 Student Record Created
+2018-06-02 12:13:24 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:13:24 Creating Student
+2018-06-02 12:13:24 Student Record Created
+2018-06-02 12:13:24 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:13:24 Creating Student
+2018-06-02 12:13:24 Student Record Created
+2018-06-02 12:13:24 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:13:24 Creating Student
+2018-06-02 12:13:24 Student Record Created
+2018-06-02 12:13:24 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:13:24 Creating Student
+2018-06-02 12:13:24 Student Record Created
+2018-06-02 12:13:24 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:13:24 Creating Student
+2018-06-02 12:13:24 Student Record Created
+2018-06-02 12:13:24 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:13:24 Creating Student
+2018-06-02 12:13:24 Student Record Created
+2018-06-02 12:13:24 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:13:24 Default students added
+2018-06-02 12:13:24 Centers initialed
+2018-06-02 12:13:24 Server Started
+2018-06-02 12:13:33 Reeived request in MTL from MTL0001 for get record count
+2018-06-02 12:13:33 Record count in MTL: 8
+2018-06-02 12:13:33 Request sent to get record data from DESKTOP-MEPO64E:6798
+2018-06-02 12:13:33 Received request in LVL from /192.168.56.1:62281 with this data GET_RECORD_COUNT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+2018-06-02 12:13:33 Received this response INVALID_REQUEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          from DESKTOP-MEPO64E:6798
+2018-06-02 12:13:33 Request sent to get record data from DESKTOP-MEPO64E:6799
+2018-06-02 12:13:33 Received request in DDO from /192.168.56.1:62282 with this data GET_RECORD_COUNT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+2018-06-02 12:13:33 Received this response INVALID_REQUEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          from DESKTOP-MEPO64E:6799
+2018-06-02 12:15:39 Staring Server
+2018-06-02 12:15:39 Initialing Centers
+2018-06-02 12:15:39 UDP server Started in LVL region in this port 6798
+2018-06-02 12:15:39 UDP server Started in DDO region in this port 6799
+2018-06-02 12:15:39 Start adding default managers
+2018-06-02 12:15:39 UDP server Started in MTL region in this port 6797
+2018-06-02 12:15:39 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:15:39 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:15:39 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:15:39 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:15:39 Default managers added
+2018-06-02 12:15:39 Start adding default teachers
+2018-06-02 12:15:39 Creating Teacher
+2018-06-02 12:15:39 Validating teacher fields
+2018-06-02 12:15:39 Teacher Record Created
+2018-06-02 12:15:39 Adding Teacher Record
+2018-06-02 12:15:39 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:15:39 Creating Teacher
+2018-06-02 12:15:39 Validating teacher fields
+2018-06-02 12:15:39 Teacher Record Created
+2018-06-02 12:15:39 Adding Teacher Record
+2018-06-02 12:15:39 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:15:39 Creating Teacher
+2018-06-02 12:15:39 Validating teacher fields
+2018-06-02 12:15:39 Teacher Record Created
+2018-06-02 12:15:39 Adding Teacher Record
+2018-06-02 12:15:39 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:15:39 Creating Teacher
+2018-06-02 12:15:39 Validating teacher fields
+2018-06-02 12:15:39 Teacher Record Created
+2018-06-02 12:15:39 Adding Teacher Record
+2018-06-02 12:15:39 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:15:39 Creating Teacher
+2018-06-02 12:15:39 Validating teacher fields
+2018-06-02 12:15:39 Teacher Record Created
+2018-06-02 12:15:39 Adding Teacher Record
+2018-06-02 12:15:39 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:15:39 Creating Teacher
+2018-06-02 12:15:39 Validating teacher fields
+2018-06-02 12:15:39 Teacher Record Created
+2018-06-02 12:15:39 Adding Teacher Record
+2018-06-02 12:15:39 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:15:39 Creating Teacher
+2018-06-02 12:15:39 Validating teacher fields
+2018-06-02 12:15:39 Teacher Record Created
+2018-06-02 12:15:39 Adding Teacher Record
+2018-06-02 12:15:39 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:15:39 Creating Teacher
+2018-06-02 12:15:39 Validating teacher fields
+2018-06-02 12:15:39 Teacher Record Created
+2018-06-02 12:15:39 Adding Teacher Record
+2018-06-02 12:15:39 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:15:40 Creating Teacher
+2018-06-02 12:15:40 Validating teacher fields
+2018-06-02 12:15:40 Teacher Record Created
+2018-06-02 12:15:40 Adding Teacher Record
+2018-06-02 12:15:40 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:15:40 Creating Teacher
+2018-06-02 12:15:40 Validating teacher fields
+2018-06-02 12:15:40 Teacher Record Created
+2018-06-02 12:15:40 Adding Teacher Record
+2018-06-02 12:15:40 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:15:40 Default teachers added
+2018-06-02 12:15:40 Start adding default students
+2018-06-02 12:15:40 Creating Student
+2018-06-02 12:15:40 Student Record Created
+2018-06-02 12:15:40 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:15:40 Creating Student
+2018-06-02 12:15:40 Student Record Created
+2018-06-02 12:15:40 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:15:40 Creating Student
+2018-06-02 12:15:40 Student Record Created
+2018-06-02 12:15:40 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:15:40 Creating Student
+2018-06-02 12:15:40 Student Record Created
+2018-06-02 12:15:40 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:15:40 Creating Student
+2018-06-02 12:15:40 Student Record Created
+2018-06-02 12:15:40 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:15:40 Creating Student
+2018-06-02 12:15:40 Student Record Created
+2018-06-02 12:15:40 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:15:40 Creating Student
+2018-06-02 12:15:40 Student Record Created
+2018-06-02 12:15:40 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:15:40 Creating Student
+2018-06-02 12:15:40 Student Record Created
+2018-06-02 12:15:40 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:15:40 Creating Student
+2018-06-02 12:15:40 Student Record Created
+2018-06-02 12:15:40 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:15:40 Creating Student
+2018-06-02 12:15:40 Student Record Created
+2018-06-02 12:15:40 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:15:40 Default students added
+2018-06-02 12:15:40 Centers initialed
+2018-06-02 12:15:40 Server Started
+2018-06-02 12:15:48 Reeived request in MTL from MTL0001 for get record count
+2018-06-02 12:15:48 Record count in MTL: 8
+2018-06-02 12:15:48 Request sent to get record data from DESKTOP-MEPO64E:6798
+2018-06-02 12:15:48 Received request in LVL from /192.168.56.1:59440 with this data GET_RECORD_COUNT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+2018-06-02 12:15:48 Received this response LVL: 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   from DESKTOP-MEPO64E:6798
+2018-06-02 12:15:48 Received request in DDO from /192.168.56.1:59441 with this data GET_RECORD_COUNT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+2018-06-02 12:15:48 Request sent to get record data from DESKTOP-MEPO64E:6799
+2018-06-02 12:15:48 Received this response DDO: 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   from DESKTOP-MEPO64E:6799
+2018-06-02 12:17:39 Staring Server
+2018-06-02 12:17:39 Initialing Centers
+2018-06-02 12:17:39 UDP server Started in LVL region in this port 6798
+2018-06-02 12:17:39 UDP server Started in MTL region in this port 6797
+2018-06-02 12:17:39 Start adding default managers
+2018-06-02 12:17:39 UDP server Started in DDO region in this port 6799
+2018-06-02 12:17:39 Manager Added:ManagerID:MTL0001 FirstName:Akshay LastName:Shah
+2018-06-02 12:17:39 Manager Added:ManagerID:MTL0002 FirstName:Mihir LastName:Pujara
+2018-06-02 12:17:39 Manager Added:ManagerID:LVL0001 FirstName:Mohammad LastName:Abdellahi
+2018-06-02 12:17:39 Manager Added:ManagerID:DDO0001 FirstName:Milan LastName:Prajapati
+2018-06-02 12:17:39 Default managers added
+2018-06-02 12:17:39 Start adding default teachers
+2018-06-02 12:17:39 Creating Teacher
+2018-06-02 12:17:39 Validating teacher fields
+2018-06-02 12:17:39 Teacher Record Created
+2018-06-02 12:17:39 Adding Teacher Record
+2018-06-02 12:17:39 Teacher record added:RecordID:TR10001 FirstName:Aaron LastName:Baton Address:1650 Maisonneuve Blvd W, Montreal, QC Phone:(438) 924-7741 Specialization:Machine Learning Location:DDO
+2018-06-02 12:17:39 Creating Teacher
+2018-06-02 12:17:39 Validating teacher fields
+2018-06-02 12:17:39 Teacher Record Created
+2018-06-02 12:17:39 Adding Teacher Record
+2018-06-02 12:17:39 Teacher record added:RecordID:TR10002 FirstName:Abraham LastName:Lincon Address:1426 Bishop St, Montreal, QC H3G 2E6 Phone:(514) 924-7741 Specialization:Mathematics Location:DDO
+2018-06-02 12:17:39 Creating Teacher
+2018-06-02 12:17:39 Validating teacher fields
+2018-06-02 12:17:39 Teacher Record Created
+2018-06-02 12:17:39 Adding Teacher Record
+2018-06-02 12:17:39 Teacher record added:RecordID:TR10003 FirstName:Albert LastName:Moore Address:1684 Boulevard de Maisonneuve O, Montréal, QC H3H 1J7 Phone:(514) 006-9939 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:17:39 Creating Teacher
+2018-06-02 12:17:39 Validating teacher fields
+2018-06-02 12:17:39 Teacher Record Created
+2018-06-02 12:17:39 Adding Teacher Record
+2018-06-02 12:17:39 Teacher record added:RecordID:TR10004 FirstName:Bernard LastName:Smith Address:1280 Rue Saint-Marc, Montréal, QC H3H 2G1 Phone:(438) 789-9939 Specialization:Machine Learning Location:DDO
+2018-06-02 12:17:39 Creating Teacher
+2018-06-02 12:17:39 Validating teacher fields
+2018-06-02 12:17:39 Teacher Record Created
+2018-06-02 12:17:39 Adding Teacher Record
+2018-06-02 12:17:39 Teacher record added:RecordID:TR10005 FirstName:Brock LastName:Lanester Address:1755 Boulevard René-Laennec, Laval, QC H7M 3L9 Phone:(438) 111-5389 Specialization:Mathematics Location:LVL
+2018-06-02 12:17:39 Creating Teacher
+2018-06-02 12:17:39 Validating teacher fields
+2018-06-02 12:17:39 Teacher Record Created
+2018-06-02 12:17:39 Adding Teacher Record
+2018-06-02 12:17:39 Teacher record added:RecordID:TR10006 FirstName:Nicol LastName:Cadman Address:0A4, 5205 Boulevard Robert-Bourassa, Laval, QC H7E 0A5 Phone:(514) 378-9542 Specialization:Machine Learning Location:LVL
+2018-06-02 12:17:39 Creating Teacher
+2018-06-02 12:17:39 Validating teacher fields
+2018-06-02 12:17:39 Teacher Record Created
+2018-06-02 12:17:39 Adding Teacher Record
+2018-06-02 12:17:39 Teacher record added:RecordID:TR10007 FirstName:Albert LastName:Moore Address:Tour A, 1600 Boul Saint-Martin Est #175, Laval, QC H7G 4R8 Phone:(514) 438-8024 Specialization:Distributed System Design Location:LVL
+2018-06-02 12:17:39 Creating Teacher
+2018-06-02 12:17:39 Validating teacher fields
+2018-06-02 12:17:39 Teacher Record Created
+2018-06-02 12:17:39 Adding Teacher Record
+2018-06-02 12:17:39 Teacher record added:RecordID:TR10008 FirstName:Jon LastName:Carter Address:136 Boulevard Westpark, Dollard-des-Ormeaux, QC H9A 2K2 Phone:(514) 548-1202 Specialization:Distributed System Design Location:DDO
+2018-06-02 12:17:39 Creating Teacher
+2018-06-02 12:17:39 Validating teacher fields
+2018-06-02 12:17:39 Teacher Record Created
+2018-06-02 12:17:39 Adding Teacher Record
+2018-06-02 12:17:39 Teacher record added:RecordID:TR10009 FirstName:Jordan LastName:Nassie Address:2983 Lake St, Dollard-Des Ormeaux, QC H9B 2L1 Phone:(514) 659-2489 Specialization:Machine Learning Location:DDO
+2018-06-02 12:17:39 Creating Teacher
+2018-06-02 12:17:39 Validating teacher fields
+2018-06-02 12:17:39 Teacher Record Created
+2018-06-02 12:17:39 Adding Teacher Record
+2018-06-02 12:17:39 Teacher record added:RecordID:TR10010 FirstName:Payal LastName:Seth Address:2900 Lake St, Dollard-Des Ormeaux, QC H9B 2P1 Phone:(514) 750-2023 Specialization:Mathematics Location:DDO
+2018-06-02 12:17:39 Default teachers added
+2018-06-02 12:17:39 Start adding default students
+2018-06-02 12:17:39 Creating Student
+2018-06-02 12:17:39 Student Record Created
+2018-06-02 12:17:39 Student record added:RecordID:SR10001 FirstName:John LastName:Doe Status:INACTIVE StatusDate:09-15-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:17:39 Creating Student
+2018-06-02 12:17:39 Student Record Created
+2018-06-02 12:17:39 Student record added:RecordID:SR10002 FirstName:Raj LastName:Patel Status:INACTIVE StatusDate:08-28-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:17:40 Creating Student
+2018-06-02 12:17:40 Student Record Created
+2018-06-02 12:17:40 Student record added:RecordID:SR10003 FirstName:Sheldon LastName:Cooper Status:INACTIVE StatusDate:05-20-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:17:40 Creating Student
+2018-06-02 12:17:40 Student Record Created
+2018-06-02 12:17:40 Student record added:RecordID:SR10004 FirstName:Lenoard LastName:Hofstader Status:INACTIVE StatusDate:05-28-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:17:40 Creating Student
+2018-06-02 12:17:40 Student Record Created
+2018-06-02 12:17:40 Student record added:RecordID:SR10005 FirstName:Howard LastName:Bennedict Status:INACTIVE StatusDate:06-17-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:17:40 Creating Student
+2018-06-02 12:17:40 Student Record Created
+2018-06-02 12:17:40 Student record added:RecordID:SR10006 FirstName:Penny LastName:Smithen Status:INACTIVE StatusDate:07-10-2018 coursesRegistered:["Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:17:40 Creating Student
+2018-06-02 12:17:40 Student Record Created
+2018-06-02 12:17:40 Student record added:RecordID:SR10007 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:17:40 Creating Student
+2018-06-02 12:17:40 Student Record Created
+2018-06-02 12:17:40 Student record added:RecordID:SR10008 FirstName:Bernadett LastName:Smithens Status:INACTIVE StatusDate:06-10-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
+2018-06-02 12:17:40 Creating Student
+2018-06-02 12:17:40 Student Record Created
+2018-06-02 12:17:40 Student record added:RecordID:SR10009 FirstName:Bruce LastName:Wayne Status:INACTIVE StatusDate:07-30-2018 coursesRegistered:["Mathematics","Machine,Learning"]
+2018-06-02 12:17:40 Creating Student
+2018-06-02 12:17:40 Student Record Created
+2018-06-02 12:17:40 Student record added:RecordID:SR10010 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
+2018-06-02 12:17:40 Default students added
+2018-06-02 12:17:40 Centers initialed
+2018-06-02 12:17:40 Server Started
+2018-06-02 12:17:47 Reeived request in MTL from MTL0001 for get record count
+2018-06-02 12:17:47 Record count in MTL: 8
+2018-06-02 12:17:47 Request sent to get record data from DESKTOP-MEPO64E:6798
+2018-06-02 12:17:47 Received request in LVL from /192.168.56.1:55265 with this data GET_RECORD_COUNT
+2018-06-02 12:17:47 Received this response LVL: 6 from DESKTOP-MEPO64E:6798
+2018-06-02 12:17:48 Request sent to get record data from DESKTOP-MEPO64E:6799
+2018-06-02 12:17:48 Received request in DDO from /192.168.56.1:55266 with this data GET_RECORD_COUNT
+2018-06-02 12:17:48 Received this response DDO: 6 from DESKTOP-MEPO64E:6799
+2018-06-02 12:18:08 Creating Teacher
+2018-06-02 12:18:08 Validating teacher fields
+2018-06-02 12:18:08 Teacher Record Created
+2018-06-02 12:18:08 Adding Teacher Record
+2018-06-02 12:18:08 Teacher record added:RecordID:TR78012 FirstName:gggg LastName:hhhh Address:hhhh Phone:hhhh Specialization:hhhh Location:DDO
+2018-06-02 12:18:12 Reeived request in MTL from MTL0001 for get record count
+2018-06-02 12:18:12 Record count in MTL: 9
+2018-06-02 12:18:12 Request sent to get record data from DESKTOP-MEPO64E:6798
+2018-06-02 12:18:12 Received request in LVL from /192.168.56.1:55267 with this data GET_RECORD_COUNT
+2018-06-02 12:18:12 Received this response LVL: 6 from DESKTOP-MEPO64E:6798
+2018-06-02 12:18:12 Received request in DDO from /192.168.56.1:55268 with this data GET_RECORD_COUNT
+2018-06-02 12:18:12 Request sent to get record data from DESKTOP-MEPO64E:6799
+2018-06-02 12:18:12 Received this response DDO: 6 from DESKTOP-MEPO64E:6799

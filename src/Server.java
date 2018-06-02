@@ -34,9 +34,9 @@ public class Server {
 
         LoggerFactory.LogServer("Initialing Centers");
 
-        this.mtl = new CenterServer("MTL");
-        this.lvl = new CenterServer("LVL");
-        this.ddo = new CenterServer("DDO");
+        this.mtl = new CenterServer("MTL",6797,new int[] {6798,6799});
+        this.lvl = new CenterServer("LVL",6798,new int[] {6797,6799});
+        this.ddo = new CenterServer("DDO",6799,new int[] {6797,6798});
 
 
 

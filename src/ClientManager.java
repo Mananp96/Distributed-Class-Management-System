@@ -88,6 +88,7 @@ public class ClientManager {
 					break;
 				case "3":
 					System.out.println("----------3>>>Get Record Counts----------");
+					System.out.println(server.getRecordCount(this.managerId));
 					System.out.println("Press any key to continue...");
 					break;
 				case "4":
