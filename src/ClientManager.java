@@ -91,7 +91,12 @@ public class ClientManager {
 					System.out.println("Press any key to continue...");
 					break;
 				case "4":
-					this.editRecord();
+					try {
+						this.editRecord();
+					} catch (RequiredValueException e) {
+						
+						e.printStackTrace();
+					}
 					System.out.println("Press any key to continue...");
 					break;
 				case "5":
@@ -170,12 +175,22 @@ public class ClientManager {
 
 	}
 
-	private void editRecord() {
+	private void editRecord() throws RemoteException, RequiredValueException {
 		System.out.println("----------Edit Record----------");
 		String recordId = userInput("Enter Record ID:");
 		String fieldName = userInput("Enter Field Name:");
 		String newvalue = userInput("Enter New Value:");
-		String[] newValue = newvalue.split(",");
+//		String[] newValue = newvalue.split(",");
+
+		LoggerFactory.Log(this.managerId, String.format("Request to edit record: %s", recordId));
+
+		Boolean result = server.editRecords(recordId, fieldName, newvalue, this.managerId);
+
+		String str = String.format("RecordID:%s FieldName:%s Value:%s", recordId, fieldName, newvalue);
+		if(result)
+			LoggerFactory.Log(this.managerId,String.format("Record edited:%s", str));
+		else
+			LoggerFactory.Log(this.managerId,String.format("Record did not edit:%s", str));
 	}
 
 	private String userInput(String var2) {

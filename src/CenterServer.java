@@ -1,10 +1,10 @@
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class CenterServer extends UnicastRemoteObject implements CenterServerInterface {
 	
@@ -129,10 +129,125 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 	}
 
 	@Override
-	public boolean editRecords(String recordId, String fieldName, String[] newValue, String managerId)
+	public boolean editRecords(String recordId, String fieldName, String newValue, String managerId)
 			throws RemoteException,RequiredValueException {
-		// TODO Auto-generated method stub
-		return false;
+
+	    LoggerFactory.LogServer(String.format("Editing record, RecordID:%s", recordId));
+
+        if(recordId == null || recordId.isEmpty()) {
+            LoggerFactory.LogServer("Record ID required");
+            throw new RequiredValueException("Record ID required");
+        }
+
+        if(fieldName == null || fieldName.isEmpty()) {
+            LoggerFactory.LogServer("FieldName required");
+            throw new RequiredValueException("FieldName required");
+        }
+
+        if(newValue == null || newValue.isEmpty()) {
+            LoggerFactory.LogServer("FieldValue required");
+            throw new RequiredValueException("FieldValue required");
+        }
+
+        LoggerFactory.LogServer("Looking record id");
+        Record record = null;
+        for (ArrayList<Record> records : this.recordData.values()) {
+            for (Record r : records)
+            {
+                if(r.getRecordId().equalsIgnoreCase(recordId)) {
+                    LoggerFactory.LogServer(String.format("Record found, %s", r.toString()));
+                    record = r;
+                    break;
+                }
+            }
+
+            if(record != null)
+                break;
+        }
+
+
+        if( record.getClass() == StudentRecord.class)
+        {
+            StudentRecord student = (StudentRecord) record;
+            switch (fieldName.toLowerCase())
+            {
+                case "firstname":
+                    student.setFirstName(newValue);
+                    break;
+                case "lastname":
+                    student.setLastName(newValue);
+                    break;
+                case "status":
+
+                    if(!newValue.toLowerCase().equals("active") && !newValue.toLowerCase().equals("inactive"))
+                    {
+                        LoggerFactory.LogServer("Status is invalid");
+                        throw new RequiredValueException("Status is invalid");
+                    }
+                    student.setStatus(Status.valueOf(newValue));
+                    break;
+                case "statusdate":
+                    try
+                    {
+                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        Date today = df.parse(newValue);
+                        student.setStatusDate(newValue);
+                    } catch (ParseException e) {
+                        LoggerFactory.LogServer("Date is invalid");
+                        throw new RequiredValueException("Date is invalid");
+                    }
+                    break;
+                case "coursesregistered":
+                    student.setCoursesRegistered(newValue.split(","));
+                    break;
+                 default:
+                     LoggerFactory.LogServer("FieldName is invalid");
+                     throw new RequiredValueException("FieldName is invalid");
+            }
+
+            LoggerFactory.LogServer(String.format("Student record edited, %s", student));
+
+        }
+        else
+        {
+            TeacherRecord teacher = (TeacherRecord) record;
+            switch (fieldName.toLowerCase())
+            {
+                case "firstname":
+                    teacher.setFirstName(newValue);
+                    break;
+                case "lastname":
+                    teacher.setLastName(newValue);
+                    break;
+                case "address":
+                    teacher.setAddress(newValue);
+                    break;
+                case "phone":
+                    teacher.setPhone(newValue);
+                    break;
+                case "specialization":
+                    teacher.setSpecialization(newValue);
+                    break;
+
+                case "location":
+
+                    if(!newValue.toLowerCase().equals("mtl") && !newValue.toLowerCase().equals("lvl") && !newValue.toLowerCase().equals("ddo"))
+                    {
+                        LoggerFactory.LogServer("location is invalid");
+                        throw new RequiredValueException("location is invalid");
+                    }
+                    teacher.setLocation(Location.valueOf(newValue));
+                    break;
+                default:
+                    LoggerFactory.LogServer("FieldName is invalid");
+                    throw new RequiredValueException("FieldName is invalid");
+            }
+
+            LoggerFactory.LogServer(String.format("Teacher record edited, %s", teacher));
+        }
+
+
+		return true;
 	}
 	
 	

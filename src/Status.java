@@ -9,7 +9,7 @@ public enum Status {
 	INACTIVE{
 		@Override
 		public String toString() {
-			return "Active";
+			return "Inactive";
 		}
 	}
 }

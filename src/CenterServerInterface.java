@@ -27,7 +27,7 @@ public interface CenterServerInterface extends Remote {
 	public boolean editRecords(
 		String recordId,
 		String fieldName,
-		String[] newValue,
+		String newValue,
 		String managerId
 	) throws RemoteException,RequiredValueException;
 
