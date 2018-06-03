@@ -35,109 +35,6 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
     }
 
-    public boolean createTRecord(String firstName, String lastName, String address, String phone, String specialization,
-                                 Location location, String managerId, String recordId) throws RemoteException, RequiredValueException {
-
-        LoggerFactory.LogServer("Creating Teacher Record.");
-        LoggerFactory.LogServer("Validating fields...");
-        if (firstName == null || firstName.isEmpty()) {
-            //LoggerFactory.LogServer("First name required");
-            throw new RequiredValueException("First name required");
-        }
-
-        if (lastName == null || lastName.isEmpty()) {
-            //LoggerFactory.LogServer("Last name required");
-            throw new RequiredValueException("Last name required");
-        }
-
-        if (address == null || address.isEmpty()) {
-            //LoggerFactory.LogServer("Address required");
-            throw new RequiredValueException("Address required");
-        }
-
-        if (phone == null || phone.isEmpty()) {
-            //LoggerFactory.LogServer("Phone required");
-            throw new RequiredValueException("Phone required");
-        }
-
-        if (specialization == null || specialization.isEmpty()) {
-            //LoggerFactory.LogServer("Specialization required");
-            throw new RequiredValueException("Specialization required");
-        }
-
-        if (location == null) {
-           // LoggerFactory.LogServer("Status required");
-            throw new RequiredValueException("Status required");
-        }
-        LoggerFactory.LogServer("Validating fields complete...");
-        Record record = new TeacherRecord(recordId, firstName, lastName, address, phone, specialization, location);
-
-        String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
-
-        LoggerFactory.LogServer("Adding Record data to List...");
-        Boolean result = addToRecordData(firstCharacter, record);
-
-        if (result) {
-            LoggerFactory.LogServer(String.format("Record added to the list :%s", record.toString()));
-            LoggerFactory.LogServer(String.format("Teacher Record Successfully created by Manager:%s",getManagerNameById(managerId)));
-        }
-        else {
-            LoggerFactory.LogServer(String.format("Something went wrong when creating teacher record :%s \n by Manager: %s", record.toString(),getManagerNameById(managerId)));
-        }
-
-        return result;
-
-    }
-
-    public boolean createSRecord(String firstName, String lastName, String[] courseRegistered, Status status,
-                                 String statusDate, String managerId, String recordId) throws RemoteException, RequiredValueException {
-
-        LoggerFactory.LogServer("Creating Student Record...");
-        LoggerFactory.LogServer("Validating fields...");
-        if (firstName == null || firstName.isEmpty()) {
-            //LoggerFactory.LogServer("First name required");
-            throw new RequiredValueException("First name required");
-        }
-
-        if (lastName == null || lastName.isEmpty()) {
-            //LoggerFactory.LogServer("Last name required");
-            throw new RequiredValueException("Last name required");
-        }
-
-        if (statusDate == null || statusDate.isEmpty()) {
-            //LoggerFactory.LogServer("Status Date required");
-            throw new RequiredValueException("Status Date required");
-        }
-
-        if (courseRegistered == null || courseRegistered.length < 1) {
-            //LoggerFactory.LogServer("Registed Course required");
-            throw new RequiredValueException("Registered Course required");
-        }
-
-        if (status == null) {
-            //LoggerFactory.LogServer("Status required");
-            throw new RequiredValueException("Status required");
-        }
-        LoggerFactory.LogServer("Validating fields complete...");
-
-
-        Record record = new StudentRecord(recordId, firstName, lastName, courseRegistered, status, statusDate);
-
-        String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
-
-        LoggerFactory.LogServer("Adding Record data to List...");
-        boolean result = addToRecordData(firstCharacter, record);
-
-        if (result) {
-            LoggerFactory.LogServer(String.format("Record added to the list :%s", record.toString()));
-            LoggerFactory.LogServer(String.format("Student Record Successfully created by Manager:%s",getManagerNameById(managerId)));
-        }
-        else {
-            LoggerFactory.LogServer(String.format("Something went wrong when creating student record :%s \n by Manager: %s", record.toString(),getManagerNameById(managerId)));
-        }
-        return result;
-    }
-
     private String getIndividualRecordCount() {
 
         Set<String> keys = this.recordData.keySet();
@@ -152,9 +49,34 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
     }
 
+    private synchronized int generateNumber() {
+        Random random = new Random(System.nanoTime());
+
+        return 10000 + random.nextInt(89999);
+    }
+
+    private boolean addToRecordData(String firstCharacter, Record record) {
+        if (this.recordData.containsKey(firstCharacter)) {
+            ArrayList<Record> list = this.recordData.get(firstCharacter);
+            if (list != null && list.size() > 0) {
+                list.add(record);
+                return true;
+            } else {
+                list.add(record);
+                this.recordData.put(firstCharacter, list);
+                return true;
+            }
+        } else {
+            ArrayList<Record> list = new ArrayList<Record>();
+            list.add(record);
+            this.recordData.put(firstCharacter, list);
+            return true;
+        }
+    }
+
     @Override
     public String getRecordCount(String managerId) throws RemoteException {
-        LoggerFactory.LogServer("Received request for " + this.name + " server from " + getManagerNameById(managerId) + " to get record counts.");
+        LoggerFactory.LogServer("Received request for " + this.name + " server from " + managerId + " to get record counts.");
         String recordCountData = this.getIndividualRecordCount();
         LoggerFactory.LogServer("Total Records in " + this.name+" server are " + recordCountData);
 
@@ -200,7 +122,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
     public boolean editRecords(String recordId, String fieldName, String newValue, String managerId)
             throws RemoteException, RequiredValueException {
 
-        LoggerFactory.LogServer("Manager :" + getManagerNameById(managerId) +" requested to edit a record." );
+        LoggerFactory.LogServer("Manager :" + managerId +" requested to edit a record." );
         LoggerFactory.LogServer(String.format("Editing record, RecordID:%s", recordId));
 
         if (recordId == null || recordId.isEmpty()) {
@@ -315,61 +237,106 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         return true;
     }
 
-    private synchronized int generateNumber() {
-        Random random = new Random(System.nanoTime());
-
-        return 10000 + random.nextInt(89999);
-    }
-
-    private boolean addToRecordData(String firstCharacter, Record record) {
-        if (this.recordData.containsKey(firstCharacter)) {
-            ArrayList<Record> list = this.recordData.get(firstCharacter);
-            if (list != null && list.size() > 0) {
-                list.add(record);
-                return true;
-            } else {
-                list.add(record);
-                this.recordData.put(firstCharacter, list);
-                return true;
-            }
-        } else {
-            ArrayList<Record> list = new ArrayList<Record>();
-            list.add(record);
-            this.recordData.put(firstCharacter, list);
-            return true;
-        }
-    }
-
-    public void addManagerToList(Manager manager) {
-        if (manager != null) {
-            serverManagerList.add(manager);
-
-            LoggerFactory.LogServer(String.format("Manager Added:%s", manager.toString()));
-        }
-    }
-
-    @Override
-    public boolean managerExists(String id) throws RemoteException {
-        for (Manager manager : serverManagerList) {
-            if (manager.getManagerID().equals(id)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public boolean createTRecord(String firstName, String lastName, String address, String phone, String specialization,
                                  Location location, String managerId) throws RemoteException, RequiredValueException {
-        return this.createTRecord(firstName, lastName, address, phone, specialization, location, managerId,
-                "TR" + generateNumber());
+        LoggerFactory.LogServer("Creating Teacher Record.");
+        LoggerFactory.LogServer("Validating fields...");
+        if (firstName == null || firstName.isEmpty()) {
+            //LoggerFactory.LogServer("First name required");
+            throw new RequiredValueException("First name required");
+        }
+
+        if (lastName == null || lastName.isEmpty()) {
+            //LoggerFactory.LogServer("Last name required");
+            throw new RequiredValueException("Last name required");
+        }
+
+        if (address == null || address.isEmpty()) {
+            //LoggerFactory.LogServer("Address required");
+            throw new RequiredValueException("Address required");
+        }
+
+        if (phone == null || phone.isEmpty()) {
+            //LoggerFactory.LogServer("Phone required");
+            throw new RequiredValueException("Phone required");
+        }
+
+        if (specialization == null || specialization.isEmpty()) {
+            //LoggerFactory.LogServer("Specialization required");
+            throw new RequiredValueException("Specialization required");
+        }
+
+        if (location == null) {
+            // LoggerFactory.LogServer("Status required");
+            throw new RequiredValueException("Status required");
+        }
+        LoggerFactory.LogServer("Validating fields complete...");
+        Record record = new TeacherRecord("TR" + generateNumber(), firstName, lastName, address, phone, specialization, location);
+
+        String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
+
+        LoggerFactory.LogServer("Adding Record data to List...");
+        Boolean result = addToRecordData(firstCharacter, record);
+
+        if (result) {
+            LoggerFactory.LogServer(String.format("Record added to the list :%s", record.toString()));
+            LoggerFactory.LogServer(String.format("Teacher Record Successfully created by Manager:%s",(managerId)));
+        }
+        else {
+            LoggerFactory.LogServer(String.format("Something went wrong when creating teacher record :%s \n by Manager: %s", record.toString(),(managerId)));
+        }
+
+        return result;
     }
 
     @Override
     public boolean createSRecord(String firstName, String lastName, String[] courseRegistered, Status status,
                                  String statusDate, String managerId) throws RemoteException, RequiredValueException {
-        return this.createSRecord(firstName, lastName, courseRegistered, status, statusDate, managerId,
-                "SR" + generateNumber());
+        LoggerFactory.LogServer("Creating Student Record...");
+        LoggerFactory.LogServer("Validating fields...");
+        if (firstName == null || firstName.isEmpty()) {
+            //LoggerFactory.LogServer("First name required");
+            throw new RequiredValueException("First name required");
+        }
+
+        if (lastName == null || lastName.isEmpty()) {
+            //LoggerFactory.LogServer("Last name required");
+            throw new RequiredValueException("Last name required");
+        }
+
+        if (statusDate == null || statusDate.isEmpty()) {
+            //LoggerFactory.LogServer("Status Date required");
+            throw new RequiredValueException("Status Date required");
+        }
+
+        if (courseRegistered == null || courseRegistered.length < 1) {
+            //LoggerFactory.LogServer("Registed Course required");
+            throw new RequiredValueException("Registered Course required");
+        }
+
+        if (status == null) {
+            //LoggerFactory.LogServer("Status required");
+            throw new RequiredValueException("Status required");
+        }
+        LoggerFactory.LogServer("Validating fields complete...");
+
+
+        Record record = new StudentRecord("SR" + generateNumber(), firstName, lastName, courseRegistered, status, statusDate);
+
+        String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
+
+        LoggerFactory.LogServer("Adding Record data to List...");
+        boolean result = addToRecordData(firstCharacter, record);
+
+        if (result) {
+            LoggerFactory.LogServer(String.format("Record added to the list :%s", record.toString()));
+            LoggerFactory.LogServer(String.format("Student Record Successfully created by Manager:%s",(managerId)));
+        }
+        else {
+            LoggerFactory.LogServer(String.format("Something went wrong when creating student record :%s \n by Manager: %s", record.toString(),(managerId)));
+        }
+        return result;
     }
 
     @Override
@@ -401,12 +368,4 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         }
     }
 
-    public String getManagerNameById(String id){
-        for (Manager manager : serverManagerList) {
-            if (manager.getManagerID().equals(id)) {
-                return manager.getFirstName() + " " + manager.getLastName();
-            }
-        }
-        return " ";
-    }
 }

@@ -56,14 +56,9 @@ public class ClientManager {
                 Registry registry = LocateRegistry.getRegistry(2964);
 
                 LoggerFactory.Log(this.managerId, "Looking up server");
-
                 server = (CenterServerInterface) registry.lookup(region);
-                if (server.managerExists(this.managerId)) {
-                    LoggerFactory.Log(this.managerId, "Server detected");
 
-                    break;
-                }
-                System.out.println("Invalid Manager ID \n Please try again...");
+                break;
             }
         }
 

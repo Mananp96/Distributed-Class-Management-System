@@ -38,8 +38,6 @@ public class Server {
         this.lvl = new CenterServer("LVL", 6798, new int[]{6797, 6799});
         this.ddo = new CenterServer("DDO", 6799, new int[]{6797, 6798});
 
-
-        this.addManagersToServer();
         this.addTeachersToServer();
         this.addStudentsToServer();
 
@@ -66,9 +64,7 @@ public class Server {
             JSONObject student = (JSONObject) object;
             String firstName = (String) student.get("firstName");
             String lastName = (String) student.get("lastName");
-            String recordId = (String) student.get("id");
-            String[] courses = (String[]) student.get("coursesRegistered").toString().replace("},{", " ,").split(" ");
-            ;
+            String[] courses = student.get("coursesRegistered").toString().replace("},{", " ,").split(" ");
             String statusDate = (String) student.get("statusDate");
             String stat = (String) student.get("status");
             if (Objects.equals(stat, "Active")) {
@@ -78,11 +74,11 @@ public class Server {
             }
 
             if (student.get("region").toString().substring(0, 3).equalsIgnoreCase("MTL")) {
-                ((CenterServer) this.mtl).createSRecord(firstName, lastName, courses, status, statusDate, "default", recordId);
+                this.mtl.createSRecord(firstName, lastName, courses, status, statusDate, "default");
             } else if (student.get("region").toString().substring(0, 3).equalsIgnoreCase("LVL")) {
-                ((CenterServer) this.lvl).createSRecord(firstName, lastName, courses, status, statusDate, "default", recordId);
+                this.lvl.createSRecord(firstName, lastName, courses, status, statusDate, "default");
             } else if (student.get("region").toString().substring(0, 3).equalsIgnoreCase("DDO")) {
-                ((CenterServer) this.ddo).createSRecord(firstName, lastName, courses, status, statusDate, "default", recordId);
+                this.ddo.createSRecord(firstName, lastName, courses, status, statusDate, "default");
             }
         }
 
@@ -115,49 +111,15 @@ public class Server {
             }
 
             if (teacher.get("location").toString().substring(0, 3).equalsIgnoreCase("MTL")) {
-                ((CenterServer) this.mtl).createTRecord(firstName, lastName, address, phone, specialization, location, "default", recordId);
+                this.mtl.createTRecord(firstName, lastName, address, phone, specialization, location, "default");
             } else if (teacher.get("location").toString().substring(0, 3).equalsIgnoreCase("LVL")) {
-                ((CenterServer) this.lvl).createTRecord(firstName, lastName, address, phone, specialization, location, "default", recordId);
+                this.lvl.createTRecord(firstName, lastName, address, phone, specialization, location, "default");
             } else if (teacher.get("location").toString().substring(0, 3).equalsIgnoreCase("DDO")) {
-                ((CenterServer) this.ddo).createTRecord(firstName, lastName, address, phone, specialization, location, "default", recordId);
+                this.ddo.createTRecord(firstName, lastName, address, phone, specialization, location, "default");
             }
         }
 
         LoggerFactory.LogServer("Default teachers added");
 
     }
-
-    private void addManagersToServer() throws IOException, ParseException {
-
-        LoggerFactory.LogServer("Start adding default managers");
-
-        JSONParser parser = new JSONParser();
-        JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("resources/managerData.json"));
-        for (Object object : jsonArray) {
-            JSONObject manager = (JSONObject) object;
-            if (manager.get("managerID").toString().substring(0, 3).equalsIgnoreCase("MTL")) {
-                ((CenterServer) this.mtl).addManagerToList(
-                        new Manager(
-                                manager.get("managerID").toString(),
-                                manager.get("firstName").toString(),
-                                manager.get("lastName").toString()));
-            } else if (manager.get("managerID").toString().substring(0, 3).equalsIgnoreCase("LVL")) {
-                ((CenterServer) this.lvl).addManagerToList(
-                        new Manager(
-                                manager.get("managerID").toString(),
-                                manager.get("firstName").toString(),
-                                manager.get("lastName").toString()));
-            } else if (manager.get("managerID").toString().substring(0, 3).equalsIgnoreCase("DDO")) {
-                ((CenterServer) this.ddo).addManagerToList(
-                        new Manager(
-                                manager.get("managerID").toString(),
-                                manager.get("firstName").toString(),
-                                manager.get("lastName").toString()));
-            }
-        }
-
-        LoggerFactory.LogServer("Default managers added");
-
-    }
-
 }
