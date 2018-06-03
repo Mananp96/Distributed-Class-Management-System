@@ -30,9 +30,6 @@ public class Server {
 
     private void runServer() throws Exception {
 
-        LoggerFactory.LogServer("Staring Server");
-
-        LoggerFactory.LogServer("Initialing Centers");
 
         this.mtl = new CenterServer("MTL", 6797, new int[]{6798, 6799});
         this.lvl = new CenterServer("LVL", 6798, new int[]{6797, 6799});
@@ -41,7 +38,6 @@ public class Server {
         this.addTeachersToServer();
         this.addStudentsToServer();
 
-        LoggerFactory.LogServer("Centers initialed");
 
         Registry registry = LocateRegistry.createRegistry(2964);
         registry.bind("MTL", this.mtl);
@@ -49,13 +45,9 @@ public class Server {
         registry.bind("DDL", this.ddo);
 
         System.out.println("Server Started");
-
-        LoggerFactory.LogServer("Server Started");
-
     }
 
     private void addStudentsToServer() throws IOException, ParseException, RequiredValueException {
-        LoggerFactory.LogServer("Start adding default students");
 
         JSONParser parser = new JSONParser();
         JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("resources/studentData.json"));
@@ -82,12 +74,10 @@ public class Server {
             }
         }
 
-        LoggerFactory.LogServer("Default students added");
     }
 
     private void addTeachersToServer() throws IOException, ParseException, RequiredValueException {
 
-        LoggerFactory.LogServer("Start adding default teachers");
 
         JSONParser parser = new JSONParser();
         JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("resources/teacherData.json"));
@@ -119,7 +109,6 @@ public class Server {
             }
         }
 
-        LoggerFactory.LogServer("Default teachers added");
 
     }
 }

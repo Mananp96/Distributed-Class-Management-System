@@ -43,14 +43,14 @@ public class LoggerFactory {
     }
 
 
-    public static void LogServer(String message) {
-
-        try {
-            Logger logger = LoggerFactory.getInstance("Server");
-
-            logger.info(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void LogServer(String message) {
+//
+//        try {
+//            Logger logger = LoggerFactory.getInstance("Server");
+//
+//            logger.info(message);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

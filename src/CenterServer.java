@@ -24,6 +24,10 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
     public CenterServer(String name, int serverPort, int[] nodePorts) throws SecurityException, IOException {
         super();
+
+        LoggerFactory.Log(name,"Initialing Center");
+
+
         this.name = name;
         recordData = new HashMap<String, ArrayList<Record>>();
         serverManagerList = new ArrayList<Manager>();
@@ -32,6 +36,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         this.isServerRunning = true;
         Thread thread = new Thread(this);
         thread.start();
+        LoggerFactory.Log(name,"Center initialed");
 
     }
 
@@ -76,9 +81,9 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
     @Override
     public String getRecordCount(String managerId) throws RemoteException {
-        LoggerFactory.LogServer("Received request for " + this.name + " server from " + managerId + " to get record counts.");
+        LoggerFactory.Log(this.name, "Received request for " + this.name + " server from " + managerId + " to get record counts.");
         String recordCountData = this.getIndividualRecordCount();
-        LoggerFactory.LogServer("Total Records in " + this.name+" server are " + recordCountData);
+        LoggerFactory.Log(this.name,"Total Records in " + this.name+" server are " + recordCountData);
 
         DatagramSocket socket = null;
         for (int port : this.nodePorts) {
@@ -88,24 +93,24 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                 byte[] requestData = "GET_RECORD_COUNT".getBytes();
                 DatagramPacket request = new DatagramPacket(requestData, requestData.length, host, port);
                 socket.send(request);
-                LoggerFactory.LogServer("Request sent to get record data from " + host.getHostName() + ":" + port);
+                LoggerFactory.Log(this.name,"Request sent to get record data from " + host.getHostName() + ":" + port);
                 byte[] buffer = new byte[1000];
                 DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
                 socket.receive(reply);
                 String replyData = new String(buffer).replaceAll("\u0000.*", "");
-                LoggerFactory.LogServer("Received this response " + replyData + " from " + host.getHostName() + ":" + port);
+                LoggerFactory.Log(this.name,"Received this response " + replyData + " from " + host.getHostName() + ":" + port);
                 if (!replyData.equals("INVALID_REQUEST")) {
                     recordCountData += " " + replyData;
                 }
             } catch (SocketException e) {
                 System.out.println(e);
-                LoggerFactory.LogServer("Error occur to connect another region server");
+                LoggerFactory.Log(this.name,"Error occur to connect another region server");
             } catch (UnknownHostException e) {
                 System.out.println(e);
-                LoggerFactory.LogServer("Invalid host");
+                LoggerFactory.Log(this.name,"Invalid host");
             } catch (IOException e) {
                 System.out.println(e);
-                LoggerFactory.LogServer("Invalid data");
+                LoggerFactory.Log(this.name,"Invalid data");
             } finally {
                 if (socket != null) {
                     socket.close();
@@ -122,30 +127,30 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
     public boolean editRecords(String recordId, String fieldName, String newValue, String managerId)
             throws RemoteException, RequiredValueException {
 
-        LoggerFactory.LogServer("Manager :" + managerId +" requested to edit a record." );
-        LoggerFactory.LogServer(String.format("Editing record, RecordID:%s", recordId));
+        LoggerFactory.Log(this.name,  "Manager :" + managerId +" requested to edit a record." );
+        LoggerFactory.Log(this.name,String.format("Editing record, RecordID:%s", recordId));
 
         if (recordId == null || recordId.isEmpty()) {
-            LoggerFactory.LogServer("Record ID required");
+            LoggerFactory.Log(this.name,"Record ID required");
             throw new RequiredValueException("Record ID required");
         }
 
         if (fieldName == null || fieldName.isEmpty()) {
-            LoggerFactory.LogServer("FieldName required");
+            LoggerFactory.Log(this.name,"FieldName required");
             throw new RequiredValueException("FieldName required");
         }
 
         if (newValue == null || newValue.isEmpty()) {
-            LoggerFactory.LogServer("FieldValue required");
+            LoggerFactory.Log(this.name,"FieldValue required");
             throw new RequiredValueException("FieldValue required");
         }
 
-        LoggerFactory.LogServer("Looking record id");
+        LoggerFactory.Log(this.name,"Looking record id");
         Record record = null;
         for (ArrayList<Record> records : this.recordData.values()) {
             for (Record r : records) {
                 if (r.getRecordId().equalsIgnoreCase(recordId)) {
-                    LoggerFactory.LogServer(String.format("Record found, %s", r.toString()));
+                    LoggerFactory.Log(this.name,String.format("Record found, %s", r.toString()));
                     record = r;
                     break;
                 }
@@ -167,7 +172,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                 case "status":
 
                     if (!newValue.toLowerCase().equals("active") && !newValue.toLowerCase().equals("inactive")) {
-                        LoggerFactory.LogServer("Status is invalid");
+                        LoggerFactory.Log(this.name,"Status is invalid");
                         throw new RequiredValueException("Status is invalid");
                     }
                     student.setStatus(Status.valueOf(newValue));
@@ -178,7 +183,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                         Date today = df.parse(newValue);
                         student.setStatusDate(newValue);
                     } catch (ParseException e) {
-                        LoggerFactory.LogServer("Date is invalid");
+                        LoggerFactory.Log(this.name,"Date is invalid");
                         throw new RequiredValueException("Date is invalid");
                     }
                     break;
@@ -186,11 +191,11 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                     student.setCoursesRegistered(newValue.split(","));
                     break;
                 default:
-                    LoggerFactory.LogServer("FieldName is invalid");
+                    LoggerFactory.Log(this.name,"FieldName is invalid");
                     throw new RequiredValueException("FieldName is invalid");
             }
 
-            LoggerFactory.LogServer(String.format("Student record edited, %s", student));
+            LoggerFactory.Log(this.name,String.format("Student record edited, %s", student));
 
         } else {
             TeacherRecord teacher = (TeacherRecord) record;
@@ -220,18 +225,18 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
                     if (!newValue.toLowerCase().equals("mtl") && !newValue.toLowerCase().equals("lvl")
                             && !newValue.toLowerCase().equals("ddo")) {
-                        LoggerFactory.LogServer("location is invalid");
+                        LoggerFactory.Log(this.name,"location is invalid");
                         throw new RequiredValueException("location is invalid");
                     }
                     assert teacher != null;
                     teacher.setLocation(Location.valueOf(newValue));
                     break;
                 default:
-                    LoggerFactory.LogServer("FieldName is invalid");
+                    LoggerFactory.Log(this.name,"FieldName is invalid");
                     throw new RequiredValueException("FieldName is invalid");
             }
 
-            LoggerFactory.LogServer(String.format("Teacher record edited, %s", teacher));
+            LoggerFactory.Log(this.name,String.format("Teacher record edited, %s", teacher));
         }
 
         return true;
@@ -240,51 +245,51 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
     @Override
     public boolean createTRecord(String firstName, String lastName, String address, String phone, String specialization,
                                  Location location, String managerId) throws RemoteException, RequiredValueException {
-        LoggerFactory.LogServer("Creating Teacher Record.");
-        LoggerFactory.LogServer("Validating fields...");
+        LoggerFactory.Log(this.name,"Creating Teacher Record.");
+        LoggerFactory.Log(this.name,"Validating fields...");
         if (firstName == null || firstName.isEmpty()) {
-            //LoggerFactory.LogServer("First name required");
+            //LoggerFactory.Log(this.name,"First name required");
             throw new RequiredValueException("First name required");
         }
 
         if (lastName == null || lastName.isEmpty()) {
-            //LoggerFactory.LogServer("Last name required");
+            //LoggerFactory.Log(this.name,"Last name required");
             throw new RequiredValueException("Last name required");
         }
 
         if (address == null || address.isEmpty()) {
-            //LoggerFactory.LogServer("Address required");
+            //LoggerFactory.Log(this.name,"Address required");
             throw new RequiredValueException("Address required");
         }
 
         if (phone == null || phone.isEmpty()) {
-            //LoggerFactory.LogServer("Phone required");
+            //LoggerFactory.Log(this.name,"Phone required");
             throw new RequiredValueException("Phone required");
         }
 
         if (specialization == null || specialization.isEmpty()) {
-            //LoggerFactory.LogServer("Specialization required");
+            //LoggerFactory.Log(this.name,"Specialization required");
             throw new RequiredValueException("Specialization required");
         }
 
         if (location == null) {
-            // LoggerFactory.LogServer("Status required");
+            // LoggerFactory.Log(this.name,"Status required");
             throw new RequiredValueException("Status required");
         }
-        LoggerFactory.LogServer("Validating fields complete...");
+        LoggerFactory.Log(this.name,"Validating fields complete...");
         Record record = new TeacherRecord("TR" + generateNumber(), firstName, lastName, address, phone, specialization, location);
 
         String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 
-        LoggerFactory.LogServer("Adding Record data to List...");
+        LoggerFactory.Log(this.name,"Adding Record data to List...");
         Boolean result = addToRecordData(firstCharacter, record);
 
         if (result) {
-            LoggerFactory.LogServer(String.format("Record added to the list :%s", record.toString()));
-            LoggerFactory.LogServer(String.format("Teacher Record Successfully created by Manager:%s",(managerId)));
+            LoggerFactory.Log(this.name,String.format("Record added to the list :%s", record.toString()));
+            LoggerFactory.Log(this.name,String.format("Teacher Record Successfully created by Manager:%s",(managerId)));
         }
         else {
-            LoggerFactory.LogServer(String.format("Something went wrong when creating teacher record :%s \n by Manager: %s", record.toString(),(managerId)));
+            LoggerFactory.Log(this.name,String.format("Something went wrong when creating teacher record :%s \n by Manager: %s", record.toString(),(managerId)));
         }
 
         return result;
@@ -293,48 +298,48 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
     @Override
     public boolean createSRecord(String firstName, String lastName, String[] courseRegistered, Status status,
                                  String statusDate, String managerId) throws RemoteException, RequiredValueException {
-        LoggerFactory.LogServer("Creating Student Record...");
-        LoggerFactory.LogServer("Validating fields...");
+        LoggerFactory.Log(this.name,"Creating Student Record...");
+        LoggerFactory.Log(this.name,"Validating fields...");
         if (firstName == null || firstName.isEmpty()) {
-            //LoggerFactory.LogServer("First name required");
+            //LoggerFactory.Log(this.name,"First name required");
             throw new RequiredValueException("First name required");
         }
 
         if (lastName == null || lastName.isEmpty()) {
-            //LoggerFactory.LogServer("Last name required");
+            //LoggerFactory.Log(this.name,"Last name required");
             throw new RequiredValueException("Last name required");
         }
 
         if (statusDate == null || statusDate.isEmpty()) {
-            //LoggerFactory.LogServer("Status Date required");
+            //LoggerFactory.Log(this.name,"Status Date required");
             throw new RequiredValueException("Status Date required");
         }
 
         if (courseRegistered == null || courseRegistered.length < 1) {
-            //LoggerFactory.LogServer("Registed Course required");
+            //LoggerFactory.Log(this.name,"Registed Course required");
             throw new RequiredValueException("Registered Course required");
         }
 
         if (status == null) {
-            //LoggerFactory.LogServer("Status required");
+            //LoggerFactory.Log(this.name,"Status required");
             throw new RequiredValueException("Status required");
         }
-        LoggerFactory.LogServer("Validating fields complete...");
+        LoggerFactory.Log(this.name,"Validating fields complete...");
 
 
         Record record = new StudentRecord("SR" + generateNumber(), firstName, lastName, courseRegistered, status, statusDate);
 
         String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 
-        LoggerFactory.LogServer("Adding Record data to List...");
+        LoggerFactory.Log(this.name,"Adding Record data to List...");
         boolean result = addToRecordData(firstCharacter, record);
 
         if (result) {
-            LoggerFactory.LogServer(String.format("Record added to the list :%s", record.toString()));
-            LoggerFactory.LogServer(String.format("Student Record Successfully created by Manager:%s",(managerId)));
+            LoggerFactory.Log(this.name,String.format("Record added to the list :%s", record.toString()));
+            LoggerFactory.Log(this.name,String.format("Student Record Successfully created by Manager:%s",(managerId)));
         }
         else {
-            LoggerFactory.LogServer(String.format("Something went wrong when creating student record :%s \n by Manager: %s", record.toString(),(managerId)));
+            LoggerFactory.Log(this.name,String.format("Something went wrong when creating student record :%s \n by Manager: %s", record.toString(),(managerId)));
         }
         return result;
     }
@@ -344,12 +349,12 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         DatagramSocket socket = null;
         try {
             socket = new DatagramSocket(this.serverPort);
-            LoggerFactory.LogServer("UDP server Started in " + this.name + " region in this port " + this.serverPort);
+            LoggerFactory.Log(this.name,"UDP server Started in " + this.name + " region in this port " + this.serverPort);
             byte[] buffer = new byte[1000];
             while (this.isServerRunning) {
                 DatagramPacket request = new DatagramPacket(buffer, buffer.length);
                 socket.receive(request);
-                LoggerFactory.LogServer("Received request in " + this.name + " from " + request.getAddress() + ":" + request.getPort() + " with this data " + new String(request.getData()).replaceAll("\u0000.*", "") + "");
+                LoggerFactory.Log(this.name,"Received request in " + this.name + " from " + request.getAddress() + ":" + request.getPort() + " with this data " + new String(request.getData()).replaceAll("\u0000.*", "") + "");
                 String replyData = "";
                 String requestData = new String(request.getData()).replaceAll("\u0000.*", "");
                 if (requestData.equals("GET_RECORD_COUNT")) {
@@ -364,7 +369,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
         } catch (Exception e) {
             System.out.println(e);
-            LoggerFactory.LogServer("Unable to start udp server in " + this.name + " region");
+            LoggerFactory.Log(this.name,"Unable to start udp server in " + this.name + " region");
         }
     }
 
