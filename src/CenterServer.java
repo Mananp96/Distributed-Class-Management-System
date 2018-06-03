@@ -44,7 +44,10 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                     while (isServerRunning) {
                         DatagramPacket request = new DatagramPacket(buffer, buffer.length);
                         socket.receive(request);
-                        LoggerFactory.Log(name, "Received request in " + name + " from " + request.getAddress() + ":" + request.getPort() + " with this data " + new String(request.getData()).replaceAll("\u0000.*", "") + "");
+                        LoggerFactory.Log(name,
+                                "Received request in " + name + " from " + request.getAddress() + ":"
+                                        + request.getPort() + " with this data "
+                                        + new String(request.getData()).replaceAll("\u0000.*", "") + "");
                         String replyData = "";
                         String requestData = new String(request.getData()).replaceAll("\u0000.*", "");
                         if (requestData.equals("GET_RECORD_COUNT")) {
@@ -52,8 +55,8 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                         } else {
                             replyData = "INVALID_REQUEST";
                         }
-                        DatagramPacket reply = new DatagramPacket(replyData.getBytes(),
-                                replyData.length(), request.getAddress(), request.getPort());
+                        DatagramPacket reply = new DatagramPacket(replyData.getBytes(), replyData.length(),
+                                request.getAddress(), request.getPort());
                         socket.send(reply);
                     }
 
@@ -68,8 +71,8 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
     }
 
-
     private synchronized int generateNumber() {
+
         Random random = new Random(System.nanoTime());
 
         return 10000 + random.nextInt(89999);
@@ -100,7 +103,8 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         try {
             RemoteServer.getClientHost();
 
-            LoggerFactory.Log(this.name, "Received request for " + this.name + " server from " + managerId + " to get record counts.");
+            LoggerFactory.Log(this.name,
+                    "Received request for " + this.name + " server from " + managerId + " to get record counts.");
 
             Set<String> keys = this.recordData.keySet();
             int count = 0;
@@ -134,12 +138,14 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                             byte[] requestData = "GET_RECORD_COUNT".getBytes();
                             DatagramPacket request = new DatagramPacket(requestData, requestData.length, host, port);
                             socket.send(request);
-                            LoggerFactory.Log(name, "Request sent to get record data from " + host.getHostName() + ":" + port);
+                            LoggerFactory.Log(name,
+                                    "Request sent to get record data from " + host.getHostName() + ":" + port);
                             byte[] buffer = new byte[1000];
                             DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
                             socket.receive(reply);
                             String replyData = new String(buffer).replaceAll("\u0000.*", "");
-                            LoggerFactory.Log(name, "Received this response " + replyData + " from " + host.getHostName() + ":" + port);
+                            LoggerFactory.Log(name,
+                                    "Received this response " + replyData + " from " + host.getHostName() + ":" + port);
                             if (!replyData.equals("INVALID_REQUEST")) {
                                 result.put(port, replyData);
                             }
@@ -161,14 +167,12 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                     }
                 }).start();
 
-
             }
             try {
                 latch.await();
                 recordCountData += " " + result.get(nodePorts[0]) + " " + result.get(nodePorts[1]);
             } catch (InterruptedException e) {
             }
-
 
             return recordCountData;
         } catch (ServerNotActiveException e1) {
@@ -310,27 +314,27 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         LoggerFactory.Log(this.name, "Creating Teacher Record.");
         LoggerFactory.Log(this.name, "Validating fields...");
         if (firstName == null || firstName.isEmpty()) {
-            //LoggerFactory.Log(this.name,"First name required");
+            // LoggerFactory.Log(this.name,"First name required");
             throw new RequiredValueException("First name required");
         }
 
         if (lastName == null || lastName.isEmpty()) {
-            //LoggerFactory.Log(this.name,"Last name required");
+            // LoggerFactory.Log(this.name,"Last name required");
             throw new RequiredValueException("Last name required");
         }
 
         if (address == null || address.isEmpty()) {
-            //LoggerFactory.Log(this.name,"Address required");
+            // LoggerFactory.Log(this.name,"Address required");
             throw new RequiredValueException("Address required");
         }
 
         if (phone == null || phone.isEmpty()) {
-            //LoggerFactory.Log(this.name,"Phone required");
+            // LoggerFactory.Log(this.name,"Phone required");
             throw new RequiredValueException("Phone required");
         }
 
         if (specialization == null || specialization.isEmpty()) {
-            //LoggerFactory.Log(this.name,"Specialization required");
+            // LoggerFactory.Log(this.name,"Specialization required");
             throw new RequiredValueException("Specialization required");
         }
 
@@ -339,7 +343,8 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
             throw new RequiredValueException("Status required");
         }
         LoggerFactory.Log(this.name, "Validating fields complete...");
-        Record record = new TeacherRecord("TR" + generateNumber(), firstName, lastName, address, phone, specialization, location);
+        Record record = new TeacherRecord("TR" + generateNumber(), firstName, lastName, address, phone, specialization,
+                location);
 
         String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 
@@ -348,9 +353,12 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
         if (result) {
             LoggerFactory.Log(this.name, String.format("Record added to the list :%s", record.toString()));
-            LoggerFactory.Log(this.name, String.format("Teacher Record Successfully created by Manager:%s", (managerId)));
+            LoggerFactory.Log(this.name,
+                    String.format("Teacher Record Successfully created by Manager:%s", (managerId)));
         } else {
-            LoggerFactory.Log(this.name, String.format("Something went wrong when creating teacher record :%s \n by Manager: %s", record.toString(), (managerId)));
+            LoggerFactory.Log(this.name,
+                    String.format("Something went wrong when creating teacher record :%s \n by Manager: %s",
+                            record.toString(), (managerId)));
         }
 
         return result;
@@ -362,33 +370,33 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         LoggerFactory.Log(this.name, "Creating Student Record...");
         LoggerFactory.Log(this.name, "Validating fields...");
         if (firstName == null || firstName.isEmpty()) {
-            //LoggerFactory.Log(this.name,"First name required");
+            // LoggerFactory.Log(this.name,"First name required");
             throw new RequiredValueException("First name required");
         }
 
         if (lastName == null || lastName.isEmpty()) {
-            //LoggerFactory.Log(this.name,"Last name required");
+            // LoggerFactory.Log(this.name,"Last name required");
             throw new RequiredValueException("Last name required");
         }
 
         if (statusDate == null || statusDate.isEmpty()) {
-            //LoggerFactory.Log(this.name,"Status Date required");
+            // LoggerFactory.Log(this.name,"Status Date required");
             throw new RequiredValueException("Status Date required");
         }
 
         if (courseRegistered == null || courseRegistered.length < 1) {
-            //LoggerFactory.Log(this.name,"Registed Course required");
+            // LoggerFactory.Log(this.name,"Registed Course required");
             throw new RequiredValueException("Registered Course required");
         }
 
         if (status == null) {
-            //LoggerFactory.Log(this.name,"Status required");
+            // LoggerFactory.Log(this.name,"Status required");
             throw new RequiredValueException("Status required");
         }
         LoggerFactory.Log(this.name, "Validating fields complete...");
 
-
-        Record record = new StudentRecord("SR" + generateNumber(), firstName, lastName, courseRegistered, status, statusDate);
+        Record record = new StudentRecord("SR" + generateNumber(), firstName, lastName, courseRegistered, status,
+                statusDate);
 
         String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 
@@ -397,9 +405,12 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
         if (result) {
             LoggerFactory.Log(this.name, String.format("Record added to the list :%s", record.toString()));
-            LoggerFactory.Log(this.name, String.format("Student Record Successfully created by Manager:%s", (managerId)));
+            LoggerFactory.Log(this.name,
+                    String.format("Student Record Successfully created by Manager:%s", (managerId)));
         } else {
-            LoggerFactory.Log(this.name, String.format("Something went wrong when creating student record :%s \n by Manager: %s", record.toString(), (managerId)));
+            LoggerFactory.Log(this.name,
+                    String.format("Something went wrong when creating student record :%s \n by Manager: %s",
+                            record.toString(), (managerId)));
         }
         return result;
     }
