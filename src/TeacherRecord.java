@@ -58,6 +58,6 @@ public class TeacherRecord extends Record {
 
     @Override
     public String toString() {
-        return String.format("%s Address:%s Phone:%s Specialization:%s Location:%s", super.toString(), this.getAddress(), this.getPhone(), this.getSpecialization(), this.getLocation().name());
+		return String.format("%s Address:%s Phone:%s Specialization:%s Location:%s", super.toString(), this.getAddress(), this.getPhone(), this.getSpecialization(), this.getLocation().name());
     }
 }

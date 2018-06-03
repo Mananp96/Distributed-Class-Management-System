@@ -7,50 +7,47 @@ import java.io.IOException;
 
 public class LoggerFactory {
 
-    private static final String LogDirectory = System.getProperty("user.dir") + "\\Logs";
+	private static final String LogDirectory = System.getProperty("user.dir") + "\\Logs";
 
-    static {
-        File directory = new File(LogDirectory);
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-    }
+	static {
+		File directory = new File(LogDirectory);
+		if (!directory.exists()) {
+			directory.mkdir();
+		}
+	}
 
+	private static Logger getInstance(String loggerName) throws IOException {
+		Logger logger = Logger.getLogger(loggerName);
+		PatternLayout layout = new PatternLayout();
+		layout.setConversionPattern("%d{yyyy-MM-dd HH:mm:ss} %m%n");
+		FileAppender fileAppender = new FileAppender(layout, LogDirectory + "\\" + loggerName + ".txt");
 
-    private static Logger getInstance(String loggerName) throws IOException {
-        Logger logger = Logger.getLogger(loggerName);
-        PatternLayout layout = new PatternLayout();
-        layout.setConversionPattern("%d{yyyy-MM-dd HH:mm:ss} %m%n");
-        FileAppender fileAppender = new FileAppender(layout, LogDirectory + "\\" + loggerName + ".txt");
+		logger.removeAllAppenders();
+		logger.addAppender(fileAppender);
 
+		return logger;
 
-        logger.removeAllAppenders();
-        logger.addAppender(fileAppender);
+	}
 
-        return logger;
+	public static void Log(String managerID, String message) {
 
-    }
+		try {
+			Logger logger = LoggerFactory.getInstance(managerID);
 
-    public static void Log(String managerID, String message) {
+			logger.info(message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-        try {
-            Logger logger = LoggerFactory.getInstance(managerID);
+	public static void LogServer(String message) {
 
-            logger.info(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			Logger logger = LoggerFactory.getInstance("Server");
 
-
-//    public static void LogServer(String message) {
-//
-//        try {
-//            Logger logger = LoggerFactory.getInstance("Server");
-//
-//            logger.info(message);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+			logger.info(message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
