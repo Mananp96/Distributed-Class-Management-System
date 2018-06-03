@@ -1,9 +1,5 @@
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.rmi.RemoteException;
 import java.rmi.server.RemoteServer;
 import java.rmi.server.ServerNotActiveException;
@@ -11,11 +7,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
 public class CenterServer extends UnicastRemoteObject implements CenterServerInterface {
@@ -33,46 +25,46 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
     public CenterServer(String name, int serverPort, int[] nodePorts) throws SecurityException, IOException {
         super();
 
-        LoggerFactory.Log(name,"Initialing Center");
+        LoggerFactory.Log(name, "Initialing Center");
         this.name = name;
         recordData = new HashMap<String, ArrayList<Record>>();
         this.serverPort = serverPort;
         this.nodePorts = nodePorts;
         this.isServerRunning = true;
-        
-        new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				DatagramSocket socket = null;
-		        try {
-		            socket = new DatagramSocket(serverPort);
-		            LoggerFactory.Log(name,"UDP server Started in " + name + " region in this port " + serverPort);
-		            byte[] buffer = new byte[1000];
-		            while (isServerRunning) {
-		                DatagramPacket request = new DatagramPacket(buffer, buffer.length);
-		                socket.receive(request);
-		                LoggerFactory.Log(name,"Received request in " + name + " from " + request.getAddress() + ":" + request.getPort() + " with this data " + new String(request.getData()).replaceAll("\u0000.*", "") + "");
-		                String replyData = "";
-		                String requestData = new String(request.getData()).replaceAll("\u0000.*", "");
-		                if (requestData.equals("GET_RECORD_COUNT")) {
-		                    replyData = getRecordCount(name+"_SERVER");
-		                } else {
-		                    replyData = "INVALID_REQUEST";
-		                }
-		                DatagramPacket reply = new DatagramPacket(replyData.getBytes(),
-		                        replyData.length(), request.getAddress(), request.getPort());
-		                socket.send(reply);
-		            }
 
-		        } catch (Exception e) {
-		            System.out.println(e);
-		            LoggerFactory.Log(name,"Unable to start udp server in " + name + " region");
-		        }
-				
-			}
-		}).start();
-        LoggerFactory.Log(name,"Center initialed");
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                DatagramSocket socket = null;
+                try {
+                    socket = new DatagramSocket(serverPort);
+                    LoggerFactory.Log(name, "UDP server Started in " + name + " region in this port " + serverPort);
+                    byte[] buffer = new byte[1000];
+                    while (isServerRunning) {
+                        DatagramPacket request = new DatagramPacket(buffer, buffer.length);
+                        socket.receive(request);
+                        LoggerFactory.Log(name, "Received request in " + name + " from " + request.getAddress() + ":" + request.getPort() + " with this data " + new String(request.getData()).replaceAll("\u0000.*", "") + "");
+                        String replyData = "";
+                        String requestData = new String(request.getData()).replaceAll("\u0000.*", "");
+                        if (requestData.equals("GET_RECORD_COUNT")) {
+                            replyData = getRecordCount(name + "_SERVER");
+                        } else {
+                            replyData = "INVALID_REQUEST";
+                        }
+                        DatagramPacket reply = new DatagramPacket(replyData.getBytes(),
+                                replyData.length(), request.getAddress(), request.getPort());
+                        socket.send(reply);
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                    LoggerFactory.Log(name, "Unable to start udp server in " + name + " region");
+                }
+
+            }
+        }).start();
+        LoggerFactory.Log(name, "Center initialed");
 
     }
 
@@ -104,122 +96,123 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
     @Override
     public String getRecordCount(String managerId) throws RemoteException {
-    	
-    	try {
-			RemoteServer.getClientHost();
-			
-			LoggerFactory.Log(this.name, "Received request for " + this.name + " server from " + managerId + " to get record counts.");
-	        
-	        Set<String> keys = this.recordData.keySet();
-	        int count = 0;
-	        for (String key : keys) {
-	            if (this.recordData.get(key) != null) {
-	                count += this.recordData.get(key).size();
-	            }
-	        }
 
-	        String recordCountData = this.name + ": " + count;
-	        LoggerFactory.Log(this.name,"Total Records in " + this.name+" server are " + recordCountData);
+        try {
+            RemoteServer.getClientHost();
 
-	        final HashMap<Integer, String> result = new HashMap<Integer,String>(){
-	        	{
-		        	put(nodePorts[0],"");
-		        	put(nodePorts[1],"");
-	        	}
-	        };
-	        
-	        final CountDownLatch latch = new CountDownLatch(2);
-	        for (int port : this.nodePorts) {
-	        	
-	        	new Thread(new Runnable() {
-					
-					@Override
-					public void run() {
-						DatagramSocket socket = null;
-			            try {
-			                socket = new DatagramSocket();
-			                InetAddress host = InetAddress.getLocalHost();
-			                byte[] requestData = "GET_RECORD_COUNT".getBytes();
-			                DatagramPacket request = new DatagramPacket(requestData, requestData.length, host, port);
-			                socket.send(request);
-			                LoggerFactory.Log(name,"Request sent to get record data from " + host.getHostName() + ":" + port);
-			                byte[] buffer = new byte[1000];
-			                DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-			                socket.receive(reply);
-			                String replyData = new String(buffer).replaceAll("\u0000.*", "");
-			                LoggerFactory.Log(name,"Received this response " + replyData + " from " + host.getHostName() + ":" + port);
-			                if (!replyData.equals("INVALID_REQUEST")) {
-			                	result.put(port, replyData);
-			                }
-			            } catch (SocketException e) {
-			                System.out.println(e);
-			                LoggerFactory.Log(name,"Error occur to connect another region server");
-			            } catch (UnknownHostException e) {
-			                System.out.println(e);
-			                LoggerFactory.Log(name,"Invalid host");
-			            } catch (IOException e) {
-			                System.out.println(e);
-			                LoggerFactory.Log(name,"Invalid data");
-			            } finally {
-			                if (socket != null) {
-			                    socket.close();
-			                }
-			            }
-						latch.countDown();
-					}
-				}).start();
-	        	
+            LoggerFactory.Log(this.name, "Received request for " + this.name + " server from " + managerId + " to get record counts.");
 
-	        }
-	        try {
-				latch.await();
-				recordCountData += " "+result.get(nodePorts[0]) +" "+result.get(nodePorts[1]);
-			} catch (InterruptedException e) {}
+            Set<String> keys = this.recordData.keySet();
+            int count = 0;
+            for (String key : keys) {
+                if (this.recordData.get(key) != null) {
+                    count += this.recordData.get(key).size();
+                }
+            }
+
+            String recordCountData = this.name + ": " + count;
+            LoggerFactory.Log(this.name, "Total Records in " + this.name + " server are " + recordCountData);
+
+            final HashMap<Integer, String> result = new HashMap<Integer, String>() {
+                {
+                    put(nodePorts[0], "");
+                    put(nodePorts[1], "");
+                }
+            };
+
+            final CountDownLatch latch = new CountDownLatch(2);
+            for (int port : this.nodePorts) {
+
+                new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        DatagramSocket socket = null;
+                        try {
+                            socket = new DatagramSocket();
+                            InetAddress host = InetAddress.getLocalHost();
+                            byte[] requestData = "GET_RECORD_COUNT".getBytes();
+                            DatagramPacket request = new DatagramPacket(requestData, requestData.length, host, port);
+                            socket.send(request);
+                            LoggerFactory.Log(name, "Request sent to get record data from " + host.getHostName() + ":" + port);
+                            byte[] buffer = new byte[1000];
+                            DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
+                            socket.receive(reply);
+                            String replyData = new String(buffer).replaceAll("\u0000.*", "");
+                            LoggerFactory.Log(name, "Received this response " + replyData + " from " + host.getHostName() + ":" + port);
+                            if (!replyData.equals("INVALID_REQUEST")) {
+                                result.put(port, replyData);
+                            }
+                        } catch (SocketException e) {
+                            System.out.println(e);
+                            LoggerFactory.Log(name, "Error occur to connect another region server");
+                        } catch (UnknownHostException e) {
+                            System.out.println(e);
+                            LoggerFactory.Log(name, "Invalid host");
+                        } catch (IOException e) {
+                            System.out.println(e);
+                            LoggerFactory.Log(name, "Invalid data");
+                        } finally {
+                            if (socket != null) {
+                                socket.close();
+                            }
+                        }
+                        latch.countDown();
+                    }
+                }).start();
 
 
-	        return recordCountData;
-		} catch (ServerNotActiveException e1) {
-			Set<String> keys = this.recordData.keySet();
-	        int count = 0;
-	        for (String key : keys) {
-	            if (this.recordData.get(key) != null) {
-	                count += this.recordData.get(key).size();
-	            }
-	        }
-	        
-	        return this.name + ": " + count;
-		}
-        
+            }
+            try {
+                latch.await();
+                recordCountData += " " + result.get(nodePorts[0]) + " " + result.get(nodePorts[1]);
+            } catch (InterruptedException e) {
+            }
+
+
+            return recordCountData;
+        } catch (ServerNotActiveException e1) {
+            Set<String> keys = this.recordData.keySet();
+            int count = 0;
+            for (String key : keys) {
+                if (this.recordData.get(key) != null) {
+                    count += this.recordData.get(key).size();
+                }
+            }
+
+            return this.name + ": " + count;
+        }
+
     }
 
     @Override
     public boolean editRecords(String recordId, String fieldName, String newValue, String managerId)
             throws RemoteException, RequiredValueException {
 
-        LoggerFactory.Log(this.name,  "Manager :" + managerId +" requested to edit a record." );
-        LoggerFactory.Log(this.name,String.format("Editing record, RecordID:%s", recordId));
+        LoggerFactory.Log(this.name, "Manager :" + managerId + " requested to edit a record.");
+        LoggerFactory.Log(this.name, String.format("Editing record, RecordID:%s", recordId));
 
         if (recordId == null || recordId.isEmpty()) {
-            LoggerFactory.Log(this.name,"Record ID required");
+            LoggerFactory.Log(this.name, "Record ID required");
             throw new RequiredValueException("Record ID required");
         }
 
         if (fieldName == null || fieldName.isEmpty()) {
-            LoggerFactory.Log(this.name,"FieldName required");
+            LoggerFactory.Log(this.name, "FieldName required");
             throw new RequiredValueException("FieldName required");
         }
 
         if (newValue == null || newValue.isEmpty()) {
-            LoggerFactory.Log(this.name,"FieldValue required");
+            LoggerFactory.Log(this.name, "FieldValue required");
             throw new RequiredValueException("FieldValue required");
         }
 
-        LoggerFactory.Log(this.name,"Looking record id");
+        LoggerFactory.Log(this.name, "Looking record id");
         Record record = null;
         for (ArrayList<Record> records : this.recordData.values()) {
             for (Record r : records) {
                 if (r.getRecordId().equalsIgnoreCase(recordId)) {
-                    LoggerFactory.Log(this.name,String.format("Record found, %s", r.toString()));
+                    LoggerFactory.Log(this.name, String.format("Record found, %s", r.toString()));
                     record = r;
                     break;
                 }
@@ -241,7 +234,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                 case "status":
 
                     if (!newValue.toLowerCase().equals("active") && !newValue.toLowerCase().equals("inactive")) {
-                        LoggerFactory.Log(this.name,"Status is invalid");
+                        LoggerFactory.Log(this.name, "Status is invalid");
                         throw new RequiredValueException("Status is invalid");
                     }
                     student.setStatus(Status.valueOf(newValue));
@@ -252,7 +245,7 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                         Date today = df.parse(newValue);
                         student.setStatusDate(newValue);
                     } catch (ParseException e) {
-                        LoggerFactory.Log(this.name,"Date is invalid");
+                        LoggerFactory.Log(this.name, "Date is invalid");
                         throw new RequiredValueException("Date is invalid");
                     }
                     break;
@@ -260,11 +253,11 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
                     student.setCoursesRegistered(newValue.split(","));
                     break;
                 default:
-                    LoggerFactory.Log(this.name,"FieldName is invalid");
+                    LoggerFactory.Log(this.name, "FieldName is invalid");
                     throw new RequiredValueException("FieldName is invalid");
             }
 
-            LoggerFactory.Log(this.name,String.format("Student record edited, %s", student));
+            LoggerFactory.Log(this.name, String.format("Student record edited, %s", student));
 
         } else {
             TeacherRecord teacher = (TeacherRecord) record;
@@ -294,18 +287,18 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
                     if (!newValue.toLowerCase().equals("mtl") && !newValue.toLowerCase().equals("lvl")
                             && !newValue.toLowerCase().equals("ddo")) {
-                        LoggerFactory.Log(this.name,"location is invalid");
+                        LoggerFactory.Log(this.name, "location is invalid");
                         throw new RequiredValueException("location is invalid");
                     }
                     assert teacher != null;
                     teacher.setLocation(Location.valueOf(newValue));
                     break;
                 default:
-                    LoggerFactory.Log(this.name,"FieldName is invalid");
+                    LoggerFactory.Log(this.name, "FieldName is invalid");
                     throw new RequiredValueException("FieldName is invalid");
             }
 
-            LoggerFactory.Log(this.name,String.format("Teacher record edited, %s", teacher));
+            LoggerFactory.Log(this.name, String.format("Teacher record edited, %s", teacher));
         }
 
         return true;
@@ -314,8 +307,8 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
     @Override
     public boolean createTRecord(String firstName, String lastName, String address, String phone, String specialization,
                                  Location location, String managerId) throws RemoteException, RequiredValueException {
-        LoggerFactory.Log(this.name,"Creating Teacher Record.");
-        LoggerFactory.Log(this.name,"Validating fields...");
+        LoggerFactory.Log(this.name, "Creating Teacher Record.");
+        LoggerFactory.Log(this.name, "Validating fields...");
         if (firstName == null || firstName.isEmpty()) {
             //LoggerFactory.Log(this.name,"First name required");
             throw new RequiredValueException("First name required");
@@ -345,20 +338,19 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
             // LoggerFactory.Log(this.name,"Status required");
             throw new RequiredValueException("Status required");
         }
-        LoggerFactory.Log(this.name,"Validating fields complete...");
+        LoggerFactory.Log(this.name, "Validating fields complete...");
         Record record = new TeacherRecord("TR" + generateNumber(), firstName, lastName, address, phone, specialization, location);
 
         String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 
-        LoggerFactory.Log(this.name,"Adding Record data to List...");
+        LoggerFactory.Log(this.name, "Adding Record data to List...");
         Boolean result = addToRecordData(firstCharacter, record);
 
         if (result) {
-            LoggerFactory.Log(this.name,String.format("Record added to the list :%s", record.toString()));
-            LoggerFactory.Log(this.name,String.format("Teacher Record Successfully created by Manager:%s",(managerId)));
-        }
-        else {
-            LoggerFactory.Log(this.name,String.format("Something went wrong when creating teacher record :%s \n by Manager: %s", record.toString(),(managerId)));
+            LoggerFactory.Log(this.name, String.format("Record added to the list :%s", record.toString()));
+            LoggerFactory.Log(this.name, String.format("Teacher Record Successfully created by Manager:%s", (managerId)));
+        } else {
+            LoggerFactory.Log(this.name, String.format("Something went wrong when creating teacher record :%s \n by Manager: %s", record.toString(), (managerId)));
         }
 
         return result;
@@ -367,8 +359,8 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
     @Override
     public boolean createSRecord(String firstName, String lastName, String[] courseRegistered, Status status,
                                  String statusDate, String managerId) throws RemoteException, RequiredValueException {
-        LoggerFactory.Log(this.name,"Creating Student Record...");
-        LoggerFactory.Log(this.name,"Validating fields...");
+        LoggerFactory.Log(this.name, "Creating Student Record...");
+        LoggerFactory.Log(this.name, "Validating fields...");
         if (firstName == null || firstName.isEmpty()) {
             //LoggerFactory.Log(this.name,"First name required");
             throw new RequiredValueException("First name required");
@@ -393,22 +385,21 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
             //LoggerFactory.Log(this.name,"Status required");
             throw new RequiredValueException("Status required");
         }
-        LoggerFactory.Log(this.name,"Validating fields complete...");
+        LoggerFactory.Log(this.name, "Validating fields complete...");
 
 
         Record record = new StudentRecord("SR" + generateNumber(), firstName, lastName, courseRegistered, status, statusDate);
 
         String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
 
-        LoggerFactory.Log(this.name,"Adding Record data to List...");
+        LoggerFactory.Log(this.name, "Adding Record data to List...");
         boolean result = addToRecordData(firstCharacter, record);
 
         if (result) {
-            LoggerFactory.Log(this.name,String.format("Record added to the list :%s", record.toString()));
-            LoggerFactory.Log(this.name,String.format("Student Record Successfully created by Manager:%s",(managerId)));
-        }
-        else {
-            LoggerFactory.Log(this.name,String.format("Something went wrong when creating student record :%s \n by Manager: %s", record.toString(),(managerId)));
+            LoggerFactory.Log(this.name, String.format("Record added to the list :%s", record.toString()));
+            LoggerFactory.Log(this.name, String.format("Student Record Successfully created by Manager:%s", (managerId)));
+        } else {
+            LoggerFactory.Log(this.name, String.format("Something went wrong when creating student record :%s \n by Manager: %s", record.toString(), (managerId)));
         }
         return result;
     }
