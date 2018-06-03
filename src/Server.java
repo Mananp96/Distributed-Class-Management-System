@@ -23,21 +23,20 @@ public class Server {
     /**
      * @param args
      */
-	public static void main(String[] args) throws Exception {
-		Server server = new Server();
-		server.runServer();
-	}
+    public static void main(String[] args) throws Exception {
+        Server server = new Server();
+        server.runServer();
+    }
 
     private void runServer() throws Exception {
 
-	    LoggerFactory.LogServer("Staring Server");
+        LoggerFactory.LogServer("Staring Server");
 
         LoggerFactory.LogServer("Initialing Centers");
 
-        this.mtl = new CenterServer("MTL",6797,new int[] {6798,6799});
-        this.lvl = new CenterServer("LVL",6798,new int[] {6797,6799});
-        this.ddo = new CenterServer("DDO",6799,new int[] {6797,6798});
-
+        this.mtl = new CenterServer("MTL", 6797, new int[]{6798, 6799});
+        this.lvl = new CenterServer("LVL", 6798, new int[]{6797, 6799});
+        this.ddo = new CenterServer("DDO", 6799, new int[]{6797, 6798});
 
 
         this.addManagersToServer();
@@ -68,7 +67,8 @@ public class Server {
             String firstName = (String) student.get("firstName");
             String lastName = (String) student.get("lastName");
             String recordId = (String) student.get("id");
-            String[] courses = (String[]) student.get("coursesRegistered").toString().replace("},{", " ,").split(" ");;
+            String[] courses = (String[]) student.get("coursesRegistered").toString().replace("},{", " ,").split(" ");
+            ;
             String statusDate = (String) student.get("statusDate");
             String stat = (String) student.get("status");
             if (Objects.equals(stat, "Active")) {
@@ -78,11 +78,11 @@ public class Server {
             }
 
             if (student.get("region").toString().substring(0, 3).equalsIgnoreCase("MTL")) {
-                ((CenterServer) this.mtl).createSRecord(firstName,lastName, courses, status,statusDate,"default",recordId);
+                ((CenterServer) this.mtl).createSRecord(firstName, lastName, courses, status, statusDate, "default", recordId);
             } else if (student.get("region").toString().substring(0, 3).equalsIgnoreCase("LVL")) {
-                ((CenterServer) this.lvl).createSRecord(firstName,lastName, courses, status,statusDate,"default",recordId);
+                ((CenterServer) this.lvl).createSRecord(firstName, lastName, courses, status, statusDate, "default", recordId);
             } else if (student.get("region").toString().substring(0, 3).equalsIgnoreCase("DDO")) {
-                ((CenterServer) this.ddo).createSRecord(firstName,lastName, courses, status,statusDate,"default",recordId);
+                ((CenterServer) this.ddo).createSRecord(firstName, lastName, courses, status, statusDate, "default", recordId);
             }
         }
 
@@ -106,20 +106,20 @@ public class Server {
             String phone = (String) teacher.get("phone");
             String specialization = (String) teacher.get("specialization");
 
-            if(loc.equalsIgnoreCase("MLT")){
+            if (loc.equalsIgnoreCase("MLT")) {
                 location = Location.MTL;
-            }else if(loc.equalsIgnoreCase("LVL")){
+            } else if (loc.equalsIgnoreCase("LVL")) {
                 location = Location.LVL;
-            }else{
+            } else {
                 location = Location.DDO;
             }
 
             if (teacher.get("location").toString().substring(0, 3).equalsIgnoreCase("MTL")) {
-                ((CenterServer) this.mtl).createTRecord(firstName,lastName,address,phone,specialization,location,"default",recordId);
+                ((CenterServer) this.mtl).createTRecord(firstName, lastName, address, phone, specialization, location, "default", recordId);
             } else if (teacher.get("location").toString().substring(0, 3).equalsIgnoreCase("LVL")) {
-                ((CenterServer) this.lvl).createTRecord(firstName,lastName,address,phone,specialization,location,"default",recordId);
+                ((CenterServer) this.lvl).createTRecord(firstName, lastName, address, phone, specialization, location, "default", recordId);
             } else if (teacher.get("location").toString().substring(0, 3).equalsIgnoreCase("DDO")) {
-                ((CenterServer) this.ddo).createTRecord(firstName,lastName,address,phone,specialization,location,"default",recordId);
+                ((CenterServer) this.ddo).createTRecord(firstName, lastName, address, phone, specialization, location, "default", recordId);
             }
         }
 

@@ -1,12 +1,13 @@
-import java.io.File;
-import java.io.IOException;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
+import java.io.File;
+import java.io.IOException;
+
 public class LoggerFactory {
 
-    private static final String LogDirectory  =System.getProperty("user.dir") + "\\Logs";
+    private static final String LogDirectory = System.getProperty("user.dir") + "\\Logs";
 
     static {
         File directory = new File(LogDirectory);
@@ -30,29 +31,25 @@ public class LoggerFactory {
 
     }
 
-    public static void Log(String managerID, String message)   {
+    public static void Log(String managerID, String message) {
 
         try {
             Logger logger = LoggerFactory.getInstance(managerID);
 
             logger.info(message);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    public static void LogServer(String message)   {
+    public static void LogServer(String message) {
 
         try {
             Logger logger = LoggerFactory.getInstance("Server");
 
             logger.info(message);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
