@@ -1,20 +1,28 @@
 import java.io.IOException;
-import java.net.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.rmi.RemoteException;
+import java.rmi.server.RemoteServer;
+import java.rmi.server.ServerNotActiveException;
 import java.rmi.server.UnicastRemoteObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
-public class CenterServer extends UnicastRemoteObject implements CenterServerInterface, Runnable {
+public class CenterServer extends UnicastRemoteObject implements CenterServerInterface {
 
     private volatile HashMap<String, ArrayList<Record>> recordData;
 
     private String name;
-
-    private ArrayList<Manager> serverManagerList;
 
     private int serverPort;
 
@@ -26,33 +34,48 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
         super();
 
         LoggerFactory.Log(name,"Initialing Center");
-
-
         this.name = name;
         recordData = new HashMap<String, ArrayList<Record>>();
-        serverManagerList = new ArrayList<Manager>();
         this.serverPort = serverPort;
         this.nodePorts = nodePorts;
         this.isServerRunning = true;
-        Thread thread = new Thread(this);
-        thread.start();
+        
+        new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				DatagramSocket socket = null;
+		        try {
+		            socket = new DatagramSocket(serverPort);
+		            LoggerFactory.Log(name,"UDP server Started in " + name + " region in this port " + serverPort);
+		            byte[] buffer = new byte[1000];
+		            while (isServerRunning) {
+		                DatagramPacket request = new DatagramPacket(buffer, buffer.length);
+		                socket.receive(request);
+		                LoggerFactory.Log(name,"Received request in " + name + " from " + request.getAddress() + ":" + request.getPort() + " with this data " + new String(request.getData()).replaceAll("\u0000.*", "") + "");
+		                String replyData = "";
+		                String requestData = new String(request.getData()).replaceAll("\u0000.*", "");
+		                if (requestData.equals("GET_RECORD_COUNT")) {
+		                    replyData = getRecordCount(name+"_SERVER");
+		                } else {
+		                    replyData = "INVALID_REQUEST";
+		                }
+		                DatagramPacket reply = new DatagramPacket(replyData.getBytes(),
+		                        replyData.length(), request.getAddress(), request.getPort());
+		                socket.send(reply);
+		            }
+
+		        } catch (Exception e) {
+		            System.out.println(e);
+		            LoggerFactory.Log(name,"Unable to start udp server in " + name + " region");
+		        }
+				
+			}
+		}).start();
         LoggerFactory.Log(name,"Center initialed");
 
     }
 
-    private String getIndividualRecordCount() {
-
-        Set<String> keys = this.recordData.keySet();
-        int count = 0;
-        for (String key : keys) {
-            if (this.recordData.get(key) != null) {
-                count += this.recordData.get(key).size();
-            }
-        }
-
-        return this.name + ": " + count;
-
-    }
 
     private synchronized int generateNumber() {
         Random random = new Random(System.nanoTime());
@@ -81,46 +104,92 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
 
     @Override
     public String getRecordCount(String managerId) throws RemoteException {
-        LoggerFactory.Log(this.name, "Received request for " + this.name + " server from " + managerId + " to get record counts.");
-        String recordCountData = this.getIndividualRecordCount();
-        LoggerFactory.Log(this.name,"Total Records in " + this.name+" server are " + recordCountData);
+    	
+    	try {
+			RemoteServer.getClientHost();
+			
+			LoggerFactory.Log(this.name, "Received request for " + this.name + " server from " + managerId + " to get record counts.");
+	        
+	        Set<String> keys = this.recordData.keySet();
+	        int count = 0;
+	        for (String key : keys) {
+	            if (this.recordData.get(key) != null) {
+	                count += this.recordData.get(key).size();
+	            }
+	        }
 
-        DatagramSocket socket = null;
-        for (int port : this.nodePorts) {
-            try {
-                socket = new DatagramSocket();
-                InetAddress host = InetAddress.getLocalHost();
-                byte[] requestData = "GET_RECORD_COUNT".getBytes();
-                DatagramPacket request = new DatagramPacket(requestData, requestData.length, host, port);
-                socket.send(request);
-                LoggerFactory.Log(this.name,"Request sent to get record data from " + host.getHostName() + ":" + port);
-                byte[] buffer = new byte[1000];
-                DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-                socket.receive(reply);
-                String replyData = new String(buffer).replaceAll("\u0000.*", "");
-                LoggerFactory.Log(this.name,"Received this response " + replyData + " from " + host.getHostName() + ":" + port);
-                if (!replyData.equals("INVALID_REQUEST")) {
-                    recordCountData += " " + replyData;
-                }
-            } catch (SocketException e) {
-                System.out.println(e);
-                LoggerFactory.Log(this.name,"Error occur to connect another region server");
-            } catch (UnknownHostException e) {
-                System.out.println(e);
-                LoggerFactory.Log(this.name,"Invalid host");
-            } catch (IOException e) {
-                System.out.println(e);
-                LoggerFactory.Log(this.name,"Invalid data");
-            } finally {
-                if (socket != null) {
-                    socket.close();
-                }
-            }
+	        String recordCountData = this.name + ": " + count;
+	        LoggerFactory.Log(this.name,"Total Records in " + this.name+" server are " + recordCountData);
 
-        }
+	        final HashMap<Integer, String> result = new HashMap<Integer,String>(){
+	        	{
+		        	put(nodePorts[0],"");
+		        	put(nodePorts[1],"");
+	        	}
+	        };
+	        
+	        final CountDownLatch latch = new CountDownLatch(2);
+	        for (int port : this.nodePorts) {
+	        	
+	        	new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						DatagramSocket socket = null;
+			            try {
+			                socket = new DatagramSocket();
+			                InetAddress host = InetAddress.getLocalHost();
+			                byte[] requestData = "GET_RECORD_COUNT".getBytes();
+			                DatagramPacket request = new DatagramPacket(requestData, requestData.length, host, port);
+			                socket.send(request);
+			                LoggerFactory.Log(name,"Request sent to get record data from " + host.getHostName() + ":" + port);
+			                byte[] buffer = new byte[1000];
+			                DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
+			                socket.receive(reply);
+			                String replyData = new String(buffer).replaceAll("\u0000.*", "");
+			                LoggerFactory.Log(name,"Received this response " + replyData + " from " + host.getHostName() + ":" + port);
+			                if (!replyData.equals("INVALID_REQUEST")) {
+			                	result.put(port, replyData);
+			                }
+			            } catch (SocketException e) {
+			                System.out.println(e);
+			                LoggerFactory.Log(name,"Error occur to connect another region server");
+			            } catch (UnknownHostException e) {
+			                System.out.println(e);
+			                LoggerFactory.Log(name,"Invalid host");
+			            } catch (IOException e) {
+			                System.out.println(e);
+			                LoggerFactory.Log(name,"Invalid data");
+			            } finally {
+			                if (socket != null) {
+			                    socket.close();
+			                }
+			            }
+						latch.countDown();
+					}
+				}).start();
+	        	
+
+	        }
+	        try {
+				latch.await();
+				recordCountData += " "+result.get(nodePorts[0]) +" "+result.get(nodePorts[1]);
+			} catch (InterruptedException e) {}
 
 
-        return recordCountData;
+	        return recordCountData;
+		} catch (ServerNotActiveException e1) {
+			Set<String> keys = this.recordData.keySet();
+	        int count = 0;
+	        for (String key : keys) {
+	            if (this.recordData.get(key) != null) {
+	                count += this.recordData.get(key).size();
+	            }
+	        }
+	        
+	        return this.name + ": " + count;
+		}
+        
     }
 
     @Override
@@ -342,35 +411,6 @@ public class CenterServer extends UnicastRemoteObject implements CenterServerInt
             LoggerFactory.Log(this.name,String.format("Something went wrong when creating student record :%s \n by Manager: %s", record.toString(),(managerId)));
         }
         return result;
-    }
-
-    @Override
-    public void run() {
-        DatagramSocket socket = null;
-        try {
-            socket = new DatagramSocket(this.serverPort);
-            LoggerFactory.Log(this.name,"UDP server Started in " + this.name + " region in this port " + this.serverPort);
-            byte[] buffer = new byte[1000];
-            while (this.isServerRunning) {
-                DatagramPacket request = new DatagramPacket(buffer, buffer.length);
-                socket.receive(request);
-                LoggerFactory.Log(this.name,"Received request in " + this.name + " from " + request.getAddress() + ":" + request.getPort() + " with this data " + new String(request.getData()).replaceAll("\u0000.*", "") + "");
-                String replyData = "";
-                String requestData = new String(request.getData()).replaceAll("\u0000.*", "");
-                if (requestData.equals("GET_RECORD_COUNT")) {
-                    replyData = this.getIndividualRecordCount();
-                } else {
-                    replyData = "INVALID_REQUEST";
-                }
-                DatagramPacket reply = new DatagramPacket(replyData.getBytes(),
-                        replyData.length(), request.getAddress(), request.getPort());
-                socket.send(reply);
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-            LoggerFactory.Log(this.name,"Unable to start udp server in " + this.name + " region");
-        }
     }
 
 }

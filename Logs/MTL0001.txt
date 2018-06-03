@@ -1,0 +1,11 @@
+2018-06-03 13:13:57 Registering manager
+2018-06-03 13:13:57 Looking up server
+2018-06-03 13:16:38 Registering manager
+2018-06-03 13:16:39 Looking up server
+2018-06-03 13:55:57 Registering manager
+2018-06-03 13:55:57 Looking up server
+2018-06-03 13:57:48 Registering manager
+2018-06-03 13:57:48 Looking up server
+2018-06-03 13:58:04 Adding Teacher
+2018-06-03 13:58:13 Teacher record added:FirstName:sdfh LastName:sfads Address:ssdf Phone:sddsf Specialization:sdfs Location:DDO
+2018-06-03 13:58:55 Request to edit record: SR10001
