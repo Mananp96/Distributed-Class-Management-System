@@ -36,10 +36,15 @@ class CenterServerImpl extends CenterServerPOA {
 		return false;
 	}
 	
+	@Override
+	public boolean transferRecord(String managerID, String recordID, String remoteCenterServerName) {
+
+		return false;
+	}
+	
 	public void shutdown() {
 		this.orb.shutdown(false);
 	}
-
 }
 
 public class Server  {

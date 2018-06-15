@@ -29,5 +29,11 @@ module DistributedClassManagementSystem {
             in string newValue,
             in string managerId
     	);
+    	
+    	boolean transferRecord (
+    		in string managerID, 
+    		in string recordID,
+    		in string remoteCenterServerName
+    	);
 	};	
 };
