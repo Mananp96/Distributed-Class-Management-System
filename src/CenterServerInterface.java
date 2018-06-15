@@ -1,6 +1,8 @@
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import DistributedClassManagementSystem.RequiredValueException;
+
 public interface CenterServerInterface extends Remote {
 
     public boolean createTRecord(

@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
+import DistributedClassManagementSystem.RequiredValueException;
+
 public class CenterServer extends UnicastRemoteObject implements CenterServerInterface {
 
     private volatile HashMap<String, ArrayList<Record>> recordData;

@@ -1,4 +1,7 @@
-
+package DistributedClassManagementSystem;
+/**
+ *
+ */
 
 /**
  * @author emihpuj

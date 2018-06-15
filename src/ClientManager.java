@@ -5,6 +5,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 
+import DistributedClassManagementSystem.RequiredValueException;
+
 public class ClientManager {
 
 	private CenterServerInterface server;

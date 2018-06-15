@@ -3,6 +3,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import DistributedClassManagementSystem.RequiredValueException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.rmi.registry.LocateRegistry;
