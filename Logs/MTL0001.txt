@@ -1,16 +1,15 @@
-2018-06-03 14:51:08 Registering manager
-2018-06-03 14:51:09 Looking up server
-2018-06-03 14:51:33 Adding Teacher
-2018-06-03 14:51:48 Teacher record added:FirstName:Mihir LastName:Pujara Address:dffsd Phone:sdfsdf Specialization:sdfsdf Location:DDO
-2018-06-03 14:52:30 Request to edit record: TR52184
-2018-06-03 14:52:30 Record edited:RecordID:TR52184 FieldName:firstname Value:Mohit
-2018-06-03 14:53:23 Adding Student
-2018-06-03 15:01:37 Registering manager
-2018-06-03 15:01:37 Looking up server
-2018-06-03 15:01:38 Adding Teacher
-2018-06-03 15:01:53 Teacher record added:FirstName:MIhir LastName:MOhit Address:ASDAD Phone:asa Specialization:asdsad Location:DDO
-2018-06-03 15:01:59 Adding Student
-2018-06-03 15:04:07 Registering manager
-2018-06-03 15:04:07 Looking up server
-2018-06-03 15:04:08 Adding Student
-2018-06-03 15:04:18 Student record added:FirstName:ABCD LastName:AAAA Status:Active StatusDate:afdsaf coursesRegistered:aasad
+2018-06-14 22:00:25 Registering manager
+2018-06-14 22:01:16 Registering manager
+2018-06-14 22:02:02 Registering manager
+2018-06-14 22:07:54 Registering manager
+2018-06-14 22:08:25 Registering manager
+2018-06-14 22:09:15 Registering manager
+2018-06-14 22:12:03 Registering manager
+2018-06-14 22:13:05 Registering manager
+2018-06-14 22:23:00 Registering manager
+2018-06-14 22:24:10 Registering manager
+2018-06-14 22:24:39 Registering manager
+2018-06-14 22:24:49 Adding Teacher
+2018-06-14 22:25:02 Teacher record added:FirstName:MIHIR LastName:MIHIR Address:MIHIR Phone:MIHIR Specialization:MIHIT Location:LVL
+2018-06-14 22:25:57 Registering manager
+2018-06-14 22:27:43 Registering manager

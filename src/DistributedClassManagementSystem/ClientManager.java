@@ -23,7 +23,7 @@ public class ClientManager {
 		ClientManager client = new ClientManager();
 		try {
 			client.menu(args);
-			server.shutdown();
+			
 		} catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,6 +130,7 @@ public class ClientManager {
 					System.out.println("Enter Correct Choice");
 				}
 				if (choice.equals("5")) {
+
 					break;
 				}
 				userInput("");

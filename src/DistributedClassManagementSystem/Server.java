@@ -1,5 +1,6 @@
 package DistributedClassManagementSystem;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -14,10 +15,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextExt;
@@ -200,11 +205,12 @@ class CenterServerImpl extends CenterServerPOA {
         return result;
 	}
 
+	
 	@Override
 	public String getRecordCount(String managerId) {
 
-		try {
-            RemoteServer.getClientHost();
+		if (!(managerId.equalsIgnoreCase("MTL_SERVER") || managerId.equalsIgnoreCase("LVL_SERVER") || managerId.equalsIgnoreCase("DDO_SERVER"))) {
+            
 
             LoggerFactory.Log(this.name,
                     "Received request for " + this.name + " server from " + managerId + " to get record counts.");
@@ -275,10 +281,12 @@ class CenterServerImpl extends CenterServerPOA {
                 latch.await();
                 recordCountData += " " + result.get(nodePorts[0]) + " " + result.get(nodePorts[1]);
             } catch (InterruptedException e) {
+            	
             }
+            
 
             return recordCountData;
-        } catch (ServerNotActiveException e1) {
+        } else {
             Set<String> keys = this.recordData.keySet();
             int count = 0;
             for (String key : keys) {
@@ -417,10 +425,6 @@ class CenterServerImpl extends CenterServerPOA {
 		return false;
 	}
 	
-	public void shutdown() {
-		this.orb.shutdown(false);
-	}
-	
 	private synchronized int generateNumber() {
 
         Random random = new Random(System.nanoTime());
@@ -450,8 +454,74 @@ class CenterServerImpl extends CenterServerPOA {
 
 public class Server  {
 	
-	public static void main(String args[]) {
-		try{
+	private CenterServer mtlRef;
+	private CenterServer lvlRef;
+	private CenterServer ddoRef;
+	
+	private void addStudentsToServer() throws IOException, ParseException, RequiredValueException, org.json.simple.parser.ParseException {
+
+        JSONParser parser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("resources/studentData.json"));
+        for (Object object : jsonArray) {
+            String status = "";
+            JSONObject student = (JSONObject) object;
+            String firstName = (String) student.get("firstName");
+            String lastName = (String) student.get("lastName");
+            String[] courses = student.get("coursesRegistered").toString().replace("},{", " ,").split(" ");
+            String statusDate = (String) student.get("statusDate");
+            String stat = (String) student.get("status");
+            if (Objects.equals(stat, "Active")) {
+                status = "ACTIVE";
+            } else {
+                status = "INACTIVE";
+            }
+
+            if (student.get("region").toString().substring(0, 3).equalsIgnoreCase("MTL")) {
+                this.mtlRef.createSRecord(firstName, lastName, courses, status, statusDate, "default");
+            } else if (student.get("region").toString().substring(0, 3).equalsIgnoreCase("LVL")) {
+                this.lvlRef.createSRecord(firstName, lastName, courses, status, statusDate, "default");
+            } else if (student.get("region").toString().substring(0, 3).equalsIgnoreCase("DDO")) {
+                this.ddoRef.createSRecord(firstName, lastName, courses, status, statusDate, "default");
+            }
+        }
+    }
+
+    private void addTeachersToServer() throws IOException, ParseException, RequiredValueException, org.json.simple.parser.ParseException {
+
+        JSONParser parser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("resources/teacherData.json"));
+        for (Object object : jsonArray) {
+            String location = "";
+            JSONObject teacher = (JSONObject) object;
+            String firstName = (String) teacher.get("firstName");
+            String lastName = (String) teacher.get("lastName");
+            String recordId = (String) teacher.get("id");
+            String address = (String) teacher.get("address");
+            String loc = (String) teacher.get("location");
+            String phone = (String) teacher.get("phone");
+            String specialization = (String) teacher.get("specialization");
+
+            if (loc.equalsIgnoreCase("MLT")) {
+                location = "MTL";
+            } else if (loc.equalsIgnoreCase("LVL")) {
+                location = "LVL";
+            } else {
+                location = "DDO";
+            }
+
+            if (teacher.get("location").toString().substring(0, 3).equalsIgnoreCase("MTL")) {
+                this.mtlRef.createTRecord(firstName, lastName, address, phone, specialization, location, "default");
+            } else if (teacher.get("location").toString().substring(0, 3).equalsIgnoreCase("LVL")) {
+                this.lvlRef.createTRecord(firstName, lastName, address, phone, specialization, location, "default");
+            } else if (teacher.get("location").toString().substring(0, 3).equalsIgnoreCase("DDO")) {
+                this.ddoRef.createTRecord(firstName, lastName, address, phone, specialization, location, "default");
+            }
+        }
+    }
+    
+    
+    private void startServer(String[] args) {
+    	try{
 			ORB orb = ORB.init(args, null);
 			
 			POA rootpoa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
@@ -460,17 +530,17 @@ public class Server  {
 			CenterServerImpl mtlServer = new CenterServerImpl("MTL", 6797, new int[]{6798, 6799});
 			mtlServer.setORB(orb); 
 			org.omg.CORBA.Object mtlref = rootpoa.servant_to_reference(mtlServer);
-			CenterServer mtlRef = CenterServerHelper.narrow(mtlref);
+			this.mtlRef = CenterServerHelper.narrow(mtlref);
 			      
 			CenterServerImpl lvlServer = new CenterServerImpl("LVL", 6798, new int[]{6797, 6799});
 			lvlServer.setORB(orb); 
 			org.omg.CORBA.Object lvlref = rootpoa.servant_to_reference(lvlServer);
-			CenterServer lvlRef = CenterServerHelper.narrow(lvlref);
+			this.lvlRef = CenterServerHelper.narrow(lvlref);
 			
 			CenterServerImpl ddoServer = new CenterServerImpl("DDO", 6799, new int[]{6797, 6798});
 			ddoServer.setORB(orb); 
 			org.omg.CORBA.Object ddoref = rootpoa.servant_to_reference(ddoServer);
-			CenterServer ddoRef = CenterServerHelper.narrow(ddoref);
+			this.ddoRef = CenterServerHelper.narrow(ddoref);
 			
 			
 			org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
@@ -478,15 +548,22 @@ public class Server  {
 			
 			String name = "MTL";
 			NameComponent mtlpath[] = ncRef.to_name( name );
-			ncRef.rebind(mtlpath, mtlRef);
+			ncRef.rebind(mtlpath, this.mtlRef);
 			
 			name = "LVL";
 			NameComponent lvlpath[] = ncRef.to_name( name );
-			ncRef.rebind(lvlpath, lvlRef);
+			ncRef.rebind(lvlpath, this.lvlRef);
 			
 			name = "DDO";
 			NameComponent ddopath[] = ncRef.to_name( name );
-			ncRef.rebind(ddopath, ddoRef);
+			ncRef.rebind(ddopath, this.ddoRef);
+			
+			try {
+				this.addTeachersToServer();
+		        this.addStudentsToServer();
+			} catch (Exception e) {
+					
+			}
 			
 			System.out.println("MTL ready and waiting ...");
 			System.out.println("LVL ready and waiting ...");
@@ -499,5 +576,12 @@ public class Server  {
 			System.err.println("ERROR: " + e);
 			e.printStackTrace(System.out);
 		}
+    }
+	
+	
+	public static void main(String args[]) {
+		Server server = new Server ();
+		
+		server.startServer(args);
 	}
 }
