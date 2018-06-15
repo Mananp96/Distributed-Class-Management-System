@@ -35,5 +35,7 @@ module DistributedClassManagementSystem {
     		in string recordID,
     		in string remoteCenterServerName
     	);
+    	
+    	oneway void shutdown();
 	};	
 };
