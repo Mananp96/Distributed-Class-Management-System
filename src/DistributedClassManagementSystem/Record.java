@@ -15,11 +15,17 @@ public class Record {
 
     private String lastName;
 
+    private Object lock;
+
     public Record(String recordId, String firstName, String lastName) {
         this.recordId = recordId;
         this.firstName = firstName;
         this.lastName = lastName;
+
+        this.lock = new Object();
     }
+
+    public Object getLock() { return lock; }
 
     public String getRecordId() {
         return recordId;
@@ -48,6 +54,11 @@ public class Record {
 
     public String toString() {
         return String.format("RecordID:%s FirstName:%s LastName:%s", this.getRecordId(), this.getFirstName(), this.getLastName());
+    }
+    
+    public String toSplited()
+    {
+    	return String.format("%s;%s;%s", this.getRecordId(), this.getFirstName(), this.getLastName());
     }
 
 }

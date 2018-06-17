@@ -89,7 +89,8 @@ public class ClientManager {
 				System.out.println("2. Add Student Record");
 				System.out.println("3. Get record counts");
 				System.out.println("4. Edit Record");
-				System.out.println("5. Exit");
+				System.out.println("5. Transfer Record");
+				System.out.println("6. Exit");
 				System.out.println("********************************");
 				String choice = userInput("Enter Choice:");
 				switch (choice) {
@@ -124,12 +125,21 @@ public class ClientManager {
 					System.out.println("Press any key to continue...");
 					break;
 				case "5":
+					try {
+						this.transferRecord();
+					} catch (RequiredValueException e) {
+
+						e.printStackTrace();
+					}
+					System.out.println("Press any key to continue...");
+					break;
+				case "6":
 					System.out.println("Good Bye!");
 					break;
 				default:
 					System.out.println("Enter Correct Choice");
 				}
-				if (choice.equals("5")) {
+				if (choice.equals("6")) {
 
 					break;
 				}
@@ -221,6 +231,34 @@ public class ClientManager {
 			LoggerFactory.Log(this.managerId, String.format("Record edited:%s", str));
 		else
 			LoggerFactory.Log(this.managerId, String.format("Record did not edit:%s", str));
+	}
+	
+	private void transferRecord() throws RemoteException, RequiredValueException {
+
+		LoggerFactory.Log(this.managerId, "Transfer Record");
+
+		String location = "";
+		System.out.println("----------Trasnfer Record----------");
+		String recordID = userInput("Enter RecordID:");
+		String loc = userInput("Enter New Server location:");
+
+		if (loc.equalsIgnoreCase("MTL")) {
+			location = "MTL";
+		} else if (loc.equalsIgnoreCase("LVL")) {
+			location = "LVL";
+		} else if (loc.equalsIgnoreCase("DDO")) {
+			location = "DDO";
+		} else {
+			throw new RequiredValueException("Invalid Location");
+		}
+
+		Boolean result = server.transferRecord(this.managerId, recordID,loc);
+
+		if (result)
+			LoggerFactory.Log(this.managerId, String.format("RecordID:%s transfered to", recordID, loc));
+		else
+			LoggerFactory.Log(this.managerId, String.format("RecordID:%s did not transfer to", recordID, loc));
+
 	}
 
 	private String userInput(String var2) {

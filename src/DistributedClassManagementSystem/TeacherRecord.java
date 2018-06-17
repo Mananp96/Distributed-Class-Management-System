@@ -61,4 +61,18 @@ public class TeacherRecord extends Record {
     public String toString() {
 		return String.format("%s Address:%s Phone:%s Specialization:%s Location:%s", super.toString(), this.getAddress(), this.getPhone(), this.getSpecialization(), this.getLocation());
     }
+    
+    public String toSplited()
+    {
+    	return String.format("%s;%s;%s;%s;%s", super.toSplited(), this.getAddress(), this.getPhone(), this.getSpecialization(), this.getLocation());
+    }
+    
+    public static TeacherRecord fromString(String s)
+    {
+    	
+    	String[] strs = s.split(";");
+    	TeacherRecord  record = new TeacherRecord(strs[0], strs[1], strs[2], strs[3], strs[4], strs[5], strs[6]);
+    	
+    	return record;
+    }
 }
