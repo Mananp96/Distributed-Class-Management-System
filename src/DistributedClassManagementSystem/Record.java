@@ -4,6 +4,9 @@ package DistributedClassManagementSystem;
  */
 
 /**
+ * This is the superclass Record which has the common attributes that of 
+ * teacher as well as Student. FName, LName and ID will be the common 
+ * attributes for all two class.
  * @author mihir
  */
 public class Record {

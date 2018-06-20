@@ -2,8 +2,6 @@ package DistributedClassManagementSystem;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.Scanner;
 
 import org.omg.CORBA.ORB;
@@ -18,18 +16,28 @@ public class ClientManager {
 
 	private String managerId;
 
-	public static void main(String[] args) throws IOException, RequiredValueException {
+	public static void main(String[] args) throws IOException, RequiredValueException, NotBoundException {
 
 		ClientManager client = new ClientManager();
-		try {
-			client.menu(args);
-			
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		client.menu(args);
 	}
 
+	/**
+	 * Command Line Interface which gives managers options to perform some of CURD operations on Records
+	 * Menu choices includes 
+	 * 1. Creating a teacher/student record.
+	 * 2. Editing a record.
+	 * 3. Transfer of record.
+	 * 4. Total Record counts.
+	 * Menu will continue unless manager exits the program.
+	 * 
+	 * First manager will enter the manager id and according to it, 
+	 * respective server object is assigned using CORBA.
+	 * 
+	 * @param args
+	 * @throws RemoteException
+	 * @throws NotBoundException
+	 */
 	public void menu(String[] args) throws RemoteException, NotBoundException {
 		String region = "";
 		while (true) {
@@ -75,7 +83,7 @@ public class ClientManager {
 					System.out.println("Obtained a handle on server object: " + server);
 				} catch (Exception e) {
 					System.out.println("ERROR : " + e);
-					e.printStackTrace(System.out);
+					//e.printStackTrace(System.out);
 				}
 				break;
 			}
@@ -237,21 +245,9 @@ public class ClientManager {
 
 		LoggerFactory.Log(this.managerId, "Transfer Record");
 
-		String location = "";
 		System.out.println("----------Trasnfer Record----------");
 		String recordID = userInput("Enter RecordID:");
 		String loc = userInput("Enter New Server location:");
-
-		if (loc.equalsIgnoreCase("MTL")) {
-			location = "MTL";
-		} else if (loc.equalsIgnoreCase("LVL")) {
-			location = "LVL";
-		} else if (loc.equalsIgnoreCase("DDO")) {
-			location = "DDO";
-		} else {
-			throw new RequiredValueException("Invalid Location");
-		}
-
 		Boolean result = server.transferRecord(this.managerId, recordID,loc);
 
 		if (result)
@@ -264,7 +260,10 @@ public class ClientManager {
 	private String userInput(String var2) {
 		System.out.print(var2);
 		Scanner s = new Scanner(System.in);
-		return s.nextLine();
+		String returnString = s.nextLine();
+		s.close();
+		return returnString;
+		
 	}
 
 }

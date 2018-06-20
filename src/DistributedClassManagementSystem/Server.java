@@ -7,13 +7,10 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.rmi.server.RemoteServer;
-import java.rmi.server.ServerNotActiveException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -33,6 +30,7 @@ import org.omg.PortableServer.POAHelper;
 
 class CenterServerImpl extends CenterServerPOA {
 
+	@SuppressWarnings("unused")
 	private ORB orb;
 
 	private volatile HashMap<String, ArrayList<Record>> recordData;
@@ -41,6 +39,7 @@ class CenterServerImpl extends CenterServerPOA {
 
 	private String name;
 
+	@SuppressWarnings("unused")
 	private int serverPort;
 
 	private HashMap<String, Integer> nodePorts;
@@ -110,77 +109,7 @@ class CenterServerImpl extends CenterServerPOA {
 		LoggerFactory.Log(name, "Center initialed");
 
 	}
-
-	private String processRecordTransferRequest(String requestData, String type) {
-		requestData = requestData.replaceAll("TRANSFER_" + type.toUpperCase() + ";", "");
-		if(type.equalsIgnoreCase("Teacher"))
-		{
-		//convert the the string request to teacher record
-		TeacherRecord teacher = TeacherRecord.fromString(requestData);
-		//add the teacher record to temp table, first step of the transaction
-		tempRecords.add(teacher);
-		}
-		else
-		{
-			//convert the the string request to student record
-			StudentRecord student = StudentRecord.fromString(requestData);
-			//add the student record to temp table, first step of the transaction
-			tempRecords.add(student);
-		}
-		return "OK";
-	}
 	
-	
-
-	private String processAddTransferRequest(String requestData, String type) {
-		LoggerFactory.Log(name, "Processing ADD_" + type.toUpperCase() + " request");
-
-		requestData = requestData.replaceAll("ADD_" + type.toUpperCase()  + ";", "");
-		String[] str = requestData.split(";");
-		String managerID = str[0];
-		String recordID = str[1];
-		LoggerFactory.Log(name, "Processing ADD_" + type.toUpperCase() + " request, managerID:" + managerID + " recordID:" + recordID);
-		Record record = null;
-		//find the record on the temp list, to commit the transfer transaction
-		for (Record r : tempRecords) {
-
-			if (r.getRecordId().equalsIgnoreCase(recordID.trim())) {
-				record = r;
-				break;
-			}
-		}
-
-		if (record == null) {
-			//if record has not been find means something is wrong and we will notify the remote server to rollback
-			LoggerFactory.Log(name, "Record not found");
-			return "Record_not_found";
-		} else {
-			
-			LoggerFactory.Log(name, "Record in temp list found, " + record.toString());
-			//commit the changes and add the record to the main hashmap
-			if(type.equalsIgnoreCase("Teacher"))
-			{
-			TeacherRecord teacher = (TeacherRecord)record;
-			createTRecord(teacher.getFirstName(), teacher.getLastName(), teacher.getAddress(), teacher.getPhone(),
-					teacher.getSpecialization(), teacher.getLocation(), managerID);
-			}
-			else
-			{
-				StudentRecord student = (StudentRecord)record;
-				this.createSRecord(student.getFirstName(), student.getLastName(), student.getCoursesRegistered(), student.getStatus(), student.getStatusDate(), managerID);
-			}
-			
-			
-			LoggerFactory.Log(name, "Attemping to remove record from temp list");
-			//remove the record from the temp list
-			tempRecords.remove(record);
-
-			LoggerFactory.Log(name, "Record removed from temp list");
-			//notify the remote server to commit the transaction
-			return "OK";
-		}
-	}
-
 	public void setORB(ORB orb) {
 		this.orb = orb;
 	}
@@ -294,6 +223,7 @@ class CenterServerImpl extends CenterServerPOA {
 		return result;
 	}
 
+	@SuppressWarnings("serial")
 	@Override
 	public String getRecordCount(String managerId) {
 
@@ -389,29 +319,7 @@ class CenterServerImpl extends CenterServerPOA {
 			return this.name + ": " + count;
 		}
 	}
-
-	private Record findRecord(String recordId) {
-		LoggerFactory.Log(this.name, "Looking record id");
-		Record record = null;
-		for (ArrayList<Record> records : this.recordData.values()) {
-
-			for (Record r : records) {
-
-				if (r.getRecordId().equalsIgnoreCase(recordId)) {
-
-					record = r;
-					break;
-				}
-			}
-
-			if (record != null)
-				break;
-		}
-
-		return record;
-
-	}
-
+	
 	@Override
 	public boolean editRecords(String recordId, String fieldName, String newValue, String managerId) {
 
@@ -471,7 +379,7 @@ class CenterServerImpl extends CenterServerPOA {
 				case "statusdate":
 					try {
 						DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-						Date today = df.parse(newValue);
+						df.parse(newValue);
 						student.setStatusDate(newValue);
 					} catch (ParseException e) {
 						LoggerFactory.Log(this.name, "Date is invalid");
@@ -533,6 +441,142 @@ class CenterServerImpl extends CenterServerPOA {
 
 		return true;
 	}
+	
+	@Override
+	public boolean transferRecord(String managerID, String recordID, String remoteCenterServerName) {
+
+		LoggerFactory.Log(this.name, "Manager :" + managerID + " requested to transfer a record.");
+		LoggerFactory.Log(this.name, String.format("Transering record, RecordID:%s", recordID));
+
+		//find the record
+		Record record = findRecord(recordID);
+
+		if (record == null) {
+			LoggerFactory.Log(this.name, String.format("Record not found, %s", recordID));
+			return false;
+		}
+		//Set lock on the record, in case if it is editing or transfering by another thread
+		synchronized (record.getLock()) {
+			
+			//we have to find the record again to make sure the recod has not been transfered and has not been removed from the hashmap by another thread 
+			record = findRecord(recordID);
+			if (record == null) {
+				LoggerFactory.Log(this.name, String.format("Record not found, %s", recordID));
+				return false;
+			}
+
+			LoggerFactory.Log(this.name, String.format("Record found, %s", record.toString()));
+
+			//find the remote server
+			int port = this.nodePorts.get(remoteCenterServerName);
+
+			if (record.getClass() == StudentRecord.class) {
+				StudentRecord student = (StudentRecord) record;
+				transferRecord(student, "Student", managerID, port, remoteCenterServerName);
+
+			} else {
+				TeacherRecord teacher = (TeacherRecord) record;
+				transferRecord(teacher, "Teacher", managerID, port, remoteCenterServerName);
+
+			}
+		}
+
+		return true;
+	}
+
+	private synchronized int generateNumber() {
+
+		Random random = new Random(System.nanoTime());
+
+		return 10000 + random.nextInt(89999);
+	}
+
+	private boolean addToRecordData(String firstCharacter, Record record) {
+		if (this.recordData.containsKey(firstCharacter)) {
+			ArrayList<Record> list = this.recordData.get(firstCharacter);
+			if (list != null && list.size() > 0) {
+				list.add(record);
+				return true;
+			} else {
+				list.add(record);
+				this.recordData.put(firstCharacter, list);
+				return true;
+			}
+		} else {
+			ArrayList<Record> list = new ArrayList<Record>();
+			list.add(record);
+			this.recordData.put(firstCharacter, list);
+			return true;
+		}
+	}
+	
+	private String processRecordTransferRequest(String requestData, String type) {
+		requestData = requestData.replaceAll("TRANSFER_" + type.toUpperCase() + ";", "");
+		if(type.equalsIgnoreCase("Teacher"))
+		{
+		//convert the the string request to teacher record
+		TeacherRecord teacher = TeacherRecord.fromString(requestData);
+		//add the teacher record to temp table, first step of the transaction
+		tempRecords.add(teacher);
+		}
+		else
+		{
+			//convert the the string request to student record
+			StudentRecord student = StudentRecord.fromString(requestData);
+			//add the student record to temp table, first step of the transaction
+			tempRecords.add(student);
+		}
+		return "OK";
+	}
+		
+	private String processAddTransferRequest(String requestData, String type) {
+		LoggerFactory.Log(name, "Processing ADD_" + type.toUpperCase() + " request");
+
+		requestData = requestData.replaceAll("ADD_" + type.toUpperCase()  + ";", "");
+		String[] str = requestData.split(";");
+		String managerID = str[0];
+		String recordID = str[1];
+		LoggerFactory.Log(name, "Processing ADD_" + type.toUpperCase() + " request, managerID:" + managerID + " recordID:" + recordID);
+		Record record = null;
+		//find the record on the temp list, to commit the transfer transaction
+		for (Record r : tempRecords) {
+
+			if (r.getRecordId().equalsIgnoreCase(recordID.trim())) {
+				record = r;
+				break;
+			}
+		}
+
+		if (record == null) {
+			//if record has not been find means something is wrong and we will notify the remote server to rollback
+			LoggerFactory.Log(name, "Record not found");
+			return "Record_not_found";
+		} else {
+			
+			LoggerFactory.Log(name, "Record in temp list found, " + record.toString());
+			//commit the changes and add the record to the main hashmap
+			if(type.equalsIgnoreCase("Teacher"))
+			{
+			TeacherRecord teacher = (TeacherRecord)record;
+			createTRecord(teacher.getFirstName(), teacher.getLastName(), teacher.getAddress(), teacher.getPhone(),
+					teacher.getSpecialization(), teacher.getLocation(), managerID);
+			}
+			else
+			{
+				StudentRecord student = (StudentRecord)record;
+				this.createSRecord(student.getFirstName(), student.getLastName(), student.getCoursesRegistered(), student.getStatus(), student.getStatusDate(), managerID);
+			}
+			
+			
+			LoggerFactory.Log(name, "Attemping to remove record from temp list");
+			//remove the record from the temp list
+			tempRecords.remove(record);
+
+			LoggerFactory.Log(name, "Record removed from temp list");
+			//notify the remote server to commit the transaction
+			return "OK";
+		}
+	}
 
 	private void removeRecord(Record record) {
 		for (ArrayList<Record> records : recordData.values()) {
@@ -564,9 +608,6 @@ class CenterServerImpl extends CenterServerPOA {
 		return replyData;
 	}
 
-	
-	
-	
 	private boolean transferRecord(Record record, String type, String managerID, int port, String remoteServer) {
 
 		final CountDownLatch latch = new CountDownLatch(1);
@@ -647,73 +688,28 @@ class CenterServerImpl extends CenterServerPOA {
 
 	}
 
-	@Override
-	public boolean transferRecord(String managerID, String recordID, String remoteCenterServerName) {
+	private Record findRecord(String recordId) {
+		LoggerFactory.Log(this.name, "Looking record id");
+		Record record = null;
+		for (ArrayList<Record> records : this.recordData.values()) {
 
-		LoggerFactory.Log(this.name, "Manager :" + managerID + " requested to transfer a record.");
-		LoggerFactory.Log(this.name, String.format("Transering record, RecordID:%s", recordID));
+			for (Record r : records) {
 
-		//find the record
-		Record record = findRecord(recordID);
+				if (r.getRecordId().equalsIgnoreCase(recordId)) {
 
-		if (record == null) {
-			LoggerFactory.Log(this.name, String.format("Record not found, %s", recordID));
-			return false;
-		}
-		//Set lock on the record, in case if it is editing or transfering by another thread
-		synchronized (record.getLock()) {
-			
-			//we have to find the record again to make sure the recod has not been transfered and has not been removed from the hashmap by another thread 
-			record = findRecord(recordID);
-			if (record == null) {
-				LoggerFactory.Log(this.name, String.format("Record not found, %s", recordID));
-				return false;
+					record = r;
+					break;
+				}
 			}
 
-			LoggerFactory.Log(this.name, String.format("Record found, %s", record.toString()));
-
-			//find the remote server
-			int port = this.nodePorts.get(remoteCenterServerName);
-
-			if (record.getClass() == StudentRecord.class) {
-				StudentRecord student = (StudentRecord) record;
-				transferRecord(student, "Student", managerID, port, remoteCenterServerName);
-
-			} else {
-				TeacherRecord teacher = (TeacherRecord) record;
-				transferRecord(teacher, "Teacher", managerID, port, remoteCenterServerName);
-
-			}
+			if (record != null)
+				break;
 		}
 
-		return true;
+		return record;
+
 	}
 
-	private synchronized int generateNumber() {
-
-		Random random = new Random(System.nanoTime());
-
-		return 10000 + random.nextInt(89999);
-	}
-
-	private boolean addToRecordData(String firstCharacter, Record record) {
-		if (this.recordData.containsKey(firstCharacter)) {
-			ArrayList<Record> list = this.recordData.get(firstCharacter);
-			if (list != null && list.size() > 0) {
-				list.add(record);
-				return true;
-			} else {
-				list.add(record);
-				this.recordData.put(firstCharacter, list);
-				return true;
-			}
-		} else {
-			ArrayList<Record> list = new ArrayList<Record>();
-			list.add(record);
-			this.recordData.put(firstCharacter, list);
-			return true;
-		}
-	}
 }
 
 public class Server {
@@ -761,7 +757,6 @@ public class Server {
 			JSONObject teacher = (JSONObject) object;
 			String firstName = (String) teacher.get("firstName");
 			String lastName = (String) teacher.get("lastName");
-			String recordId = (String) teacher.get("id");
 			String address = (String) teacher.get("address");
 			String loc = (String) teacher.get("location");
 			String phone = (String) teacher.get("phone");
@@ -785,6 +780,7 @@ public class Server {
 		}
 	}
 
+	@SuppressWarnings("serial")
 	private void startServer(String[] args) {
 		try {
 			ORB orb = ORB.init(args, null);
@@ -847,7 +843,7 @@ public class Server {
 				this.addTeachersToServer();
 				this.addStudentsToServer();
 			} catch (Exception e) {
-
+				//do nothing
 			}
 
 			System.out.println("MTL ready and waiting ...");

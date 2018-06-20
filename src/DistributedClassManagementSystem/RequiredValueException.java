@@ -1,11 +1,9 @@
 package DistributedClassManagementSystem;
-/**
- *
- */
 
 /**
- * @author emihpuj
+ * @author team#2
  */
+@SuppressWarnings("serial")
 public class RequiredValueException extends Exception {
 
     public RequiredValueException(String message) {
