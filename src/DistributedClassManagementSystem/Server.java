@@ -79,14 +79,16 @@ class CenterServerImpl extends CenterServerPOA {
 						if (requestData.startsWith("GET_RECORD_COUNT")) {
 							replyData = getRecordCount(name + "_SERVER");
 						} else if (requestData.startsWith("TRANSFER_TEACHER")) {
-
+							//A transfer record request from another server recieved, we need to add the record to temp list
 							replyData = processRecordTransferRequest(requestData, "Teacher");
 						} else if (requestData.startsWith("ADD_TEACHER")) {
+							//A transfer record request from another server recieved, we need to add the record to temp list
 							replyData = processAddTransferRequest(requestData, "Teacher");
 						} else if (requestData.startsWith("TRANSFER_STUDENT")) {
-
+							//A transfer record request from another server recieved, we need to add the record to temp list
 							replyData = processRecordTransferRequest(requestData, "Student");
 						} else if (requestData.startsWith("ADD_STUDENT")) {
+							//A transfer record request from another server recieved, we need to add the record to temp list
 							replyData = processAddTransferRequest(requestData, "Student");
 						}
 
@@ -113,12 +115,16 @@ class CenterServerImpl extends CenterServerPOA {
 		requestData = requestData.replaceAll("TRANSFER_" + type.toUpperCase() + ";", "");
 		if(type.equalsIgnoreCase("Teacher"))
 		{
+		//convert the the string request to teacher record
 		TeacherRecord teacher = TeacherRecord.fromString(requestData);
+		//add the teacher record to temp table, first step of the transaction
 		tempRecords.add(teacher);
 		}
 		else
 		{
+			//convert the the string request to student record
 			StudentRecord student = StudentRecord.fromString(requestData);
+			//add the student record to temp table, first step of the transaction
 			tempRecords.add(student);
 		}
 		return "OK";
@@ -135,7 +141,7 @@ class CenterServerImpl extends CenterServerPOA {
 		String recordID = str[1];
 		LoggerFactory.Log(name, "Processing ADD_" + type.toUpperCase() + " request, managerID:" + managerID + " recordID:" + recordID);
 		Record record = null;
-
+		//find the record on the temp list, to commit the transfer transaction
 		for (Record r : tempRecords) {
 
 			if (r.getRecordId().equalsIgnoreCase(recordID.trim())) {
@@ -145,13 +151,13 @@ class CenterServerImpl extends CenterServerPOA {
 		}
 
 		if (record == null) {
-
+			//if record has not been find means something is wrong and we will notify the remote server to rollback
 			LoggerFactory.Log(name, "Record not found");
 			return "Record_not_found";
 		} else {
 			
 			LoggerFactory.Log(name, "Record in temp list found, " + record.toString());
-			
+			//commit the changes and add the record to the main hashmap
 			if(type.equalsIgnoreCase("Teacher"))
 			{
 			TeacherRecord teacher = (TeacherRecord)record;
@@ -166,10 +172,11 @@ class CenterServerImpl extends CenterServerPOA {
 			
 			
 			LoggerFactory.Log(name, "Attemping to remove record from temp list");
-
+			//remove the record from the temp list
 			tempRecords.remove(record);
 
 			LoggerFactory.Log(name, "Record removed from temp list");
+			//notify the remote server to commit the transaction
 			return "OK";
 		}
 	}
@@ -432,9 +439,10 @@ class CenterServerImpl extends CenterServerPOA {
 			LoggerFactory.Log(this.name, String.format("Record not found, %s", recordId));
 			return false;
 		}
-
+		//Set lock on the record, in case if it is editing or transfering by another thread
 		synchronized (record.getLock()) {
-
+			
+			//we have to find the record again to make sure the recod has not been transfered and has not been removed from the hashmap by another thread
 			record = findRecord(recordId);
 			if (record == null) {
 				LoggerFactory.Log(this.name, String.format("Record not found, %s", recordId));
@@ -556,81 +564,13 @@ class CenterServerImpl extends CenterServerPOA {
 		return replyData;
 	}
 
-	private boolean transferTeacher(TeacherRecord teacher, String managerID, int port, String remoteServer) {
-
-		final CountDownLatch latch = new CountDownLatch(1);
-
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				DatagramSocket socket = null;
-				try {
-					socket = new DatagramSocket();
-					InetAddress host = InetAddress.getLocalHost();
-					tempRecords.add(teacher);
-					LoggerFactory.Log(name, Integer.toString(port));
-
-					String replyData = sendSocketRequest(socket, "TRANSFER_TEACHER;" + teacher.toSplited(), host, port,
-							remoteServer);
-
-					if (!replyData.equalsIgnoreCase("OK")) {
-						LoggerFactory.Log(name, "Error occur to transfer teacher");
-						tempRecords.remove(teacher);
-					} else {
-						removeRecord(teacher);
-						LoggerFactory.Log(name, "Teacher record removed");
-
-						replyData = sendSocketRequest(socket,
-								"ADD_TEACHER;" + managerID + ";" + teacher.getRecordId() + ";", host, port,
-								remoteServer);
-
-						if (!replyData.equalsIgnoreCase("OK")) {
-							LoggerFactory.Log(name, "Error occur to add teacher");
-							String firstCharacter = teacher.getLastName().substring(0, 1).toUpperCase();
-							addToRecordData(firstCharacter, teacher);
-							tempRecords.remove(teacher);
-						} else {
-							tempRecords.remove(teacher);
-						}
-
-					}
-
-				} catch (SocketException e) {
-					System.out.println(e);
-					LoggerFactory.Log(name, "Error occur to connect another region server");
-
-				} catch (UnknownHostException e) {
-					System.out.println(e);
-					LoggerFactory.Log(name, "Invalid host");
-				} catch (IOException e) {
-					System.out.println(e);
-					LoggerFactory.Log(name, "Invalid data");
-				} finally {
-					if (socket != null) {
-						socket.close();
-					}
-
-					latch.countDown();
-				}
-
-			}
-		}).start();
-
-		try {
-			latch.await();
-			return true;
-		} catch (InterruptedException e) {
-
-			return false;
-		}
-
-	}
-
+	
+	
+	
 	private boolean transferRecord(Record record, String type, String managerID, int port, String remoteServer) {
 
 		final CountDownLatch latch = new CountDownLatch(1);
-
+		//Create a new thread to transfer the record
 		new Thread(new Runnable() {
 
 			@Override
@@ -639,19 +579,25 @@ class CenterServerImpl extends CenterServerPOA {
 				try {
 					socket = new DatagramSocket();
 					InetAddress host = InetAddress.getLocalHost();
+					
+					//add the record to temp list to provide transactional operation, we keep a copy of the record in the temp list
 					tempRecords.add(record);
 					LoggerFactory.Log(name, Integer.toString(port));
-
+					
+					//create a request to transfer the record
 					String replyData = sendSocketRequest(socket,
 							"TRANSFER_" + type.toUpperCase() + ";" + record.toSplited(), host, port, remoteServer);
-
+					
+					//if the remote server couldn't accept the request we have to remove the record from the temp table, which means rollback
 					if (!replyData.equalsIgnoreCase("OK")) {
-						LoggerFactory.Log(name, "Error occur to transfer teacher");
+						LoggerFactory.Log(name, "Error occur to transfer record");
 						tempRecords.remove(record);
 					} else {
+						//remove the record from the main hash map
 						removeRecord(record);
 						LoggerFactory.Log(name, type + " record removed");
-
+						
+						//send a request to the remote server to add the reocrd to main hash map of the remote server
 						replyData = sendSocketRequest(socket,
 								"ADD_" + type.toUpperCase() + ";" + managerID + ";" + record.getRecordId() + ";", host,
 								port, remoteServer);
@@ -659,9 +605,12 @@ class CenterServerImpl extends CenterServerPOA {
 						if (!replyData.equalsIgnoreCase("OK")) {
 							LoggerFactory.Log(name, "Error occur to add " + type);
 							String firstCharacter = record.getLastName().substring(0, 1).toUpperCase();
+							//if the remote server couldn't commit the changes we need to rollback which means we have to add the reocrd to main hash map again 
 							addToRecordData(firstCharacter, record);
+							//remove the record from the temp list
 							tempRecords.remove(record);
 						} else {
+							//everything goes well so we remove the record from the temp list
 							tempRecords.remove(record);
 						}
 
@@ -704,15 +653,17 @@ class CenterServerImpl extends CenterServerPOA {
 		LoggerFactory.Log(this.name, "Manager :" + managerID + " requested to transfer a record.");
 		LoggerFactory.Log(this.name, String.format("Transering record, RecordID:%s", recordID));
 
+		//find the record
 		Record record = findRecord(recordID);
 
 		if (record == null) {
 			LoggerFactory.Log(this.name, String.format("Record not found, %s", recordID));
 			return false;
 		}
-
+		//Set lock on the record, in case if it is editing or transfering by another thread
 		synchronized (record.getLock()) {
-
+			
+			//we have to find the record again to make sure the recod has not been transfered and has not been removed from the hashmap by another thread 
 			record = findRecord(recordID);
 			if (record == null) {
 				LoggerFactory.Log(this.name, String.format("Record not found, %s", recordID));
@@ -721,6 +672,7 @@ class CenterServerImpl extends CenterServerPOA {
 
 			LoggerFactory.Log(this.name, String.format("Record found, %s", record.toString()));
 
+			//find the remote server
 			int port = this.nodePorts.get(remoteCenterServerName);
 
 			if (record.getClass() == StudentRecord.class) {
