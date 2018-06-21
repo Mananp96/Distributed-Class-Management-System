@@ -260,9 +260,7 @@ public class ClientManager {
 	private String userInput(String var2) {
 		System.out.print(var2);
 		Scanner s = new Scanner(System.in);
-		String returnString = s.nextLine();
-		s.close();
-		return returnString;
+		return s.nextLine();
 		
 	}
 

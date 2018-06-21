@@ -1,5 +1,5 @@
 COMP6231 Distributed Systems Design
-ASSIGNMENT #1
+ASSIGNMENT #2
 Submitted BY - Team#2
 Mihir Pujara - 40025592
 Akshay Shah - 40053212
