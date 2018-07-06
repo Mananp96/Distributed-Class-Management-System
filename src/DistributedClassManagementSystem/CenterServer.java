@@ -1,5 +1,7 @@
 package DistributedClassManagementSystem;
 
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 
 /**
 * DistributedClassManagementSystem/CenterServer.java .
@@ -7,7 +9,14 @@ package DistributedClassManagementSystem;
 * from DistributedClassManagementSystem.idl
 * Thursday, June 14, 2018 10:27:13 o'clock PM EDT
 */
-
-public interface CenterServer extends CenterServerOperations, org.omg.CORBA.Object, org.omg.CORBA.portable.IDLEntity 
+@WebService
+@SOAPBinding(style = SOAPBinding.Style.RPC)
+public interface CenterServer 
 {
+	  boolean createTRecord (String firstName, String lastName, String address, String phone, String specialization, String location, String managerId);
+	  boolean createSRecord (String firstName, String lastName, String[] courseRegistered, String status, String statusDate, String managerId);
+	  String getRecordCount (String managerId);
+	  boolean editRecords (String recordId, String fieldName, String newValue, String managerId);
+	  boolean transferRecord (String managerID, String recordID, String remoteCenterServerName);
+	
 } // interface CenterServer

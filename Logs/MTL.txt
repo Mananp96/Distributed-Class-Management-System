@@ -997,3 +997,194 @@
 2018-06-14 22:27:45 Request sent to get record data from DESKTOP-PU08N37:6798
 2018-06-14 22:27:45 Received this response DDO: 6 from DESKTOP-PU08N37:6799
 2018-06-14 22:27:45 Received this response LVL: 6 from DESKTOP-PU08N37:6798
+2018-07-05 21:27:41 Initialing Center
+2018-07-05 21:27:41 Center initialed
+2018-07-05 21:27:41 UDP server Started in MTL region in this port 0
+2018-07-05 22:14:13 Initialing Center
+2018-07-05 22:39:08 Initialing Center
+2018-07-05 22:39:08 Center initialed
+2018-07-05 22:39:08 UDP server Started in MTL region in this port 9767
+2018-07-05 22:42:46 Initialing Center
+2018-07-05 22:42:46 Center initialed
+2018-07-05 22:42:46 Unable to start udp server in MTL region
+2018-07-05 23:23:16 Initialing Center
+2018-07-05 23:23:16 Center initialed
+2018-07-05 23:23:16 UDP server Started in MTL region in this port 9767
+2018-07-05 23:31:04 Initialing Center
+2018-07-05 23:31:04 Center initialed
+2018-07-05 23:31:04 Unable to start udp server in MTL region
+2018-07-05 23:57:10 Initialing Center
+2018-07-05 23:57:10 Center initialed
+2018-07-05 23:57:10 Unable to start udp server in MTL region
+2018-07-05 23:57:40 Initialing Center
+2018-07-05 23:57:40 Center initialed
+2018-07-05 23:57:41 Unable to start udp server in MTL region
+2018-07-05 23:58:11 Initialing Center
+2018-07-05 23:58:11 Center initialed
+2018-07-05 23:58:11 Unable to start udp server in MTL region
+2018-07-05 23:58:42 Initialing Center
+2018-07-05 23:58:42 Center initialed
+2018-07-05 23:58:42 Unable to start udp server in MTL region
+2018-07-05 23:59:12 Initialing Center
+2018-07-05 23:59:12 Center initialed
+2018-07-05 23:59:12 UDP server Started in MTL region in this port 9767
+2018-07-06 00:00:41 Initialing Center
+2018-07-06 00:00:41 Center initialed
+2018-07-06 00:00:41 UDP server Started in MTL region in this port 9767
+2018-07-06 00:01:01 Received request for MTL server from MTL0001 to get record counts.
+2018-07-06 00:01:01 Total Records in MTL server are MTL: 0
+2018-07-06 00:09:55 Initialing Center
+2018-07-06 00:09:55 Center initialed
+2018-07-06 00:09:55 UDP server Started in MTL region in this port 9767
+2018-07-06 00:12:27 Manager :MTL0001 requested to edit a record.
+2018-07-06 00:12:27 Editing record, RecordID:SR21615
+2018-07-06 00:12:27 Looking record id
+2018-07-06 00:12:27 Record not found, SR21615
+2018-07-06 00:13:59 Manager :MTL0001 requested to edit a record.
+2018-07-06 00:13:59 Editing record, RecordID:SR41567
+2018-07-06 00:13:59 Looking record id
+2018-07-06 00:13:59 Record not found, SR41567
+2018-07-06 00:16:23 Creating Teacher Record.
+2018-07-06 00:16:23 Validating fields...
+2018-07-06 00:16:23 Validating fields complete...
+2018-07-06 00:16:23 Adding Record data to List...
+2018-07-06 00:16:23 Record added to the list :RecordID:TR92072 FirstName:Manna LastName:Prajapati Address:35456 Phone:5465 Specialization:sdjfb Location:MTL
+2018-07-06 00:16:23 Teacher Record Successfully created by Manager:MTL0001
+2018-07-06 00:16:58 Manager :MTL0001 requested to edit a record.
+2018-07-06 00:16:58 Editing record, RecordID:TR92072
+2018-07-06 00:16:58 Looking record id
+2018-07-06 00:16:58 Looking record id
+2018-07-06 00:16:58 Record found, RecordID:TR92072 FirstName:Manna LastName:Prajapati Address:35456 Phone:5465 Specialization:sdjfb Location:MTL
+2018-07-06 00:16:58 Teacher record edited, RecordID:TR92072 FirstName:Jabd LastName:Prajapati Address:35456 Phone:5465 Specialization:sdjfb Location:MTL
+2018-07-06 00:17:26 Received request for MTL server from MTL0001 to get record counts.
+2018-07-06 00:17:26 Total Records in MTL server are MTL: 1
+2018-07-06 00:18:06 Creating Teacher Record.
+2018-07-06 00:18:06 Validating fields...
+2018-07-06 00:18:06 Validating fields complete...
+2018-07-06 00:18:06 Adding Record data to List...
+2018-07-06 00:18:06 Record added to the list :RecordID:TR43362 FirstName:Man LastName:smdb Address:sdf Phone:dsf Specialization:dsf Location:MTL
+2018-07-06 00:18:06 Teacher Record Successfully created by Manager:MTL0001
+2018-07-06 00:18:18 Creating Teacher Record.
+2018-07-06 00:18:18 Validating fields...
+2018-07-06 00:18:18 Validating fields complete...
+2018-07-06 00:18:18 Adding Record data to List...
+2018-07-06 00:18:18 Record added to the list :RecordID:TR39244 FirstName:dkfjn LastName:sd Address:dsf Phone:dsf Specialization:dsf Location:LVL
+2018-07-06 00:18:18 Teacher Record Successfully created by Manager:MTL0001
+2018-07-06 00:18:29 Creating Teacher Record.
+2018-07-06 00:18:29 Validating fields...
+2018-07-06 00:18:29 Validating fields complete...
+2018-07-06 00:18:29 Adding Record data to List...
+2018-07-06 00:18:29 Record added to the list :RecordID:TR64657 FirstName:asdj LastName:sad Address:ads Phone:asd Specialization:as Location:DDO
+2018-07-06 00:18:29 Teacher Record Successfully created by Manager:MTL0001
+2018-07-06 00:20:43 Creating Student Record...
+2018-07-06 00:20:43 Validating fields...
+2018-07-06 00:20:43 Validating fields complete...
+2018-07-06 00:20:43 Adding Record data to List...
+2018-07-06 00:20:43 Record added to the list :RecordID:SR55254 FirstName:sdfjh LastName:weh Status:ACTIVE StatusDate:10012012 coursesRegistered:e
+2018-07-06 00:20:43 Student Record Successfully created by Manager:MTL0001
+2018-07-06 00:25:04 Initialing Center
+2018-07-06 00:25:04 Center initialed
+2018-07-06 00:25:04 UDP server Started in MTL region in this port 9767
+2018-07-06 00:36:59 Initialing Center
+2018-07-06 00:36:59 Center initialed
+2018-07-06 00:36:59 UDP server Started in MTL region in this port 9767
+2018-07-06 00:37:35 Creating Teacher Record.
+2018-07-06 00:37:35 Validating fields...
+2018-07-06 00:37:35 Validating fields complete...
+2018-07-06 00:37:35 Adding Record data to List...
+2018-07-06 00:37:35 Record added to the list :RecordID:TR98577 FirstName:asdj LastName:sdfj Address:sdf Phone:sd Specialization:asd Location:MTL
+2018-07-06 00:37:35 Teacher Record Successfully created by Manager:MTL0001
+2018-07-06 00:38:03 Creating Student Record...
+2018-07-06 00:38:03 Validating fields...
+2018-07-06 00:38:03 Validating fields complete...
+2018-07-06 00:38:03 Adding Record data to List...
+2018-07-06 00:38:03 Record added to the list :RecordID:SR37275 FirstName:dg LastName:fdg Status:ACTIVE StatusDate:20022012 coursesRegistered:dfg
+2018-07-06 00:38:03 Student Record Successfully created by Manager:MTL0001
+2018-07-06 00:39:13 Manager :MTL0001 requested to edit a record.
+2018-07-06 00:39:13 Editing record, RecordID:SR37275
+2018-07-06 00:39:13 Looking record id
+2018-07-06 00:39:13 Looking record id
+2018-07-06 00:39:13 Record found, RecordID:SR37275 FirstName:dg LastName:fdg Status:ACTIVE StatusDate:20022012 coursesRegistered:dfg
+2018-07-06 00:39:13 Student record edited, RecordID:SR37275 FirstName:dg LastName:fdg Status:inactive StatusDate:20022012 coursesRegistered:dfg
+2018-07-06 00:39:49 Manager :MTL0001 requested to transfer a record.
+2018-07-06 00:39:49 Transering record, RecordID:SR37275
+2018-07-06 00:39:49 Looking record id
+2018-07-06 00:39:49 Looking record id
+2018-07-06 00:39:49 Record found, RecordID:SR37275 FirstName:dg LastName:fdg Status:inactive StatusDate:20022012 coursesRegistered:dfg
+2018-07-06 01:24:16 Initialing Center
+2018-07-06 01:24:16 Center initialed
+2018-07-06 01:24:16 UDP server Started in MTL region in this port 6797
+2018-07-06 01:24:43 Creating Teacher Record.
+2018-07-06 01:24:43 Validating fields...
+2018-07-06 01:24:43 Validating fields complete...
+2018-07-06 01:24:43 Adding Record data to List...
+2018-07-06 01:24:43 Record added to the list :RecordID:TR38582 FirstName:dfjb LastName:sdfkj Address:df Phone:sdf Specialization:dsfjb Location:MTL
+2018-07-06 01:24:43 Teacher Record Successfully created by Manager:MTL0001
+2018-07-06 01:25:04 Creating Student Record...
+2018-07-06 01:25:04 Validating fields...
+2018-07-06 01:25:04 Validating fields complete...
+2018-07-06 01:25:04 Adding Record data to List...
+2018-07-06 01:25:04 Record added to the list :RecordID:SR31932 FirstName:shg LastName:jsdf Status:ACTIVE StatusDate:20122012 coursesRegistered:sdfm
+2018-07-06 01:25:04 Student Record Successfully created by Manager:MTL0001
+2018-07-06 01:25:09 Received request for MTL server from MTL0001 to get record counts.
+2018-07-06 01:25:09 Total Records in MTL server are MTL: 2
+2018-07-06 01:25:09 Request sent to get record data from Manan:6799
+2018-07-06 01:25:09 Request sent to get record data from Manan:6798
+2018-07-06 01:25:09 Received this response DDO: 0 from Manan:6799
+2018-07-06 01:25:09 Received this response LVL: 0 from Manan:6798
+2018-07-06 01:25:52 Manager :MTL0001 requested to edit a record.
+2018-07-06 01:25:52 Editing record, RecordID:SR31932
+2018-07-06 01:25:52 Looking record id
+2018-07-06 01:25:52 Looking record id
+2018-07-06 01:25:52 Record found, RecordID:SR31932 FirstName:shg LastName:jsdf Status:ACTIVE StatusDate:20122012 coursesRegistered:sdfm
+2018-07-06 01:25:52 Student record edited, RecordID:SR31932 FirstName:sdjhdsj LastName:jsdf Status:ACTIVE StatusDate:20122012 coursesRegistered:sdfm
+2018-07-06 01:26:18 Manager :MTL0001 requested to transfer a record.
+2018-07-06 01:26:18 Transering record, RecordID:SR31932
+2018-07-06 01:26:18 Looking record id
+2018-07-06 01:26:18 Looking record id
+2018-07-06 01:26:18 Record found, RecordID:SR31932 FirstName:sdjhdsj LastName:jsdf Status:ACTIVE StatusDate:20122012 coursesRegistered:sdfm
+2018-07-06 01:26:18 6798
+2018-07-06 01:26:18 Sending request to center LVL request details:TRANSFER_STUDENT;SR31932;sdjhdsj;jsdf;ACTIVE;20122012;sdfm
+2018-07-06 01:26:18 Request sent to transfer teacher record data to Manan:6798
+2018-07-06 01:26:18 Received this response OK from Manan:6798
+2018-07-06 01:26:18 Student record removed
+2018-07-06 01:26:18 Sending request to center LVL request details:ADD_STUDENT;MTL0001;SR31932;
+2018-07-06 01:26:18 Request sent to transfer teacher record data to Manan:6798
+2018-07-06 01:26:18 Received this response OK from Manan:6798
+2018-07-06 01:29:41 Initialing Center
+2018-07-06 01:29:41 Center initialed
+2018-07-06 01:29:41 UDP server Started in MTL region in this port 6797
+2018-07-06 01:30:08 Initialing Center
+2018-07-06 01:30:08 Center initialed
+2018-07-06 01:30:08 UDP server Started in MTL region in this port 6797
+2018-07-06 01:30:30 Creating Teacher Record.
+2018-07-06 01:30:30 Validating fields...
+2018-07-06 01:30:30 Validating fields complete...
+2018-07-06 01:30:30 Adding Record data to List...
+2018-07-06 01:30:30 Record added to the list :RecordID:TR77820 FirstName:dsf LastName:sdf Address:sdf Phone:sdf Specialization:sdf Location:MTL
+2018-07-06 01:30:30 Teacher Record Successfully created by Manager:MTL0001
+2018-07-06 01:30:42 Creating Student Record...
+2018-07-06 01:30:42 Validating fields...
+2018-07-06 01:30:42 Validating fields complete...
+2018-07-06 01:30:42 Adding Record data to List...
+2018-07-06 01:30:42 Record added to the list :RecordID:SR59924 FirstName:sdf LastName:sf Status:ACTIVE StatusDate:20120122 coursesRegistered:f
+2018-07-06 01:30:42 Student Record Successfully created by Manager:MTL0001
+2018-07-06 01:30:45 Received request for MTL server from MTL0001 to get record counts.
+2018-07-06 01:30:45 Total Records in MTL server are MTL: 2
+2018-07-06 01:30:45 Request sent to get record data from Manan:6799
+2018-07-06 01:30:45 Request sent to get record data from Manan:6798
+2018-07-06 01:30:45 Received this response LVL: 0 from Manan:6798
+2018-07-06 01:30:45 Received this response DDO: 0 from Manan:6799
+2018-07-06 01:31:07 Manager :MTL0001 requested to transfer a record.
+2018-07-06 01:31:07 Transering record, RecordID:SR59924
+2018-07-06 01:31:07 Looking record id
+2018-07-06 01:31:07 Looking record id
+2018-07-06 01:31:07 Record found, RecordID:SR59924 FirstName:sdf LastName:sf Status:ACTIVE StatusDate:20120122 coursesRegistered:f
+2018-07-06 01:31:07 6798
+2018-07-06 01:31:07 Sending request to center LVL request details:TRANSFER_STUDENT;SR59924;sdf;sf;ACTIVE;20120122;f
+2018-07-06 01:31:07 Request sent to transfer teacher record data to Manan:6798
+2018-07-06 01:31:07 Received this response OK from Manan:6798
+2018-07-06 01:31:07 Student record removed
+2018-07-06 01:31:07 Sending request to center LVL request details:ADD_STUDENT;MTL0001;SR59924;
+2018-07-06 01:31:07 Request sent to transfer teacher record data to Manan:6798
+2018-07-06 01:31:07 Received this response OK from Manan:6798

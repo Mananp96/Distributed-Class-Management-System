@@ -743,3 +743,119 @@
 2018-06-14 22:27:38 Record added to the list :RecordID:SR11096 FirstName:Amy LastName:Cooper Status:INACTIVE StatusDate:08-24-2018 coursesRegistered:["Mathematics","Distributed,System,Design"]
 2018-06-14 22:27:38 Student Record Successfully created by Manager:default
 2018-06-14 22:27:45 Received request in LVL from /10.0.75.1:58181 with this data GET_RECORD_COUNT
+2018-07-05 23:31:07 Initialing Center
+2018-07-05 23:31:07 Center initialed
+2018-07-05 23:31:07 UDP server Started in LVL region in this port 9768
+2018-07-05 23:59:13 Initialing Center
+2018-07-05 23:59:13 Center initialed
+2018-07-05 23:59:13 UDP server Started in LVL region in this port 9768
+2018-07-06 00:00:42 Initialing Center
+2018-07-06 00:00:42 Center initialed
+2018-07-06 00:00:42 UDP server Started in LVL region in this port 9768
+2018-07-06 00:04:14 Creating Teacher Record.
+2018-07-06 00:04:14 Validating fields...
+2018-07-06 00:04:14 Validating fields complete...
+2018-07-06 00:04:14 Adding Record data to List...
+2018-07-06 00:04:14 Record added to the list :RecordID:TR73303 FirstName:kjdsh LastName:dkfj Address:dsfkj Phone:dkj Specialization:sdknn Location:LVL
+2018-07-06 00:04:14 Teacher Record Successfully created by Manager:LVL0001
+2018-07-06 00:04:46 Creating Teacher Record.
+2018-07-06 00:04:46 Validating fields...
+2018-07-06 00:04:46 Validating fields complete...
+2018-07-06 00:04:46 Adding Record data to List...
+2018-07-06 00:04:46 Record added to the list :RecordID:TR83040 FirstName:sdhga LastName:djh Address:sdj Phone:sdj Specialization:zsm Location:MTL
+2018-07-06 00:04:46 Teacher Record Successfully created by Manager:LVL0001
+2018-07-06 00:05:52 Received request for LVL server from LVL0001 to get record counts.
+2018-07-06 00:05:52 Total Records in LVL server are LVL: 2
+2018-07-06 00:06:29 Creating Teacher Record.
+2018-07-06 00:06:29 Validating fields...
+2018-07-06 00:06:29 Validating fields complete...
+2018-07-06 00:06:29 Adding Record data to List...
+2018-07-06 00:06:29 Record added to the list :RecordID:TR88648 FirstName:hsdf LastName:dsfj Address:sdfjsd Phone:dsfsd Specialization:dfs Location:LVL
+2018-07-06 00:06:29 Teacher Record Successfully created by Manager:LVL0001
+2018-07-06 00:08:05 Manager :LVL0001 requested to transfer a record.
+2018-07-06 00:08:05 Transering record, RecordID:TR88648
+2018-07-06 00:08:05 Looking record id
+2018-07-06 00:08:05 Looking record id
+2018-07-06 00:08:05 Record found, RecordID:TR88648 FirstName:hsdf LastName:dsfj Address:sdfjsd Phone:dsfsd Specialization:dfs Location:LVL
+2018-07-06 00:09:56 Initialing Center
+2018-07-06 00:09:56 Center initialed
+2018-07-06 00:09:56 UDP server Started in LVL region in this port 9768
+2018-07-06 00:22:43 Manager :LVL0001 requested to edit a record.
+2018-07-06 00:22:43 Editing record, RecordID:TR88648
+2018-07-06 00:22:43 Looking record id
+2018-07-06 00:22:43 Record not found, TR88648
+2018-07-06 00:23:11 Manager :LVL0001 requested to edit a record.
+2018-07-06 00:23:11 Editing record, RecordID:TR88648
+2018-07-06 00:23:11 Looking record id
+2018-07-06 00:23:11 Record not found, TR88648
+2018-07-06 00:23:44 Creating Teacher Record.
+2018-07-06 00:23:44 Validating fields...
+2018-07-06 00:23:44 Validating fields complete...
+2018-07-06 00:23:44 Adding Record data to List...
+2018-07-06 00:23:44 Record added to the list :RecordID:TR23331 FirstName:dn LastName:sdf Address:sdf Phone:sd Specialization:as Location:LVL
+2018-07-06 00:23:44 Teacher Record Successfully created by Manager:LVL0001
+2018-07-06 00:23:58 Creating Student Record...
+2018-07-06 00:23:58 Validating fields...
+2018-07-06 00:23:58 Validating fields complete...
+2018-07-06 00:23:58 Adding Record data to List...
+2018-07-06 00:23:58 Record added to the list :RecordID:SR43698 FirstName:d LastName:df Status:ACTIVE StatusDate:20021212 coursesRegistered:df
+2018-07-06 00:23:58 Student Record Successfully created by Manager:LVL0001
+2018-07-06 00:24:08 Received request for LVL server from LVL0001 to get record counts.
+2018-07-06 00:24:08 Total Records in LVL server are LVL: 2
+2018-07-06 00:25:04 Initialing Center
+2018-07-06 00:25:04 Center initialed
+2018-07-06 00:25:04 UDP server Started in LVL region in this port 9768
+2018-07-06 00:25:22 Creating Teacher Record.
+2018-07-06 00:25:22 Validating fields...
+2018-07-06 00:25:22 Validating fields complete...
+2018-07-06 00:25:22 Adding Record data to List...
+2018-07-06 00:25:22 Record added to the list :RecordID:TR93412 FirstName:dsf LastName:sdf Address:sdf Phone:dsf Specialization:ew Location:LVL
+2018-07-06 00:25:22 Teacher Record Successfully created by Manager:LVL0001
+2018-07-06 00:25:35 Creating Student Record...
+2018-07-06 00:25:35 Validating fields...
+2018-07-06 00:25:35 Validating fields complete...
+2018-07-06 00:25:35 Adding Record data to List...
+2018-07-06 00:25:35 Record added to the list :RecordID:SR66215 FirstName:dsf LastName:f Status:ACTIVE StatusDate:20031023 coursesRegistered:df
+2018-07-06 00:25:35 Student Record Successfully created by Manager:LVL0001
+2018-07-06 00:25:44 Received request for LVL server from LVL0001 to get record counts.
+2018-07-06 00:25:44 Total Records in LVL server are LVL: 2
+2018-07-06 00:37:00 Initialing Center
+2018-07-06 00:37:00 UDP server Started in LVL region in this port 9768
+2018-07-06 00:37:00 Center initialed
+2018-07-06 01:24:17 Initialing Center
+2018-07-06 01:24:17 UDP server Started in LVL region in this port 6798
+2018-07-06 01:24:17 Center initialed
+2018-07-06 01:25:09 Received request in LVL from /172.31.106.148:50947 with this data GET_RECORD_COUNT
+2018-07-06 01:26:18 Received request in LVL from /172.31.106.148:59087 with this data TRANSFER_STUDENT;SR31932;sdjhdsj;jsdf;ACTIVE;20122012;sdfm
+2018-07-06 01:26:18 Received request in LVL from /172.31.106.148:59087 with this data ADD_STUDENT;MTL0001;SR31932;hdsj;jsdf;ACTIVE;20122012;sdfm
+2018-07-06 01:26:18 Processing ADD_STUDENT request
+2018-07-06 01:26:18 Processing ADD_STUDENT request, managerID:MTL0001 recordID:SR31932
+2018-07-06 01:26:18 Record in temp list found, RecordID:SR31932 FirstName:sdjhdsj LastName:jsdf Status:20122012 StatusDate:sdfm coursesRegistered:ACTIVE
+2018-07-06 01:26:18 Creating Student Record...
+2018-07-06 01:26:18 Validating fields...
+2018-07-06 01:26:18 Validating fields complete...
+2018-07-06 01:26:18 Adding Record data to List...
+2018-07-06 01:26:18 Record added to the list :RecordID:SR39342 FirstName:sdjhdsj LastName:jsdf Status:20122012 StatusDate:sdfm coursesRegistered:ACTIVE
+2018-07-06 01:26:18 Student Record Successfully created by Manager:MTL0001
+2018-07-06 01:26:18 Attemping to remove record from temp list
+2018-07-06 01:26:18 Record removed from temp list
+2018-07-06 01:29:42 Initialing Center
+2018-07-06 01:29:42 Center initialed
+2018-07-06 01:29:42 UDP server Started in LVL region in this port 6798
+2018-07-06 01:30:09 Initialing Center
+2018-07-06 01:30:09 UDP server Started in LVL region in this port 6798
+2018-07-06 01:30:09 Center initialed
+2018-07-06 01:30:45 Received request in LVL from /172.31.106.148:56176 with this data GET_RECORD_COUNT
+2018-07-06 01:31:07 Received request in LVL from /172.31.106.148:54688 with this data TRANSFER_STUDENT;SR59924;sdf;sf;ACTIVE;20120122;f
+2018-07-06 01:31:07 Received request in LVL from /172.31.106.148:54688 with this data ADD_STUDENT;MTL0001;SR59924;;sf;ACTIVE;20120122;f
+2018-07-06 01:31:07 Processing ADD_STUDENT request
+2018-07-06 01:31:07 Processing ADD_STUDENT request, managerID:MTL0001 recordID:SR59924
+2018-07-06 01:31:07 Record in temp list found, RecordID:SR59924 FirstName:sdf LastName:sf Status:20120122 StatusDate:f coursesRegistered:ACTIVE
+2018-07-06 01:31:07 Creating Student Record...
+2018-07-06 01:31:07 Validating fields...
+2018-07-06 01:31:07 Validating fields complete...
+2018-07-06 01:31:07 Adding Record data to List...
+2018-07-06 01:31:07 Record added to the list :RecordID:SR91448 FirstName:sdf LastName:sf Status:20120122 StatusDate:f coursesRegistered:ACTIVE
+2018-07-06 01:31:07 Student Record Successfully created by Manager:MTL0001
+2018-07-06 01:31:07 Attemping to remove record from temp list
+2018-07-06 01:31:07 Record removed from temp list

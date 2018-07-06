@@ -743,3 +743,31 @@
 2018-06-14 22:27:38 Record added to the list :RecordID:SR91528 FirstName:Alfred LastName:Hitchcock Status:INACTIVE StatusDate:10-10-2018 coursesRegistered:["Mathematics","Machine,Learning","Distributed,System,Design"]
 2018-06-14 22:27:38 Student Record Successfully created by Manager:default
 2018-06-14 22:27:45 Received request in DDO from /10.0.75.1:58182 with this data GET_RECORD_COUNT
+2018-07-05 23:31:07 Initialing Center
+2018-07-05 23:31:07 Center initialed
+2018-07-05 23:31:07 UDP server Started in DDO region in this port 9769
+2018-07-05 23:59:13 Initialing Center
+2018-07-05 23:59:13 UDP server Started in DDO region in this port 9769
+2018-07-05 23:59:13 Center initialed
+2018-07-06 00:00:42 Initialing Center
+2018-07-06 00:00:42 Center initialed
+2018-07-06 00:00:42 UDP server Started in DDO region in this port 9769
+2018-07-06 00:09:56 Initialing Center
+2018-07-06 00:09:56 Center initialed
+2018-07-06 00:09:56 UDP server Started in DDO region in this port 9769
+2018-07-06 00:25:04 Initialing Center
+2018-07-06 00:25:04 Center initialed
+2018-07-06 00:25:04 UDP server Started in DDO region in this port 9769
+2018-07-06 00:37:00 Initialing Center
+2018-07-06 00:37:00 Center initialed
+2018-07-06 00:37:00 UDP server Started in DDO region in this port 9769
+2018-07-06 01:24:17 Initialing Center
+2018-07-06 01:24:17 Center initialed
+2018-07-06 01:24:17 UDP server Started in DDO region in this port 6799
+2018-07-06 01:25:09 Received request in DDO from /172.31.106.148:50948 with this data GET_RECORD_COUNT
+2018-07-06 01:29:42 Initialing Center
+2018-07-06 01:29:42 UDP server Started in DDO region in this port 6799
+2018-07-06 01:30:09 Initialing Center
+2018-07-06 01:30:09 Center initialed
+2018-07-06 01:30:09 UDP server Started in DDO region in this port 6799
+2018-07-06 01:30:45 Received request in DDO from /172.31.106.148:56177 with this data GET_RECORD_COUNT

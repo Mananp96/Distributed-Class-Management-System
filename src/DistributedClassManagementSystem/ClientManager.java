@@ -1,18 +1,21 @@
 package DistributedClassManagementSystem;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
-import org.omg.CORBA.ORB;
-import org.omg.CosNaming.NamingContextExt;
-import org.omg.CosNaming.NamingContextExtHelper;
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
+
 
 import DistributedClassManagementSystem.RequiredValueException;
 
 public class ClientManager {
 
-	private static CenterServer server;
+	CenterServer server = null;
+	private URL url;
 
 	private String managerId;
 
@@ -27,7 +30,7 @@ public class ClientManager {
 	 * Menu choices includes 
 	 * 1. Creating a teacher/student record.
 	 * 2. Editing a record.
-	 * 3. Transfer of record.
+	 * 3. Transfer of record. 
 	 * 4. Total Record counts.
 	 * Menu will continue unless manager exits the program.
 	 * 
@@ -35,9 +38,40 @@ public class ClientManager {
 	 * respective server object is assigned using CORBA.
 	 * 
 	 * @param args
+	 * @throws MalformedURLException 
 	 * @throws RemoteException
 	 * @throws NotBoundException
 	 */
+	
+	public void setup(String serverRegion) throws MalformedURLException {
+		try {
+			this.server = ws_setup(serverRegion);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public CenterServer ws_setup(String serverRegion) throws Exception {
+		 QName qname = new QName("http://DistributedClassManagementSystem/", "CenterServerImplService");
+		if(serverRegion.equals("MTL")) {
+			url = new URL("http://localhost:8080/MTL?wsdl");
+          
+		}
+		else if(serverRegion.equals("LVL")) {
+			url = new URL("http://localhost:8080/LVL?wsdl");
+          
+		}
+		else if(serverRegion.equals("DDO")) {
+			 url = new URL("http://localhost:8080/DDO?wsdl");
+	   
+		}
+		 Service service = Service.create(url, qname);
+         return service.getPort(CenterServer.class);
+	
+		
+	}
+	
 	public void menu(String[] args) throws RemoteException, NotBoundException {
 		String region = "";
 		while (true) {
@@ -50,7 +84,12 @@ public class ClientManager {
 
 			boolean regionCheck = (serverRegion.equalsIgnoreCase("MTL") || serverRegion.equalsIgnoreCase("LVL")
 					|| serverRegion.equalsIgnoreCase("DDO"));
-
+			try {
+				this.setup(serverRegion);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 			boolean idCheck = false;
 
 			try {
@@ -70,23 +109,10 @@ public class ClientManager {
 				this.managerId = managerId;
 				
 				LoggerFactory.Log(this.managerId, "Registering manager");
-				try{
-					
-					ORB orb = ORB.init(args, null);
-					
-					org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
-					  
-					NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
-					
-					server = CenterServerHelper.narrow(ncRef.resolve_str(region));
-					
-					System.out.println("Obtained a handle on server object: " + server);
-				} catch (Exception e) {
-					System.out.println("ERROR : " + e);
-					//e.printStackTrace(System.out);
-				}
 				break;
+			
 			}
+		
 		}
 
 		if (!region.isEmpty()) {
@@ -157,6 +183,7 @@ public class ClientManager {
 		}
 
 	}
+	
 
 	private void addTeacherRecord() throws RemoteException, RequiredValueException {
 
@@ -202,7 +229,7 @@ public class ClientManager {
 		String lastName = userInput("Enter Last Name:");
 		String courses = userInput("Enter Registered Course:");
 		String[] courseRegistered = courses.split(",");
-		String stat = userInput("Enter Status");
+		String stat = userInput("Enter Status(Active/InActive):");
 		if (stat.equalsIgnoreCase("Active")) {
 			status = "ACTIVE";
 		} else if (stat.equalsIgnoreCase("Inactive")) {
@@ -245,7 +272,7 @@ public class ClientManager {
 
 		LoggerFactory.Log(this.managerId, "Transfer Record");
 
-		System.out.println("----------Trasnfer Record----------");
+		System.out.println("----------Transfer Record----------");
 		String recordID = userInput("Enter RecordID:");
 		String loc = userInput("Enter New Server location:");
 		Boolean result = server.transferRecord(this.managerId, recordID,loc);
