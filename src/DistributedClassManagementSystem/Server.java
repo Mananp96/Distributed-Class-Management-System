@@ -18,7 +18,6 @@ public class Server {
 	private CenterServer lvlRef;
 	private CenterServer ddoRef;
 
-	@SuppressWarnings("unused")
 	private void addStudentsToServer()
 			throws IOException, ParseException, RequiredValueException, org.json.simple.parser.ParseException {
 
@@ -48,7 +47,6 @@ public class Server {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private void addTeachersToServer()
 			throws IOException, ParseException, RequiredValueException, org.json.simple.parser.ParseException {
 
@@ -81,10 +79,8 @@ public class Server {
 			}
 		}
 	}
-
-
-
-	public static void main(String args[]) {
+	
+	public void startAllServerWithAllRegions() {
 		
 		HashMap<String, Integer> mtlPorts = new HashMap<String, Integer>() {
 			{
@@ -107,13 +103,56 @@ public class Server {
 			}
 		};
 		
-	
-		Endpoint mtlEndPoint = Endpoint.publish("http://localhost:8080/MTL", new CenterServerImpl("MTL",6797,mtlPorts));
-        Endpoint lvlEndPoint = Endpoint.publish("http://localhost:8080/LVL", new CenterServerImpl("LVL",6798,lvlPorts));
-        Endpoint ddoEndPoint = Endpoint.publish("http://localhost:8080/DDO", new CenterServerImpl("DDO",6799,ddoPorts));
+		this.mtlRef = new CenterServerImpl("MTL",6797,mtlPorts);
+		this.lvlRef = new CenterServerImpl("LVL",6798,lvlPorts);
+		this.ddoRef = new CenterServerImpl("DDO",6799,ddoPorts);
+		
+		try {
+			this.addStudentsToServer();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+		} catch (RequiredValueException e) {
+
+			e.printStackTrace();
+		} catch (org.json.simple.parser.ParseException e) {
+
+			e.printStackTrace();
+		}
+		try {
+			this.addTeachersToServer();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+		} catch (RequiredValueException e) {
+
+			e.printStackTrace();
+		} catch (org.json.simple.parser.ParseException e) {
+
+			e.printStackTrace();
+		}
+		
+		Endpoint mtlEndPoint = Endpoint.publish("http://localhost:8080/DistributedClassManagementSystem/MTL", this.mtlRef);
+        Endpoint lvlEndPoint = Endpoint.publish("http://localhost:8080/DistributedClassManagementSystem/LVL", this.lvlRef);
+        Endpoint ddoEndPoint = Endpoint.publish("http://localhost:8080/DistributedClassManagementSystem/DDO", this.ddoRef);
+        
         System.out.println("MTL service published: " + mtlEndPoint.isPublished());
         System.out.println("LVL service published: " + lvlEndPoint.isPublished());
         System.out.println("DDO service published: " + ddoEndPoint.isPublished());
+	}
+
+
+
+	public static void main(String args[]) {
+		
+		Server server = new Server();
+		server.startAllServerWithAllRegions();
 
         System.out.println("---Server started---");
 	}

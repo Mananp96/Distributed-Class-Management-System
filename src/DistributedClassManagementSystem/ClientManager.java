@@ -24,46 +24,19 @@ public class ClientManager {
 		ClientManager client = new ClientManager();
 		client.menu(args);
 	}
-
-	/**
-	 * Command Line Interface which gives managers options to perform some of CURD operations on Records
-	 * Menu choices includes 
-	 * 1. Creating a teacher/student record.
-	 * 2. Editing a record.
-	 * 3. Transfer of record. 
-	 * 4. Total Record counts.
-	 * Menu will continue unless manager exits the program.
-	 * 
-	 * First manager will enter the manager id and according to it, 
-	 * respective server object is assigned using CORBA.
-	 * 
-	 * @param args
-	 * @throws MalformedURLException 
-	 * @throws RemoteException
-	 * @throws NotBoundException
-	 */
-	
-	public void setup(String serverRegion) throws MalformedURLException {
-		try {
-			this.server = ws_setup(serverRegion);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	public CenterServer ws_setup(String serverRegion) throws Exception {
 		 QName qname = new QName("http://DistributedClassManagementSystem/", "CenterServerImplService");
 		if(serverRegion.equals("MTL")) {
-			url = new URL("http://localhost:8080/MTL?wsdl");
+			url = new URL("http://localhost:8080/DistributedClassManagementSystem/MTL?wsdl");
           
 		}
 		else if(serverRegion.equals("LVL")) {
-			url = new URL("http://localhost:8080/LVL?wsdl");
+			url = new URL("http://localhost:8080/DistributedClassManagementSystem/LVL?wsdl");
           
 		}
 		else if(serverRegion.equals("DDO")) {
-			 url = new URL("http://localhost:8080/DDO?wsdl");
+			 url = new URL("http://localhost:8080/DistributedClassManagementSystem/DDO?wsdl");
 	   
 		}
 		 Service service = Service.create(url, qname);
@@ -77,19 +50,17 @@ public class ClientManager {
 		while (true) {
 
 			String managerId = userInput("Enter Manager ID:");
-
+			if (managerId == null || managerId.equals("")) {
+				System.out.println("Invalid Manager ID \n Please try again...");
+				continue;
+			}
 			String serverRegion = managerId.substring(0, 3);
 
 			boolean lengthCheck = (managerId.length() == 7);
 
 			boolean regionCheck = (serverRegion.equalsIgnoreCase("MTL") || serverRegion.equalsIgnoreCase("LVL")
 					|| serverRegion.equalsIgnoreCase("DDO"));
-			try {
-				this.setup(serverRegion);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
+			
 			boolean idCheck = false;
 
 			try {
@@ -104,11 +75,23 @@ public class ClientManager {
 			if (!(lengthCheck && regionCheck && idCheck)) {
 				System.out.println("Invalid Manager ID \n Please try again...");
 			} else {
+
+				
 				region = serverRegion.toUpperCase();
 				
 				this.managerId = managerId;
 				
 				LoggerFactory.Log(this.managerId, "Registering manager");
+				
+				
+				try {
+					this.server = this.ws_setup(serverRegion);
+					LoggerFactory.Log(this.managerId, "Connecting to "+region+" web service");
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+				
+				
 				break;
 			
 			}
@@ -212,10 +195,13 @@ public class ClientManager {
 
 		String str = String.format("FirstName:%s LastName:%s Address:%s Phone:%s Specialization:%s Location:%s",
 				firstName, lastName, address, phone, specialization, location);
-		if (result)
+		if (result) {
+			System.out.println("Record added successfully...");
 			LoggerFactory.Log(this.managerId, String.format("Teacher record added:%s", str));
-		else
+		}
+		else {
 			LoggerFactory.Log(this.managerId, String.format("Teacher record did not add:%s", str));
+		}
 
 	}
 
@@ -244,8 +230,10 @@ public class ClientManager {
 
 		String str = String.format("FirstName:%s LastName:%s Status:%s StatusDate:%s coursesRegistered:%s", firstName,
 				lastName, status, statusDate, String.join(",", courseRegistered));
-		if (result)
+		if (result) {
+			System.out.println("Record added successfully...");
 			LoggerFactory.Log(this.managerId, String.format("Student record added: %s", str));
+		}
 		else
 			LoggerFactory.Log(this.managerId, String.format("Student record did not add: %s", str));
 
@@ -262,8 +250,10 @@ public class ClientManager {
 		Boolean result = server.editRecords(recordId, fieldName, newvalue, this.managerId);
 
 		String str = String.format("RecordID:%s FieldName:%s Value:%s", recordId, fieldName, newvalue);
-		if (result)
+		if (result) {
+			System.out.println("Record edited successfully...");
 			LoggerFactory.Log(this.managerId, String.format("Record edited:%s", str));
+		}
 		else
 			LoggerFactory.Log(this.managerId, String.format("Record did not edit:%s", str));
 	}
@@ -277,8 +267,10 @@ public class ClientManager {
 		String loc = userInput("Enter New Server location:");
 		Boolean result = server.transferRecord(this.managerId, recordID,loc);
 
-		if (result)
+		if (result) {
+			System.out.println("Record transfered successfully...");
 			LoggerFactory.Log(this.managerId, String.format("RecordID:%s transfered to", recordID, loc));
+		}
 		else
 			LoggerFactory.Log(this.managerId, String.format("RecordID:%s did not transfer to", recordID, loc));
 
