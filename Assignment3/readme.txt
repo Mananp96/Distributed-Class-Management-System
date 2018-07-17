@@ -1,5 +1,5 @@
 COMP6231 Distributed Systems Design
-ASSIGNMENT #2
+ASSIGNMENT #3
 Submitted BY - Team#2
 Mihir Pujara - 40025592
 Akshay Shah - 40053212
@@ -19,11 +19,15 @@ src\ -> contains all source code files
 lib\ -> contains all library jars
 Logs\ -> all log files will be created here
 resources\ -> all default data files are here
-Report.pdf -> project report
-security.policy -> security policy for JAVA RMI
+Testlogs\ -> all testcase logs and output txt files are here
+Assignment#3_Team#2_Report.pdf -> project report
+Testcases_Team#2.xlsx -> contais all test cases details 
+Webserviceclassdiagram.png -> class diagram image
+server.png -> server diagram image
+remoteserver.png -> remote server diagram image
 
 Steps to run
 -----------------
-1) run server class (Server.java)
-2) run clientmanager class (ClientManager.java)
+1) run server class in eclipse for j2ee (Server.java)
+2) run clientmanager class in eclipse for j2ee (ClientManager.java)
 
