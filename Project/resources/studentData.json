@@ -1,0 +1,125 @@
+[
+  {
+    "id": "SR10001",
+    "firstName": "John",
+    "lastName": "Doe",
+    "coursesRegistered": [
+      "Mathematics",
+      "Machine Learning",
+      "Distributed System Design"
+    ],
+    "status": "ACTIVE",
+    "statusDate": "09-15-2018",
+    "region": "MTL"
+  },
+  {
+    "id": "SR10002",
+    "firstName": "Raj",
+    "lastName": "Patel",
+    "coursesRegistered": [
+      "Mathematics",
+      "Distributed System Design"
+    ],
+    "status": "ACTIVE",
+    "statusDate": "08-28-2018",
+    "region": "MTL"
+  },
+  {
+    "id": "SR10003",
+    "firstName": "Sheldon",
+    "lastName": "Cooper",
+    "coursesRegistered": [
+      "Mathematics",
+      "Machine Learning"
+    ],
+    "status": "INACTIVE",
+    "statusDate": "05-20-2018",
+    "region": "MTL"
+  },
+  {
+    "id": "SR10004",
+    "firstName": "Lenoard",
+    "lastName": "Hofstader",
+    "coursesRegistered": [
+      "Machine Learning",
+      "Distributed System Design"
+    ],
+    "status": "INACTIVE",
+    "statusDate": "05-28-2018",
+    "region": "MTL"
+  },
+  {
+    "id": "SR10005",
+    "firstName": "Howard",
+    "lastName": "Bennedict",
+    "coursesRegistered": [
+      "Mathematics",
+      "Machine Learning",
+      "Distributed System Design"
+    ],
+    "status": "ACTIVE",
+    "statusDate": "06-17-2018",
+    "region": "LVL"
+  },
+  {
+    "id": "SR10006",
+    "firstName": "Penny",
+    "lastName": "Smithen",
+    "coursesRegistered": [
+      "Machine Learning",
+      "Distributed System Design"
+    ],
+    "status": "INACTIVE",
+    "statusDate": "07-10-2018",
+    "region": "LVL"
+  },
+  {
+    "id": "SR10007",
+    "firstName": "Amy",
+    "lastName": "Cooper",
+    "coursesRegistered": [
+      "Mathematics",
+      "Distributed System Design"
+    ],
+    "status": "ACTIVE",
+    "statusDate": "08-24-2018",
+    "region": "LVL"
+  },
+  {
+    "id": "SR10008",
+    "firstName": "Bernadett",
+    "lastName": "Smithens",
+    "coursesRegistered": [
+      "Mathematics",
+      "Distributed System Design"
+    ],
+    "status": "INACTIVE",
+    "statusDate": "06-10-2018",
+    "region": "DDO"
+  },
+  {
+    "id": "SR10009",
+    "firstName": "Bruce",
+    "lastName": "Wayne",
+    "coursesRegistered": [
+      "Mathematics",
+      "Machine Learning"
+    ],
+    "status": "INACTIVE",
+    "statusDate": "07-30-2018",
+    "region": "DDO"
+  },
+  {
+    "id": "SR10010",
+    "firstName": "Alfred",
+    "lastName": "Hitchcock",
+    "coursesRegistered": [
+      "Mathematics",
+      "Machine Learning",
+      "Distributed System Design"
+    ],
+    "status": "ACTIVE",
+    "statusDate": "10-10-2018",
+    "region": "DDO"
+  }
+]
