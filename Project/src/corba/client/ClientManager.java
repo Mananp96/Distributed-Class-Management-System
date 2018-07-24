@@ -49,6 +49,7 @@ public class ClientManager {
 
 			String managerId = userInput("Enter Manager ID:");
 			String serverRegion = managerId.substring(0, 3);
+			
 			boolean lengthCheck = (managerId.length() == 7);
 			boolean regionCheck = (serverRegion.equalsIgnoreCase("MTL") || serverRegion.equalsIgnoreCase("LVL")
 					|| serverRegion.equalsIgnoreCase("DDO"));
@@ -190,14 +191,9 @@ public class ClientManager {
 		String str = String.format("FirstName:%s LastName:%s Address:%s Phone:%s Specialization:%s Location:%s",
 				firstName, lastName, address, phone, specialization, location);
 		
-		if (result.equals("Success")) {
 			System.out.println("---Teacher Record succesfully added---");
-			LoggerFactory.Log(this.managerId, String.format("Teacher record added:%s", str));
-		}
-		else {
-			System.out.println("---Add Teacher Record failed---");
-			LoggerFactory.Log(this.managerId, String.format("Teacher record did not add:%s", str));
-		}
+			LoggerFactory.Log(this.managerId, String.format("Teacher Record :%s %s", str,result));
+		
 
 	}
 
@@ -226,14 +222,9 @@ public class ClientManager {
 
 		String str = String.format("FirstName:%s LastName:%s Status:%s StatusDate:%s coursesRegistered:%s", firstName,
 				lastName, status, statusDate, String.join(",", courseRegistered));
-		if (result.equals("Success")) {
-			System.out.println("---Student Record succesfully added---");
-			LoggerFactory.Log(this.managerId, String.format("Student record added: %s", str));
-			}
-		else {
-			System.out.println("---Add Student Record failed---");
-			LoggerFactory.Log(this.managerId, String.format("Student record did not add: %s", str));
-		}
+		
+			LoggerFactory.Log(this.managerId, String.format("Student record : %s", result));
+		
 
 	}
 
@@ -249,14 +240,9 @@ public class ClientManager {
 
 		String str = String.format("RecordID:%s FieldName:%s Value:%s", recordId, fieldName, newvalue);
 		
-		if (result.equals("Success")) {
-			System.out.println("---Record succesfully edited---");
-			LoggerFactory.Log(this.managerId, String.format("Record edited:%s", str));
-		}
-		else {
-			System.out.println("---Record edit failed---");
-			LoggerFactory.Log(this.managerId, String.format("Record did not edit:%s", str));
-		}
+	
+			LoggerFactory.Log(this.managerId, String.format("Record edited:%s", result));
+		
 	}
 	
 	private void transferRecord() throws RemoteException, RequiredValueException {
@@ -268,14 +254,9 @@ public class ClientManager {
 		String loc = userInput("Enter New Server location:");
 		String result = frontEnd.transferRecord(this.managerId, recordID,loc);
 
-		if (result.equals("Success")) {
-			System.out.println("---Record succesfully Transfered---");
-			LoggerFactory.Log(this.managerId, String.format("RecordID:%s transfered to", recordID, loc));
-		}
-		else {
-			System.out.println("---Record Transfer failed---");
-			LoggerFactory.Log(this.managerId, String.format("RecordID:%s did not transfer to", recordID, loc));
-		}
+		
+			LoggerFactory.Log(this.managerId, String.format("RecordID:%s transfered to", result));
+		
 	}
 
 	private String userInput(String var2) {

@@ -1,21 +1,18 @@
 package corba.server;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
-import logerfactory.*;
 import rudp.UDPClient;
-import FrontEndApp.*;
-
-import org.omg.CORBA.ORB;
-
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import FrontEndApp.FrontEndPOA;
 import dcms.LoggerFactory;
-import util.FEMessage;
-import util.UdpPort;
+
 
 /**
  * Front End remote interface implementation
@@ -25,13 +22,36 @@ import util.UdpPort;
 public class FrontEndImpl extends FrontEndPOA {
 	
 	private LinkedList<String> queueA = new LinkedList<String>();
-	private int leaderServerPort = UdpPort.Server1_ACTION_PORT;
-	FEUdpServer feudp;
 	private String name;
+	private JSONObject LeaderRegion;
+	private String leader;
+	public String managerId;
+	public String serverRegion;
+	int LeaderServerPort;
+	String LeaderServerHost;
+	
+	public void setLeaderPort(String managerId) throws FileNotFoundException, IOException, ParseException {
+		
+		serverRegion = managerId.substring(0, 3);
+		JSONParser parser = new JSONParser();
+		JSONObject config = (JSONObject)parser.parse(new FileReader("resources/config.json"));
+		JSONObject currentRoleConfig = (JSONObject) config.get(leader);
+		this.LeaderRegion = (JSONObject) currentRoleConfig.get(serverRegion);
+		LeaderServerPort = (int) this.LeaderRegion.get("port");
+		LeaderServerHost = (String) this.LeaderRegion.get("host");
+		
+	}
 	
 	@Override
 	public String createTRecord(String firstName, String lastName, String address, String phone, String specialization,
 			String location, String managerId) {
+		
+		try {
+			this.setLeaderPort(managerId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
 		LoggerFactory.Log(this.name, "Validating fields...");
 		if (firstName == null || firstName.isEmpty()) {
@@ -65,6 +85,7 @@ public class FrontEndImpl extends FrontEndPOA {
 		}
 		LoggerFactory.Log(this.name, "Validating fields complete...");
 		
+		
 		String msg = "CREATETR" + "|" + "TR" + generateNumber() + "|" + managerId + "|" + firstName + "|" + lastName + "|" + address + "|" + phone + "|" + specialization + "|" +
 		location;
 		String ack = sendMessage(msg);
@@ -74,6 +95,13 @@ public class FrontEndImpl extends FrontEndPOA {
 	@Override
 	public String createSRecord(String firstName, String lastName, String[] courseRegistered, String status,
 			String statusDate, String managerId) {
+		
+		try {
+			this.setLeaderPort(managerId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
 		LoggerFactory.Log(this.name, "Validating fields...");
 		if (firstName == null || firstName.isEmpty()) {
@@ -109,6 +137,14 @@ public class FrontEndImpl extends FrontEndPOA {
 
 	@Override
 	public String getRecordCount(String managerId) {
+		
+		try {
+			this.setLeaderPort(managerId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 		String msg = "RECORDCOUNT" + "," + managerId;
 		String ack = sendMessage(msg);
 		return ack;
@@ -116,6 +152,13 @@ public class FrontEndImpl extends FrontEndPOA {
 
 	@Override
 	public String editRecords(String recordId, String fieldName, String newValue, String managerId) {
+		
+		try {
+			this.setLeaderPort(managerId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
 		LoggerFactory.Log(this.name, "Manager :" + managerId + " requested to edit a record.");
 		LoggerFactory.Log(this.name, String.format("Editing record, RecordID:%s", recordId));
@@ -142,6 +185,13 @@ public class FrontEndImpl extends FrontEndPOA {
 
 	@Override
 	public String transferRecord(String managerId, String recordId, String remoteCenterServerName) {
+		
+		try {
+			this.setLeaderPort(managerId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
 		LoggerFactory.Log(this.name, "Manager :" + managerId + " requested to transfer a record.");
 		LoggerFactory.Log(this.name, String.format("Transering record, RecordID:%s", recordId));
@@ -171,7 +221,7 @@ public class FrontEndImpl extends FrontEndPOA {
 		else
 		{
 			//invoking FEUdpServer to send message to Lead Server.
-			status = this.sendFirstMessage(leaderServerPort);
+			status = this.sendFirstMessage();
 			
 			//invoking FEUdpServer to remove processed message from Queue
 			this.removeQueue();
@@ -201,7 +251,7 @@ public class FrontEndImpl extends FrontEndPOA {
 	}
 	
 	//Sends first message in queue
-	public String sendFirstMessage(int leaderServerPort) {
+	public String sendFirstMessage() {
 		
 		ArrayList<String> processstatus = new ArrayList<>();
 	
@@ -210,12 +260,9 @@ public class FrontEndImpl extends FrontEndPOA {
 			String femessage = queueA.getFirst();
 			
 			try {
-				final DatagramSocket frontEndSocket = new DatagramSocket(UdpPort.FE_PORT);
-				
-				InetAddress IPAddress = InetAddress.getByName("localhost");
 				
 				new Thread(() -> {
-					UDPClient client = new UDPClient("127.0.0.1", 9191);
+					UDPClient client = new UDPClient(LeaderServerHost,LeaderServerPort);
 					
 					String messageStatus;
 					try {
@@ -244,7 +291,7 @@ public class FrontEndImpl extends FrontEndPOA {
 //				
 //					}
 					}).start();
-					frontEndSocket.close();	
+					
 				}catch (Exception e) {
 					e.printStackTrace();
 				} 
