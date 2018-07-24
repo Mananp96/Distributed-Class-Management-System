@@ -20,74 +20,8 @@ import util.UdpPort;
  */
 public class FEUdpServer{
 	
-	private LinkedList<FEMessage> queueA = new LinkedList<FEMessage>();
 	
-	//Add request message to queue
-	public boolean addQueue(FEMessage femessage) {
-		boolean status = true;
-		try {
-		queueA.add(femessage);
-		}catch (Exception e) {
-			status = false;
-			System.out.println("Exception occurred:" +e.getMessage());
-			}
-		return status;
-	}
 	
-	//Remove first element of queue
-	public void removeQueue() {
-		queueA.removeFirst();
-		
-	}
-	
-	public String sendFirstMessage(int leaderServerPort) {
-		
-		ArrayList<String> processstatus = new ArrayList<>();
-	
-		if(!queueA.isEmpty()) 
-		{	
-			FEMessage femessage = queueA.getFirst();
-			
-			try {
-				final DatagramSocket frontEndSocket = new DatagramSocket(UdpPort.FE_PORT);
-				
-				InetAddress IPAddress = InetAddress.getByName("localhost");
-				
-				new Thread(() -> {
-					
-					final String messageStatus = sendMsgToServer(femessage,frontEndSocket,IPAddress,leaderServerPort);
-					
-					if(messageStatus.equalsIgnoreCase("leader_crashed")) {
-						processstatus.add("Lead Server Crashed");
-					}
-					else
-					{
-						String response = null;
-						//getting response from server
-						response = receiveData(frontEndSocket);
-						if(response == null) {
-							processstatus.add("Failed to get data from server");
-						}
-						else {
-							processstatus.add(response);
-							
-						}
-				
-					}
-					}).start();
-					frontEndSocket.close();	
-				}catch (Exception e) {
-					e.printStackTrace();
-				} 
-		
-		}else {
-			processstatus.add("No Request in Queue");
-		}
-		
-		
-		
-		return processstatus.get(0);
-	}
 	
 	public String sendMsgToServer(FEMessage femessage, DatagramSocket frontEndSocket, InetAddress IPAddress, int leaderServerPort) {
 		
