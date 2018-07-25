@@ -145,7 +145,7 @@ public class FrontEndImpl extends FrontEndPOA {
 			e.printStackTrace();
 		} 
 		
-		String msg = "RECORDCOUNT" + "," + managerId;
+		String msg = "RECORDCOUNT" + "|" + managerId;
 		String ack = sendMessage(msg);
 		return ack;
 	}
@@ -178,7 +178,7 @@ public class FrontEndImpl extends FrontEndPOA {
 			// throw new RequiredValueException("FieldValue required");
 		}
 
-		String msg = "EDITRECORD" + "," + managerId + "," + recordId + "," + fieldName + "," + newValue;
+		String msg = "EDITRECORD" + "|" + managerId + "|" + recordId + "|" + fieldName + "|" + newValue;
 		String ack = sendMessage(msg);
 		return ack;
 	}
@@ -196,7 +196,7 @@ public class FrontEndImpl extends FrontEndPOA {
 		LoggerFactory.Log(this.name, "Manager :" + managerId + " requested to transfer a record.");
 		LoggerFactory.Log(this.name, String.format("Transering record, RecordID:%s", recordId));
 
-		String msg = "TRANSFERRECORD" + "," + managerId + "," + recordId + "," + remoteCenterServerName;
+		String msg = "TRANSFERRECORD" + "|" + managerId + "|" + recordId + "|" + remoteCenterServerName;
 		String ack = sendMessage(msg);
 		return ack;
 	}
