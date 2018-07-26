@@ -6,29 +6,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
-<<<<<<< HEAD
 
-import FrontEndApp.FrontEndPOA;
-import dcms.LoggerFactory;
-import rudp.UDPClient;
-import util.UdpPort;
-=======
-import rudp.UDPClient;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 import FrontEndApp.FrontEndPOA;
 import dcms.LoggerFactory;
-
->>>>>>> 372d0e503185b0bb4636453fe2ceadf0e4245c01
+import rudp.UDPClient;
 
 /**
  * Front End remote interface implementation
+ * 
  * @author Manan Prajapati
  */
 
 public class FrontEndImpl extends FrontEndPOA {
-	
+
 	private LinkedList<String> queueA = new LinkedList<String>();
 	private String name;
 	private JSONObject LeaderRegion;
@@ -37,30 +31,30 @@ public class FrontEndImpl extends FrontEndPOA {
 	public String serverRegion;
 	int LeaderServerPort;
 	String LeaderServerHost;
-	
+
 	public void setLeaderPort(String managerId) throws FileNotFoundException, IOException, ParseException {
-		
+
 		serverRegion = managerId.substring(0, 3);
 		JSONParser parser = new JSONParser();
-		JSONObject config = (JSONObject)parser.parse(new FileReader("resources/config.json"));
+		JSONObject config = (JSONObject) parser.parse(new FileReader("resources/config.json"));
 		JSONObject currentRoleConfig = (JSONObject) config.get(leader);
 		this.LeaderRegion = (JSONObject) currentRoleConfig.get(serverRegion);
 		LeaderServerPort = (int) this.LeaderRegion.get("port");
 		LeaderServerHost = (String) this.LeaderRegion.get("host");
-		
+
 	}
-	
+
 	@Override
 	public String createTRecord(String firstName, String lastName, String address, String phone, String specialization,
 			String location, String managerId) {
-		
+
 		try {
 			this.setLeaderPort(managerId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
+		}
+
 		LoggerFactory.Log(this.name, "Validating fields...");
 		if (firstName == null || firstName.isEmpty()) {
 			LoggerFactory.Log(this.name, "First name required");
@@ -92,10 +86,9 @@ public class FrontEndImpl extends FrontEndPOA {
 			// throw new RequiredValueException("Status required");
 		}
 		LoggerFactory.Log(this.name, "Validating fields complete...");
-		
-		
-		String msg = "CREATETR" + "|" + "TR" + generateNumber() + "|" + managerId + "|" + firstName + "|" + lastName + "|" + address + "|" + phone + "|" + specialization + "|" +
-		location;
+
+		String msg = "CREATETR" + "|" + "TR" + generateNumber() + "|" + managerId + "|" + firstName + "|" + lastName
+				+ "|" + address + "|" + phone + "|" + specialization + "|" + location;
 		String ack = sendMessage(msg);
 		return ack;
 	}
@@ -103,14 +96,14 @@ public class FrontEndImpl extends FrontEndPOA {
 	@Override
 	public String createSRecord(String firstName, String lastName, String[] courseRegistered, String status,
 			String statusDate, String managerId) {
-		
+
 		try {
 			this.setLeaderPort(managerId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
+		}
+
 		LoggerFactory.Log(this.name, "Validating fields...");
 		if (firstName == null || firstName.isEmpty()) {
 			LoggerFactory.Log(this.name, "First name required");
@@ -137,22 +130,23 @@ public class FrontEndImpl extends FrontEndPOA {
 			// throw new RequiredValueException("Status required");
 		}
 		LoggerFactory.Log(this.name, "Validating fields complete...");
-		
-		String msg = "CREATESR" + "|" + "SR" + generateNumber() + "|" + managerId + "|" + firstName + "|" + lastName + "|" + courseRegistered + "|" + status + "|" + statusDate;
+
+		String msg = "CREATESR" + "|" + "SR" + generateNumber() + "|" + managerId + "|" + firstName + "|" + lastName
+				+ "|" + courseRegistered + "|" + status + "|" + statusDate;
 		String ack = sendMessage(msg);
 		return ack;
 	}
 
 	@Override
 	public String getRecordCount(String managerId) {
-		
+
 		try {
 			this.setLeaderPort(managerId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
+		}
+
 		String msg = "RECORDCOUNT" + "|" + managerId;
 		String ack = sendMessage(msg);
 		return ack;
@@ -160,14 +154,14 @@ public class FrontEndImpl extends FrontEndPOA {
 
 	@Override
 	public String editRecords(String recordId, String fieldName, String newValue, String managerId) {
-		
+
 		try {
 			this.setLeaderPort(managerId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
+		}
+
 		LoggerFactory.Log(this.name, "Manager :" + managerId + " requested to edit a record.");
 		LoggerFactory.Log(this.name, String.format("Editing record, RecordID:%s", recordId));
 
@@ -193,14 +187,14 @@ public class FrontEndImpl extends FrontEndPOA {
 
 	@Override
 	public String transferRecord(String managerId, String recordId, String remoteCenterServerName) {
-		
+
 		try {
 			this.setLeaderPort(managerId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
+		}
+
 		LoggerFactory.Log(this.name, "Manager :" + managerId + " requested to transfer a record.");
 		LoggerFactory.Log(this.name, String.format("Transering record, RecordID:%s", recordId));
 
@@ -208,70 +202,65 @@ public class FrontEndImpl extends FrontEndPOA {
 		String ack = sendMessage(msg);
 		return ack;
 	}
-	
+
 	private synchronized int generateNumber() {
 
 		Random random = new Random(System.nanoTime());
 
 		return 10000 + random.nextInt(89999);
 	}
-	
+
 	private String sendMessage(String msg) {
-		
+
 		String status = null;
 		boolean queuestatus = this.addQueue(msg);
-		
-		if(!queuestatus)
-		{
+
+		if (!queuestatus) {
 			System.out.println("Message did not added to queue.");
 			status = "Message did not added to queue";
-		}
-		else
-		{
-			//invoking FEUdpServer to send message to Lead Server.
+		} else {
+			// invoking FEUdpServer to send message to Lead Server.
 			status = this.sendFirstMessage();
-			
-			//invoking FEUdpServer to remove processed message from Queue
+
+			// invoking FEUdpServer to remove processed message from Queue
 			this.removeQueue();
 		}
-		
+
 		return status;
 	}
-	
-	
-	//Add request message to queue
+
+	// Add request message to queue
 	public boolean addQueue(String femessage) {
-		
+
 		boolean status = true;
 		try {
 			queueA.add(femessage);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			status = false;
-			System.out.println("Exception occurred:" +e.getMessage());
-			}
+			System.out.println("Exception occurred:" + e.getMessage());
+		}
 		return status;
 	}
-	
-	//Remove first element of queue
+
+	// Remove first element of queue
 	public void removeQueue() {
-		
+
 		queueA.removeFirst();
 	}
-	
-	//Sends first message in queue
+
+	// Sends first message in queue
 	public String sendFirstMessage() {
-		
+
 		ArrayList<String> processstatus = new ArrayList<>();
-	
-		if(!queueA.isEmpty()) 
-		{	
+
+		if (!queueA.isEmpty()) {
 			String femessage = queueA.getFirst();
-			
+
 			try {
-				
+
 				new Thread(() -> {
-					UDPClient client = new UDPClient(LeaderServerHost,LeaderServerPort);
-					
+					UDPClient client = new UDPClient(LeaderServerHost, LeaderServerPort);
+
 					String messageStatus;
 					try {
 						messageStatus = client.sendMessage(femessage);
@@ -280,38 +269,18 @@ public class FrontEndImpl extends FrontEndPOA {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
-//					if(messageStatus.equalsIgnoreCase("leader_crashed")) {
-//						processstatus.add("Lead Server Crashed");
-//					}
-//					else
-//					{
-//						String response = null;
-//						//getting response from server
-//						response = receiveData(frontEndSocket);
-//						if(response == null) {
-//							processstatus.add("Failed to get data from server");
-//						}
-//						else {
-//							processstatus.add(response);
-//							
-//						}
-//				
-//					}
-					}).start();
-					
-				}catch (Exception e) {
-					e.printStackTrace();
-				} 
-		
-		}else {
+
+				}).start();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else {
 			processstatus.add("No Request in Queue");
 		}
-		
+
 		return processstatus.get(0);
 	}
 
-	
-	
-	
 }
