@@ -23,73 +23,109 @@ import rudp.UDPClient;
 
 public class FrontEndImpl extends FrontEndPOA {
 
-	private LinkedList<String> queueA = new LinkedList<String>();
-	private String name;
-	private JSONObject LeaderRegion;
-	private String leader;
-	public String managerId;
-	public String serverRegion;
-	int LeaderServerPort;
-	String LeaderServerHost;
+	private Region MTLLeader;
+	private Region LVLLeader;
+	private Region DDOLeader;
 
-	public void setLeaderPort(String managerId) throws FileNotFoundException, IOException, ParseException {
+	public void FrontEndImpl() throws FileNotFoundException, IOException, ParseException {
+		initialLeaders();
+		BullyAlgorithm ba = new BullyAlgorithm(this.MTLLeader, this.LVLLeader, this.DDOLeader);
+	}
 
-		serverRegion = managerId.substring(0, 3);
+	private void initialLeaders() throws FileNotFoundException, IOException, ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("resources/config.json"));
-		JSONObject currentRoleConfig = (JSONObject) config.get(leader);
-		this.LeaderRegion = (JSONObject) currentRoleConfig.get(serverRegion);
-		LeaderServerPort = (int) this.LeaderRegion.get("port");
-		LeaderServerHost = (String) this.LeaderRegion.get("host");
+		JSONObject leader = (JSONObject) config.get("leader");
 
+		this.MTLLeader = initialRegion((JSONObject) leader.get("MTL"));
+		this.LVLLeader = initialRegion((JSONObject) leader.get("LVL"));
+		this.DDOLeader = initialRegion((JSONObject) leader.get("DDO"));
+
+	}
+
+	private Region initialRegion(JSONObject region) {
+		Region s = new Region();
+		s.Region = (String) region.get("region");
+		s.Host = (String) region.get("host");
+		s.Port = (int) region.get("port");
+		s.ID = (int) region.get("id");
+
+		return s;
+	}
+	
+	private String sendMessage(String managerID, String msg)  {
+		Region r = null;
+		String regionStr = managerID.substring(0, 3);
+		if (regionStr.equalsIgnoreCase("MTL"))
+			r = this.MTLLeader;
+		else if (regionStr.equalsIgnoreCase("LVL"))
+			r = this.LVLLeader;
+		else
+			r = this.DDOLeader;
+
+		UDPClient client = new UDPClient(r.Host, r.Port);
+		int i = 0;
+		while (i++ < 100) {
+
+			try {
+				return client.sendMessage(msg);
+				
+
+			} catch (IOException e) {
+
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e1) {
+					
+					e1.printStackTrace();
+				}
+
+				e.printStackTrace();
+			}
+		}
+		
+		return "Error";
 	}
 
 	@Override
 	public String createTRecord(String firstName, String lastName, String address, String phone, String specialization,
 			String location, String managerId) {
 
-		try {
-			this.setLeaderPort(managerId);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		LoggerFactory.Log(this.name, "Validating fields...");
+		LoggerFactory.LogFrontEnd("Validating fields...");
 		if (firstName == null || firstName.isEmpty()) {
-			LoggerFactory.Log(this.name, "First name required");
+			LoggerFactory.LogFrontEnd("First name required");
 			// throw new RequiredValueException("First name required");
 		}
 
 		if (lastName == null || lastName.isEmpty()) {
-			LoggerFactory.Log(this.name, "Last name required");
+			LoggerFactory.LogFrontEnd("Last name required");
 			// throw new RequiredValueException("Last name required");
 		}
 
 		if (address == null || address.isEmpty()) {
-			LoggerFactory.Log(this.name, "Address required");
+			LoggerFactory.LogFrontEnd("Address required");
 			// throw new RequiredValueException("Address required");
 		}
 
 		if (phone == null || phone.isEmpty()) {
-			LoggerFactory.Log(this.name, "Phone required");
+			LoggerFactory.LogFrontEnd("Phone required");
 			// throw new RequiredValueException("Phone required");
 		}
 
 		if (specialization == null || specialization.isEmpty()) {
-			LoggerFactory.Log(this.name, "Specialization required");
+			LoggerFactory.LogFrontEnd("Specialization required");
 			// throw new RequiredValueException("Specialization required");
 		}
 
 		if (location == null) {
-			LoggerFactory.Log(this.name, "Status required");
+			LoggerFactory.LogFrontEnd("Status required");
 			// throw new RequiredValueException("Status required");
 		}
-		LoggerFactory.Log(this.name, "Validating fields complete...");
+		LoggerFactory.LogFrontEnd("Validating fields complete...");
 
 		String msg = "CREATETR" + "|" + "TR" + generateNumber() + "|" + managerId + "|" + firstName + "|" + lastName
 				+ "|" + address + "|" + phone + "|" + specialization + "|" + location;
-		String ack = sendMessage(msg);
+		String ack = sendMessage(managerId, msg);
 		return ack;
 	}
 
@@ -97,109 +133,88 @@ public class FrontEndImpl extends FrontEndPOA {
 	public String createSRecord(String firstName, String lastName, String[] courseRegistered, String status,
 			String statusDate, String managerId) {
 
-		try {
-			this.setLeaderPort(managerId);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
-		LoggerFactory.Log(this.name, "Validating fields...");
+		LoggerFactory.LogFrontEnd("Validating fields...");
 		if (firstName == null || firstName.isEmpty()) {
-			LoggerFactory.Log(this.name, "First name required");
+			LoggerFactory.LogFrontEnd("First name required");
 			// throw new RequiredValueException("First name required");
 		}
 
 		if (lastName == null || lastName.isEmpty()) {
-			LoggerFactory.Log(this.name, "Last name required");
+			LoggerFactory.LogFrontEnd("Last name required");
 			// throw new RequiredValueException("Last name required");
 		}
 
 		if (statusDate == null || statusDate.isEmpty()) {
-			LoggerFactory.Log(this.name, "Status Date required");
+			LoggerFactory.LogFrontEnd("Status Date required");
 			// throw new RequiredValueException("Status Date required");
 		}
 
 		if (courseRegistered == null || courseRegistered.length < 1) {
-			LoggerFactory.Log(this.name, "Registed Course required");
+			LoggerFactory.LogFrontEnd("Registed Course required");
 			// throw new RequiredValueException("Registered Course required");
 		}
 
 		if (status == null) {
-			LoggerFactory.Log(this.name, "Status required");
+			LoggerFactory.LogFrontEnd("Status required");
 			// throw new RequiredValueException("Status required");
 		}
-		LoggerFactory.Log(this.name, "Validating fields complete...");
+		LoggerFactory.LogFrontEnd("Validating fields complete...");
 
 		String msg = "CREATESR" + "|" + "SR" + generateNumber() + "|" + managerId + "|" + firstName + "|" + lastName
 				+ "|" + courseRegistered + "|" + status + "|" + statusDate;
-		String ack = sendMessage(msg);
+		String ack = sendMessage(managerId, msg);
 		return ack;
 	}
 
 	@Override
 	public String getRecordCount(String managerId) {
 
-		try {
-			this.setLeaderPort(managerId);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	
 		String msg = "RECORDCOUNT" + "|" + managerId;
-		String ack = sendMessage(msg);
+		String ack = sendMessage(managerId, msg);
 		return ack;
 	}
 
 	@Override
 	public String editRecords(String recordId, String fieldName, String newValue, String managerId) {
 
-		try {
-			this.setLeaderPort(managerId);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
-		LoggerFactory.Log(this.name, "Manager :" + managerId + " requested to edit a record.");
-		LoggerFactory.Log(this.name, String.format("Editing record, RecordID:%s", recordId));
+		LoggerFactory.LogFrontEnd("Manager :" + managerId + " requested to edit a record.");
+		LoggerFactory.LogFrontEnd(String.format("Editing record, RecordID:%s", recordId));
 
 		if (recordId == null || recordId.isEmpty()) {
-			LoggerFactory.Log(this.name, "Record ID required");
+			LoggerFactory.LogFrontEnd("Record ID required");
 			// throw new RequiredValueException("Record ID required");
 		}
 
 		if (fieldName == null || fieldName.isEmpty()) {
-			LoggerFactory.Log(this.name, "FieldName required");
+			LoggerFactory.LogFrontEnd("FieldName required");
 			// throw new RequiredValueException("FieldName required");
 		}
 
 		if (newValue == null || newValue.isEmpty()) {
-			LoggerFactory.Log(this.name, "FieldValue required");
+			LoggerFactory.LogFrontEnd("FieldValue required");
 			// throw new RequiredValueException("FieldValue required");
 		}
 
 		String msg = "EDITRECORD" + "|" + managerId + "|" + recordId + "|" + fieldName + "|" + newValue;
-		String ack = sendMessage(msg);
+		String ack = sendMessage(managerId, msg);
 		return ack;
 	}
 
 	@Override
 	public String transferRecord(String managerId, String recordId, String remoteCenterServerName) {
 
-		try {
-			this.setLeaderPort(managerId);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
-		LoggerFactory.Log(this.name, "Manager :" + managerId + " requested to transfer a record.");
-		LoggerFactory.Log(this.name, String.format("Transering record, RecordID:%s", recordId));
+		LoggerFactory.LogFrontEnd("Manager :" + managerId + " requested to transfer a record.");
+		LoggerFactory.LogFrontEnd(String.format("Transering record, RecordID:%s", recordId));
 
 		String msg = "TRANSFERRECORD" + "|" + managerId + "|" + recordId + "|" + remoteCenterServerName;
-		String ack = sendMessage(msg);
+		String ack = sendMessage(managerId, msg);
 		return ack;
 	}
 
@@ -209,78 +224,6 @@ public class FrontEndImpl extends FrontEndPOA {
 
 		return 10000 + random.nextInt(89999);
 	}
-
-	private String sendMessage(String msg) {
-
-		String status = null;
-		boolean queuestatus = this.addQueue(msg);
-
-		if (!queuestatus) {
-			System.out.println("Message did not added to queue.");
-			status = "Message did not added to queue";
-		} else {
-			// invoking FEUdpServer to send message to Lead Server.
-			status = this.sendFirstMessage();
-
-			// invoking FEUdpServer to remove processed message from Queue
-			this.removeQueue();
-		}
-
-		return status;
-	}
-
-	// Add request message to queue
-	public boolean addQueue(String femessage) {
-
-		boolean status = true;
-		try {
-			queueA.add(femessage);
-		} catch (Exception e) {
-			status = false;
-			System.out.println("Exception occurred:" + e.getMessage());
-		}
-		return status;
-	}
-
-	// Remove first element of queue
-	public void removeQueue() {
-
-		queueA.removeFirst();
-	}
-
-	// Sends first message in queue
-	public String sendFirstMessage() {
-
-		ArrayList<String> processstatus = new ArrayList<>();
-
-		if (!queueA.isEmpty()) {
-			String femessage = queueA.getFirst();
-
-			try {
-
-				new Thread(() -> {
-					UDPClient client = new UDPClient(LeaderServerHost, LeaderServerPort);
-
-					String messageStatus;
-					try {
-						messageStatus = client.sendMessage(femessage);
-						processstatus.add(messageStatus);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				}).start();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		} else {
-			processstatus.add("No Request in Queue");
-		}
-
-		return processstatus.get(0);
-	}
-
 }
+
+	

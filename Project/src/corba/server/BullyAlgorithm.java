@@ -21,23 +21,22 @@ import rudp.UDPClient;
 
 public class BullyAlgorithm extends TimerTask {
 	
-	private class Server
-	{
-		public String Host;
-		public int Port;
-		public String Region;
-		public int ID;
-		public boolean IsAlive;
-	}
 	
-	private HashMap<String, ArrayList<Server>> Servers;
-	private JSONObject Leader;
 	
-	public BullyAlgorithm(JSONObject leader) throws FileNotFoundException, IOException, ParseException
+	private HashMap<String, ArrayList<Region>> Servers;
+	private Region MTLLeader;
+	private Region LVLLeader;
+	private Region DDOLeader;
+	
+	public BullyAlgorithm(Region mtlLeader, Region lvlLeader, Region ddoLeader) throws FileNotFoundException, IOException, ParseException
 	{
 		
 		initialServersList();
-		this.Leader = leader;
+
+		this.MTLLeader = mtlLeader;
+		this.LVLLeader = lvlLeader;
+		this.DDOLeader = ddoLeader;
+		
 		Timer timer = new Timer();
 		timer.schedule(this, 5000, 3000);
 	}
@@ -88,8 +87,8 @@ public class BullyAlgorithm extends TimerTask {
 	 private void runRegionBully(String region)
 	 {
 		 LoggerFactory.LogServer("start to run bully algorithm for " + region);
-		 ArrayList<Server> servers = getRegionServers(region);
-		 for(Server s: servers)
+		 ArrayList<Region> servers = getRegionServers(region);
+		 for(Region s: servers)
 		 {
 			 UDPClient client = new UDPClient(s.Host, s.Port);
 				try {
@@ -104,13 +103,23 @@ public class BullyAlgorithm extends TimerTask {
 		 }
 		 
 		 
-		
-		 
-		 for(Server s : servers)
+		 Region r;
+		 if(region.equalsIgnoreCase("MTL"))
+			 r = this.MTLLeader;
+		 else
+			 if(region.equalsIgnoreCase("LVL"))
+				 r = this.LVLLeader;
+			 else
+				 r = this.DDOLeader;
+			 
+		 for(Region s : servers)
 		 {
 			 if(s.IsAlive)
 			 {
-				 
+				 r.Host = s.Host;
+				 r.ID = s.ID;
+				 r.Port = s.Port;
+				 r.IsAlive = s.IsAlive;
 				 LoggerFactory.LogServer("set leader for the region " + region + " on " + s.Host  + ":" + s.Port + " is alive");		 
 				 break;
 			 }
@@ -118,7 +127,7 @@ public class BullyAlgorithm extends TimerTask {
 		 
 	 }
 	 
-	 private ArrayList<Server> getRegionServers(String region)
+	 private ArrayList<Region> getRegionServers(String region)
 	 {
 		 return this.Servers.get(region);
 	 }
@@ -126,10 +135,10 @@ public class BullyAlgorithm extends TimerTask {
 	 private void initialServersList() throws FileNotFoundException, IOException, ParseException
 	 {
 		 LoggerFactory.LogServer("Initializing the server list in bully algorithm");
-		 this.Servers = new HashMap<String, ArrayList<Server>>();
-		 this.Servers.put("MTL", new ArrayList<Server>());
-		 this.Servers.put("LVL", new ArrayList<Server>());
-		 this.Servers.put("DDO", new ArrayList<Server>());
+		 this.Servers = new HashMap<String, ArrayList<Region>>();
+		 this.Servers.put("MTL", new ArrayList<Region>());
+		 this.Servers.put("LVL", new ArrayList<Region>());
+		 this.Servers.put("DDO", new ArrayList<Region>());
 		 loadConfigFile();
 		 
 		 sortServerList("MTL");
@@ -143,10 +152,10 @@ public class BullyAlgorithm extends TimerTask {
 	 private void sortServerList(String region)
 	 {
 		 LoggerFactory.LogServer("Sorting " + region + " list based on the ID");
-		 ArrayList<Server> servers = getRegionServers(region);
-		 Collections.sort(servers, new Comparator<Server>() {
+		 ArrayList<Region> servers = getRegionServers(region);
+		 Collections.sort(servers, new Comparator<Region>() {
 			    @Override
-			    public int compare(Server lhs, Server rhs) {
+			    public int compare(Region lhs, Region rhs) {
 			        return lhs.ID < rhs.ID ? -1 : (lhs.ID > rhs.ID) ? 1 : 0;
 			    }
 			});
@@ -178,13 +187,13 @@ public class BullyAlgorithm extends TimerTask {
 	 {
 		 for(final JSONObject region: regions)
 		 {
-			 Server s = new Server();
+			 Region s = new Region();
 			 s.Region =  (String)region.get("region");
 			 s.Host =  (String)region.get("host");
 			 s.Port = (int) region.get("port");
 			 s.ID = (int) region.get("id");
 			 
-			 ArrayList<Server> servers = this.Servers.get(s.Region);
+			 ArrayList<Region> servers = this.Servers.get(s.Region);
 			 servers.add(s);
 		 }
 		 
