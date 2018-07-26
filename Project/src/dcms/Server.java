@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -54,9 +55,9 @@ public class Server {
 	}
 	
 	private void initilizeServers() throws IOException {
-		int MTLServerPort = (int) ((JSONObject)this.config.get("MTL")).get("port");
-		int DDOServerPort = (int) ((JSONObject)this.config.get("DDO")).get("port");
-		int LVLServerPort = (int) ((JSONObject)this.config.get("LVL")).get("port");
+		int MTLServerPort = (int) ((long) ((JSONObject)this.config.get("MTL")).get("port"));
+		int DDOServerPort = (int)((long) ((JSONObject)this.config.get("DDO")).get("port"));
+		int LVLServerPort = (int)((long) ((JSONObject)this.config.get("LVL")).get("port"));
 		this.MTLUDPServer = new UDPServer(MTLServerPort, new UDPServerListener() {
 			
 			@Override
@@ -90,6 +91,15 @@ public class Server {
 	}
 	
 	public void addDefaultData() {
+		JSONParser parser = new JSONParser();
+		JSONArray config;
+		try {
+			config = (JSONArray)parser.parse(new FileReader("resources/studentData.json"));
+			
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

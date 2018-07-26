@@ -129,8 +129,6 @@ public class DCMSServer {
 				}).start();
 			}
 
-			
-			
 			try {
 				latch.await();
 				for(int i=0;i<results.size();i++) {
