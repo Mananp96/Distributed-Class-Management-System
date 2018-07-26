@@ -2,43 +2,52 @@
 	"leader": { 
 		"MTL" :{ 
 			"host" : "127.0.0.1", 
-			"port": 9191  
+			"port": 9191,
+			"region": "MTL"  
 		},
 		"LVL" :{ 
 			"host" : "127.0.0.1", 
-			"port": 9192
+			"port": 9192,
+			"region": "LVL"
 		},
 		"DDO" :{ 
 			"host" : "127.0.0.1", 
-			"port": 9193  
+			"port": 9193,
+			"region": "DDO"  
 		},
 	},
 	"slave1": { 
 		"MTL" :{ 
 			"host" : "127.0.0.1", 
-			"port": 9194  
+			"port": 9194,
+			"region": "MTL"  
 		},
 		"LVL" :{ 
 			"host" : "127.0.0.1", 
-			"port": 9195
+			"port": 9195,
+			"region": "LVL"
 		},
 		"DDO" :{ 
 			"host" : "127.0.0.1", 
-			"port": 9196  
+			"port": 9196,
+			"region": "DDO"  
 		}
 	},
 	"slave2": { 
 		"MTL" :{ 
 			"host" : "127.0.0.1", 
-			"port": 9197  
+			"port": 9197,
+			"region": "MTL"  
 		},
 		"LVL" :{ 
 			"host" : "127.0.0.1", 
-			"port": 9198
+			"port": 9198,
+			"region": "LVL"
 		},
 		"DDO" :{ 
 			"host" : "127.0.0.1", 
-			"port": 9199  
+			"port": 9199,
+			"region": "DDO"  
 		}
 	}
 }

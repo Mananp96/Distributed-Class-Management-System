@@ -3,14 +3,13 @@
  */
 package dcms;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+
+import org.json.simple.JSONObject;
 
 import rudp.UDPClient;
 
@@ -30,10 +29,14 @@ public class DCMSServer {
 
 	private HashMap<String, Integer> nodePorts;
 	
-	public DCMSServer(String name,HashMap<String, Integer> nodePorts) {
+	private JSONObject[] otherRegions;
+	
+	private boolean isLeader;
+	
+	public DCMSServer(String name,JSONObject[] otherRegions) {
 		this.recordData = new HashMap<String, ArrayList<Record>>();
 		this.name = name;
-		this.nodePorts = nodePorts;
+		this.otherRegions = otherRegions;		
 	}
 		
 	public String createTRecord(String recordId, String firstName, String lastName, String address, String phone, String specialization, String location, String managerId) {
@@ -100,45 +103,40 @@ public class DCMSServer {
 			String recordCountData = this.name + ": " + count;
 			LoggerFactory.Log(this.name, "Total Records in " + this.name + " server are " + recordCountData);
 
-			final int[] nodeports = new int[2];
-			int i = 0;
-			for (Entry<String, Integer> node : this.nodePorts.entrySet())
-				nodeports[i++] = node.getValue();
-
-			final HashMap<Integer, String> result = new HashMap<Integer, String>() {
-				{
-					put(nodeports[0], "");
-					put(nodeports[1], "");
-				}
-			};
-
-			final CountDownLatch latch = new CountDownLatch(2);
-			for (final int port : nodeports) {
+			final CountDownLatch latch = new CountDownLatch(this.otherRegions.length);
+			final ArrayList<String> results = new ArrayList<String>(); 
+			for(final JSONObject region: this.otherRegions) {
 				new Thread(new Runnable() {
 
 					@Override
 					public void run() {
 						
-						UDPClient client = new UDPClient("127.0.0.1", port);
+						UDPClient client = new UDPClient((String) region.get("host"), (int) region.get("port"));
 						LoggerFactory.Log(name,
-								"Request sent to get record data from 127.0.0.1:" + port);
-						String reply = client.sendMessage("GET_RECORD_COUNT");
-						LoggerFactory.Log(name,
-								"Received this response " + reply + " from 127.0.0.1 :" + port);
+								"Request sent to get record data from "+(String) region.get("host")+":" + (int) region.get("port"));
+						String reply = null;
+						try {
+							reply = client.sendMessage("GET_RECORD_COUNT");
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						LoggerFactory.Log(name,"Received this response " + reply + " from "+(String) region.get("host")+" :" + (int) region.get("port"));
 						if (!reply.equals("INVALID_REQUEST")) {
-							result.put(port, reply);
+							results.add((String) region.get("name")+": "+reply);
 						}
 						latch.countDown();
 					}
 				}).start();
-
 			}
+
+			
+			
 			try {
 				latch.await();
-				recordCountData += " " + result.get(nodeports[0]) + " " + result.get(nodeports[1]);
-			} catch (InterruptedException e) {
-
-			}
+				for(int i=0;i<results.size();i++) {
+					recordCountData += results.get(i) + " ";
+				}
+			} catch (InterruptedException e) {}
 
 			return recordCountData;
 		} else {
@@ -153,7 +151,7 @@ public class DCMSServer {
 			return this.name + ": " + count;
 		}
 	}
-
+	/*
 	public boolean editRecords(String recordId, String fieldName, String newValue, String managerId) {
 
 		LoggerFactory.Log(this.name, "Manager :" + managerId + " requested to edit a record.");
@@ -319,7 +317,7 @@ public class DCMSServer {
 
 		return true;
 	}
-
+	*/
 	private boolean addToRecordData(String firstCharacter, Record record) {
 		if (this.recordData.containsKey(firstCharacter)) {
 			ArrayList<Record> list = this.recordData.get(firstCharacter);
@@ -338,7 +336,7 @@ public class DCMSServer {
 			return true;
 		}
 	}
-
+	/*
 	private String processRecordTransferRequest(String requestData, String type) {
 		requestData = requestData.replaceAll("TRANSFER_" + type.toUpperCase() + ";", "");
 		if (type.equalsIgnoreCase("Teacher")) {
@@ -538,5 +536,6 @@ public class DCMSServer {
 
 		return record;
 
-
+	}
+	*/
 }

@@ -8,10 +8,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.NoRouteToHostException;
-import java.util.ArrayList;
-import java.util.LinkedList;
+
 import util.FEMessage;
-import util.UdpPort;
 
 /**
  * defining methods to add and remove requests from queue, send request to Leader Server 
