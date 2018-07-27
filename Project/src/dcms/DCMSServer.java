@@ -36,6 +36,10 @@ public class DCMSServer {
 		this.otherRegions = otherRegions;		
 		this.tempRecords = new ArrayList<Record>();
 	}
+	
+	public void setRegions(JSONObject[] regions) {
+		this.otherRegions = regions;
+	}
 		
 	public String createTRecord(String recordId, String firstName, String lastName, String address, String phone, String specialization, String location, String managerId) {
 
@@ -51,13 +55,13 @@ public class DCMSServer {
 			LoggerFactory.Log(this.name, String.format("Record added to the list :%s", record.toString()));
 			LoggerFactory.Log(this.name,
 					String.format("Teacher Record Successfully created by Manager:%s", (managerId)));
-			return String.format("Teacher Record Successfully created by Manager:%s", (managerId));
+			return String.format("SUCCESS: Teacher Record Successfully created by Manager:%s", (managerId));
 			
 		} else {
 			LoggerFactory.Log(this.name,
 					String.format("Something went wrong when creating teacher record :%s \n by Manager: %s",
 							record.toString(), (managerId)));
-			return String.format("Something went wrong when creating teacher record :%s \n by Manager: %s",record.toString(), (managerId));
+			return String.format("ERROR: Something went wrong when creating teacher record :%s \n by Manager: %s",record.toString(), (managerId));
 		}
 	}
 
@@ -75,10 +79,10 @@ public class DCMSServer {
 		if (result) {
 			LoggerFactory.Log(this.name, String.format("Record added to the list :%s", record.toString()));
 			LoggerFactory.Log(this.name, String.format("Student Record Successfully created by Manager:%s", (managerId)));
-			return String.format("Student Record Successfully created by Manager:%s", (managerId));
+			return String.format("SUCCESS: Student Record Successfully created by Manager:%s", (managerId));
 		} else {
 			LoggerFactory.Log(this.name, String.format("Something went wrong when creating student record :%s \n by Manager: %s",record.toString(), (managerId)));
-			return String.format("Something went wrong when creating student record :%s \n by Manager: %s",record.toString(), (managerId));
+			return String.format("ERROR: Something went wrong when creating student record :%s \n by Manager: %s",record.toString(), (managerId));
 		}
 	}
 	

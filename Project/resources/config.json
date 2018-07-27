@@ -4,19 +4,22 @@
 			"host" : "127.0.0.1", 
 			"port": 9191,
 			"region": "MTL",
-			"id": 3
+			"id": 3,
+			"status": "leader"
 		},
 		"LVL" :{ 
 			"host" : "127.0.0.1", 
 			"port": 9192,
 			"region": "LVL",
-			"id": 3
+			"id": 3,
+			"status": "leader"
 		},
 		"DDO" :{ 
 			"host" : "127.0.0.1", 
 			"port": 9193,
 			"region": "DDO",
-			"id": 3
+			"id": 3,
+			"status": "leader"
 		},
 	},
 	"slave1": { 
@@ -24,19 +27,22 @@
 			"host" : "127.0.0.1", 
 			"port": 9194,
 			"region": "MTL",
-			"id": 2  
+			"id": 2,
+			"status": "slave"
 		},
 		"LVL" :{ 
 			"host" : "127.0.0.1", 
 			"port": 9195,
 			"region": "LVL",
-			"id": 2
+			"id": 2,
+			"status": "slave"
 		},
 		"DDO" :{ 
 			"host" : "127.0.0.1", 
 			"port": 9196,
 			"region": "DDO",
-			"id": 2  
+			"id": 2,
+			"status": "slave"  
 		}
 	},
 	"slave2": { 
@@ -44,19 +50,22 @@
 			"host" : "127.0.0.1", 
 			"port": 9197,
 			"region": "MTL",
-			"id": 1 
+			"id": 1,
+			"status": "slave" 
 		},
 		"LVL" :{ 
 			"host" : "127.0.0.1", 
 			"port": 9198,
 			"region": "LVL",
-			"id": 1 
+			"id": 1 ,
+			"status": "slave"
 		},
 		"DDO" :{ 
 			"host" : "127.0.0.1", 
 			"port": 9199,
 			"region": "DDO",
-			"id": 1 
+			"id": 1,
+			"status": "slave" 
 		}
 	}
 }

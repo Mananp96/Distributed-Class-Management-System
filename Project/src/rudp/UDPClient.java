@@ -23,7 +23,6 @@ public class UDPClient {
 		ReliableSocket client = new ReliableSocket();
 
 		client.connect(this.serverAddress,6000);
-
 		
 		DataOutputStream stream = new DataOutputStream(client.getOutputStream());
 		stream.writeUTF(data);

@@ -3,16 +3,18 @@
  */
 package dcms;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import rudp.UDPClient;
 import rudp.UDPServer;
 import rudp.UDPServerListener;
 
@@ -27,6 +29,8 @@ public class Server {
 	
 	private JSONObject config;
 	
+	private JSONObject appConfig;
+	
 	private UDPServer MTLUDPServer;
 	
 	private UDPServer DDOUDPServer;
@@ -40,20 +44,14 @@ public class Server {
 	private DCMSServer DDOServer;
 	
 	
-	public Server(String role) throws FileNotFoundException, IOException, ParseException {
-		this.role = role;
-		loadConfig("resources/config.json",this.role);
+	public Server(JSONObject appConfig,JSONObject config) throws IOException {
+		this.config = config;
+		this.appConfig = appConfig;
 		initilizeServers();
 		addDefaultData();
 	}
 	
-	public void loadConfig(String configPath, String role) throws FileNotFoundException, IOException, ParseException {
-		JSONParser parser = new JSONParser();
-		
-		JSONObject config = (JSONObject)parser.parse(new FileReader(configPath));
-		this.config = (JSONObject) config.get(role);
-	}
-	
+
 	private void initilizeServers() throws IOException {
 		int MTLServerPort = (int) ((long) ((JSONObject)this.config.get("MTL")).get("port"));
 		int DDOServerPort = (int)((long) ((JSONObject)this.config.get("DDO")).get("port"));
@@ -184,20 +182,28 @@ public class Server {
 	}
 	
 	
-	public String handleRequest(String region, String requestData, InetAddress clientHost) {
+	public String handleRequest(final String region, final String requestData, InetAddress clientHost) {
 		DCMSServer regionServer = null;
-		
+		JSONObject regionConfig = null;
 		switch(region) {
 			case "MTL":
 				regionServer = this.MTLServer;
+				regionConfig = (JSONObject)this.config.get("MTL");
 				break;
 			case "LVL":
 				regionServer = this.LVLServer;
+				regionConfig = (JSONObject)this.config.get("LVL");
 				break;
 			case "DDO":
 				regionServer = this.DDOServer;
+				regionConfig = (JSONObject)this.config.get("DDO");
 				break;	
 			
+		}
+		
+		boolean isLeader = false;
+		if(((String)regionConfig.get("status")).equals("leader")) {
+			isLeader = true;
 		}
 		
 		String result = null;
@@ -206,6 +212,15 @@ public class Server {
 			
 			String[] data = requestData.split("|");
 			result = regionServer.createTRecord(data[1], data[3], data[4], data[5], data[6], data[7], data[8], data[2]);
+			if(isLeader) {
+				new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						syncRequest(requestData, region);
+					}
+				}).start();
+			}
 			
 		} else if(requestData.startsWith("CREATESR")) {
 			
@@ -228,33 +243,89 @@ public class Server {
 			result = regionServer.transferRecord(data[1], data[2], data[3]);
 			
 		} else if(requestData.startsWith("GET_RECORD_COUNT")) {
+			
 			result = regionServer.getRecordCount(region+"_SERVER");
+			
 		} else if(requestData.startsWith("TRANSFER_TEACHER")) {
+			
 			result = regionServer.processRecordTransferRequest(requestData, "Teacher");
+			
 		} else if(requestData.startsWith("ADD_TEACHER")) {
+			
 			result = regionServer.processAddTransferRequest(requestData, "Teacher");
+			
 		} else if(requestData.startsWith("TRANSFER_STUDENT")) {
+			
 			result = regionServer.processRecordTransferRequest(requestData, "Student");
+			
 		} else if(requestData.startsWith("ADD_STUDENT")) {
+			
 			result = regionServer.processAddTransferRequest(requestData, "Student");
+			
+		} else if(requestData.startsWith("ARE_YOU_ALIVE")) {
+			
+			result = "YES";
+			
 		}
 		
 		return result;
 	}
 	
+	
+	private void syncRequest(String requestData, String region) {
+		Set keys = this.appConfig.keySet();
+		Iterator iterator = keys.iterator();
+		while(iterator.hasNext()) {
+			JSONObject currentConfig = (JSONObject)this.appConfig.get(((String)iterator.next()));
+			Set regionKeys = currentConfig.keySet();
+			Iterator regionIterator = regionKeys.iterator();
+			while(regionIterator.hasNext()) {
+				String regionStr = (String)regionIterator.next();
+				if(!regionStr.equals(region)) {
+					JSONObject regionConfig = (JSONObject)currentConfig.get(regionStr);
+					if(((String)regionConfig.get("status")).equals("slave")) {
+						String host = (String)regionConfig.get("host");
+						int port = ((int)(long)regionConfig.get("port"));
+						UDPClient client = new UDPClient(host, port);
+						
+						try {
+							String response;
+							do
+							{
+								response = client.sendMessage(requestData);
+							}while(! response.startsWith("SUCCESS"));
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+	}
+	
 
 	public static void main(String[] args) {
 		try {
-			Server server = new Server("leader");
-			server.startMTLRegion();
-			System.out.println("Leader Server MTL Region started.");
 			
-			server.startDDORegion();
-			System.out.println("Leader Server DDO Region started.");
+			JSONParser parser = new JSONParser();
 			
-			server.startLVLRegion();
-			System.out.println("Leader Server LVL Region started.");
+			JSONObject config = (JSONObject)parser.parse(new FileReader("resources/config.json"));
 			
+			Set keys = config.keySet();
+			Iterator iterator = keys.iterator();
+			while(iterator.hasNext()) {
+				String key = (String)iterator.next();
+				JSONObject currentConfig = (JSONObject)config.get(key);
+				Server server = new Server(config,currentConfig);
+				server.startMTLRegion();
+				System.out.println(key+" Server MTL Region started.");
+				
+				server.startDDORegion();
+				System.out.println(key+" Server DDO Region started.");
+				
+				server.startLVLRegion();
+				System.out.println(key+" Server LVL Region started.");
+			}
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
