@@ -28,16 +28,16 @@ public class UDPServer {
 	private boolean isRunning;
 
 	private BlockingQueue<UDPRequest> requestQueue;
-	
+
 	private Thread requestThread;
-	
+
 	private Thread responseThread;
 
 	public UDPServer(int port, UDPServerListener serverListener) throws IOException {
 		this.serverSocket = new ReliableServerSocket(port);
 		this.serverListener = serverListener;
 		this.requestQueue = new LinkedBlockingQueue<UDPRequest>();
-		
+
 		this.requestThread = new Thread(new Runnable() {
 
 			@Override
@@ -60,11 +60,11 @@ public class UDPServer {
 											UDPRequest request = new UDPRequest(socket, requestMessage);
 											requestQueue.put(request);
 
-										} catch (EOFException e) {}
-										 catch (InterruptedException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
+										} catch (EOFException e) {
+										} catch (InterruptedException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
 										input.close();
 									}
 								} catch (IOException e) {
@@ -79,30 +79,38 @@ public class UDPServer {
 				}
 			}
 		});
-		
+
 		this.responseThread = new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				
-				while(isRunning) {
-					UDPRequest request = requestQueue.poll();
-					if(request != null) {
-						String data = request.getData();
-						Socket requestSocket = request.getSocket();
-						InetAddress client = requestSocket.getInetAddress();
-						String responseData = serverListener.respondRequest(data, client);
-						if(requestSocket.isConnected() && (!requestSocket.isOutputShutdown())) {
-							DataOutputStream outputStream;
-							try {
+
+				while (isRunning) {
+					UDPRequest request;
+					try {
+						request = requestQueue.take();
+
+						if (request != null) {
+							String data = request.getData();
+							Socket requestSocket = request.getSocket();
+							InetAddress client = requestSocket.getInetAddress();
+							String responseData = serverListener.respondRequest(data, client);
+							if (requestSocket.isConnected() && (!requestSocket.isOutputShutdown())) {
+								DataOutputStream outputStream;
+
 								outputStream = new DataOutputStream(requestSocket.getOutputStream());
 								outputStream.writeUTF(responseData);
 								outputStream.close();
 								requestSocket.close();
-							} catch (IOException e) {
-								e.printStackTrace();
+
 							}
 						}
+
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 				}
 			}
@@ -114,7 +122,7 @@ public class UDPServer {
 		this.requestThread.start();
 		this.responseThread.start();
 	}
-	
+
 	public void killServer() {
 		this.isRunning = false;
 		this.serverSocket.close();
