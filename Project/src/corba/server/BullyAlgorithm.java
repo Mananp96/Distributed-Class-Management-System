@@ -178,8 +178,8 @@ public class BullyAlgorithm extends TimerTask {
 			Region s = new Region();
 			s.Region = (String) region.get("region");
 			s.Host = (String) region.get("host");
-			s.Port = (int) region.get("port");
-			s.ID = (int) region.get("id");
+			s.Port = (int) (long)region.get("port");
+			s.ID = (int) (long)region.get("id");
 
 			ArrayList<Region> servers = this.Servers.get(s.Region);
 			servers.add(s);

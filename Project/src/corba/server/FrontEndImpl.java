@@ -47,8 +47,8 @@ public class FrontEndImpl extends FrontEndPOA {
 		Region s = new Region();
 		s.Region = (String) region.get("region");
 		s.Host = (String) region.get("host");
-		s.Port = (int) region.get("port");
-		s.ID = (int) region.get("id");
+		s.Port = (int) (long)region.get("port");
+		s.ID = (int) (long)region.get("id");
 
 		return s;
 	}
