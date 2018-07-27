@@ -143,7 +143,7 @@ public class DCMSServer {
 						}
 						LoggerFactory.Log(name,"Received this response " + reply + " from "+(String) region.get("host")+" :" + (int) (long) region.get("port"));
 						if (!reply.equals("INVALID_REQUEST")) {
-							results.add((String) region.get("name")+": "+reply);
+							results.add(reply);
 						}
 						latch.countDown();
 					}
