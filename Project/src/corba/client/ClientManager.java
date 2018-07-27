@@ -19,7 +19,7 @@ public class ClientManager {
 	private static FrontEnd frontEnd;
 	private String managerId;
 	private Scanner s;
-	
+
 	private static final String FE_HOST = "localhost";
 	private static final int ORB_PORT = 1050;
 
@@ -30,17 +30,13 @@ public class ClientManager {
 	}
 
 	/**
-	 * Command Line Interface which gives managers options to perform some of CURD operations on Records
-	 * Menu choices includes 
-	 * 1. Creating a Teacher Record
-	 * 2. Creating a Student Record.
-	 * 3. Editing a Record.
-	 * 4. Transfer of Record.
-	 * 5. Total Record counts.
-	 * Menu will continue unless manager exits the program.
+	 * Command Line Interface which gives managers options to perform some of CURD
+	 * operations on Records Menu choices includes 1. Creating a Teacher Record 2.
+	 * Creating a Student Record. 3. Editing a Record. 4. Transfer of Record. 5.
+	 * Total Record counts. Menu will continue unless manager exits the program.
 	 * 
-	 * First manager will enter the manager id and according to it, 
-	 * respective server object is assigned using CORBA.
+	 * First manager will enter the manager id and according to it, respective
+	 * server object is assigned using CORBA.
 	 * 
 	 * @param args
 	 * @throws RemoteException
@@ -52,14 +48,14 @@ public class ClientManager {
 
 			String managerId = userInput("Enter Manager ID:");
 			String serverRegion = managerId.substring(0, 3);
-			
+
 			boolean lengthCheck = (managerId.length() == 7);
 			boolean regionCheck = (serverRegion.equalsIgnoreCase("MTL") || serverRegion.equalsIgnoreCase("LVL")
 					|| serverRegion.equalsIgnoreCase("DDO"));
 			boolean idCheck = false;
 
 			try {
-				
+
 				if (lengthCheck) {
 					String id = managerId.substring(3, 7);
 					Integer.parseInt(id);
@@ -70,13 +66,12 @@ public class ClientManager {
 
 			if (!(lengthCheck && regionCheck && idCheck)) {
 				System.out.println("Invalid Manager ID \n Please try again...");
-			} 
-			else {
+			} else {
 				region = serverRegion.toUpperCase();
 				this.managerId = managerId;
 				LoggerFactory.Log(this.managerId, "Registering manager");
-				
-				try{
+
+				try {
 					String orbInitStr = "-ORBInitialPort " + ORB_PORT + " -ORBInitialHost " + FE_HOST;
 					String[] orbInitArr = orbInitStr.split(" ");
 					ORB orb = ORB.init(orbInitArr, null);
@@ -84,10 +79,10 @@ public class ClientManager {
 					NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
 					frontEnd = (FrontEnd) FrontEndHelper.narrow(ncRef.resolve_str("fEnd"));
 					System.out.println("Obtained a handle on server object: " + frontEnd);
-					
+
 				} catch (Exception e) {
 					System.out.println("ERROR : " + e);
-					//e.printStackTrace(System.out);
+					// e.printStackTrace(System.out);
 				}
 				break;
 			}
@@ -106,7 +101,7 @@ public class ClientManager {
 				System.out.println("********************************");
 				String choice = userInput("Enter Choice:");
 				switch (choice) {
-				
+
 				case "1":
 					try {
 						this.addTeacherRecord();
@@ -115,7 +110,7 @@ public class ClientManager {
 					}
 					System.out.println("Press any key to continue...");
 					break;
-					
+
 				case "2":
 					try {
 						this.addStudentRecord();
@@ -124,13 +119,13 @@ public class ClientManager {
 					}
 					System.out.println("Press any key to continue...");
 					break;
-					
+
 				case "3":
 					System.out.println("----------Get Record Counts----------");
 					System.out.println(frontEnd.getRecordCount(this.managerId));
 					System.out.println("Press any key to continue...");
 					break;
-					
+
 				case "4":
 					try {
 						this.editRecord();
@@ -139,7 +134,7 @@ public class ClientManager {
 					}
 					System.out.println("Press any key to continue...");
 					break;
-					
+
 				case "5":
 					try {
 						this.transferRecord();
@@ -148,14 +143,14 @@ public class ClientManager {
 					}
 					System.out.println("Press any key to continue...");
 					break;
-					
+
 				case "6":
 					System.out.println("Good Bye!");
 					break;
-					
+
 				default:
 					System.out.println("Enter Correct Choice");
-					
+
 				}
 				if (choice.equals("6")) {
 					break;
@@ -190,14 +185,14 @@ public class ClientManager {
 			throw new RequiredValueException("Invalid Location");
 		}
 
-		String result = frontEnd.createTRecord(firstName, lastName, address, phone, specialization, location, managerId);
+		String result = frontEnd.createTRecord(firstName, lastName, address, phone, specialization, location,
+				managerId);
 
-		String str = String.format("FirstName:%s LastName:%s Address:%s Phone:%s Specialization:%s Location:%s",
-				firstName, lastName, address, phone, specialization, location);
-		
-			System.out.println("---Teacher Record succesfully added---");
-			LoggerFactory.Log(this.managerId, String.format("Teacher Record :%s %s", str,result));
-		
+		//String str = String.format("FirstName:%s LastName:%s Address:%s Phone:%s Specialization:%s Location:%s",
+		//		firstName, lastName, address, phone, specialization, location);
+
+		System.out.println("---Teacher Record succesfully added---");
+		LoggerFactory.Log(this.managerId, String.format("Teacher Record :%s", result));
 
 	}
 
@@ -224,11 +219,11 @@ public class ClientManager {
 		String result = frontEnd.createSRecord(firstName, lastName, courseRegistered, status, statusDate,
 				this.managerId);
 
-		String str = String.format("FirstName:%s LastName:%s Status:%s StatusDate:%s coursesRegistered:%s", firstName,
-				lastName, status, statusDate, String.join(",", courseRegistered));
-		
-			LoggerFactory.Log(this.managerId, String.format("Student record : %s", result));
-		
+		// String str = String.format("FirstName:%s LastName:%s Status:%s StatusDate:%s
+		// coursesRegistered:%s", firstName,lastName, status, statusDate,
+		// String.join(",", courseRegistered));
+
+		LoggerFactory.Log(this.managerId, String.format("Student record : %s", result));
 
 	}
 
@@ -243,12 +238,11 @@ public class ClientManager {
 		String result = frontEnd.editRecords(recordId, fieldName, newvalue, this.managerId);
 
 		String str = String.format("RecordID:%s FieldName:%s Value:%s", recordId, fieldName, newvalue);
-		
-	
-			LoggerFactory.Log(this.managerId, String.format("Record edited:%s", result));
-		
+
+		LoggerFactory.Log(this.managerId, String.format("Record edited:%s", result));
+
 	}
-	
+
 	private void transferRecord() throws RemoteException, RequiredValueException {
 
 		LoggerFactory.Log(this.managerId, "Transfer Record");
@@ -256,18 +250,17 @@ public class ClientManager {
 		System.out.println("----------Trasnfer Record----------");
 		String recordID = userInput("Enter RecordID:");
 		String loc = userInput("Enter New Server location:");
-		String result = frontEnd.transferRecord(this.managerId, recordID,loc.toUpperCase());
+		String result = frontEnd.transferRecord(this.managerId, recordID, loc.toUpperCase());
 
-		
-			LoggerFactory.Log(this.managerId, String.format("RecordID:%s transfered to", result));
-		
+		LoggerFactory.Log(this.managerId, String.format("RecordID:%s transfered to", result));
+
 	}
 
 	private String userInput(String var2) {
 		System.out.print(var2);
 		s = new Scanner(System.in);
 		return s.nextLine();
-		
+
 	}
 
 }

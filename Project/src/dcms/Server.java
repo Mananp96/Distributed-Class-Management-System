@@ -210,7 +210,7 @@ public class Server {
 		
 		if(requestData.startsWith("CREATETR")) {
 			
-			String[] data = requestData.split("|");
+			String[] data = requestData.toString().split("\\|");
 			result = regionServer.createTRecord(data[1], data[3], data[4], data[5], data[6], data[7], data[8], data[2]);
 			if(isLeader) {
 				new Thread(new Runnable() {
@@ -224,22 +224,22 @@ public class Server {
 			
 		} else if(requestData.startsWith("CREATESR")) {
 			
-			String[] data = requestData.split("|");
+			String[] data = requestData.split("\\|");
 			result = regionServer.createSRecord(data[1], data[3], data[4], data[5].split(","), data[6], data[7], data[2]);
 			
 		} else if(requestData.startsWith("RECORDCOUNT")) {
 			
-			String[] data = requestData.split("|");
+			String[] data = requestData.split("\\|");
 			result = regionServer.getRecordCount(data[1]);
 			
 		} else if(requestData.startsWith("EDITRECORD")) {
 			
-			String[] data = requestData.split("|");
+			String[] data = requestData.split("\\|");
 			result = regionServer.editRecords(data[2], data[3], data[4], data[1]);
 			
 		} else if(requestData.startsWith("TRANSFERRECORD")) {
 			
-			String[] data = requestData.split("|");
+			String[] data = requestData.split("\\|");
 			result = regionServer.transferRecord(data[1], data[2], data[3]);
 			
 		} else if(requestData.startsWith("GET_RECORD_COUNT")) {
