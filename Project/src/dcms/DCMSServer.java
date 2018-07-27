@@ -121,7 +121,7 @@ public class DCMSServer {
 				}
 			}
 
-			String recordCountData = this.name + ": " + count;
+			String recordCountData = this.name + ": " + count + " ";
 			LoggerFactory.Log(this.name, "Total Records in " + this.name + " server are " + recordCountData);
 
 			final CountDownLatch latch = new CountDownLatch(this.otherRegions.length);

@@ -105,17 +105,47 @@ public class BullyAlgorithm extends TimerTask {
 			r = this.DDOLeader;
 
 		for (Region s : servers) {
-			if (s.IsAlive) {
+			if (s.IsAlive && s.ID != r.ID) {
+				
+
+				String msgOLD = "OLD_REGION|" 
+						+ r.Region + "|" + r.Host + "|" + r.Port;
+				
 				r.Host = s.Host;
 				r.ID = s.ID;
 				r.Port = s.Port;
 				r.IsAlive = s.IsAlive;
+				
+				String msg = "CURRENT_STATUS|" 
+						+ this.MTLLeader.Region + "|" + this.MTLLeader.Host + "|" + this.MTLLeader.Port + "|"
+					    + this.LVLLeader.Region + "|" + this.LVLLeader.Host + "|" + this.LVLLeader.Port + "|"
+					    + this.DDOLeader.Region + "|" + this.DDOLeader.Host + "|" + this.DDOLeader.Port;
+				
+				
+				sendCurrentStatus(r, msgOLD);
+				
+				sendCurrentStatus(this.MTLLeader, msg);
+				sendCurrentStatus(this.LVLLeader, msg);
+				sendCurrentStatus(this.DDOLeader, msg);
+					
+				
 				LoggerFactory.LogServer(
-						"set leader for the region " + region + " on " + s.Host + ":" + s.Port + " is alive");
+						"set leader for the region " + region + " on " + s.Host + ":" + s.Port);
 				break;
 			}
 		}
 
+	}
+	
+	private void sendCurrentStatus(Region r, String msg)
+	{
+		UDPClient client = new UDPClient(r.Host, r.Port);
+		try {
+			String response = client.sendMessage(msg);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private ArrayList<Region> getRegionServers(String region) {
