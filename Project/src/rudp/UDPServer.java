@@ -9,7 +9,9 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import net.rudp.ReliableServerSocket;
 
@@ -25,7 +27,7 @@ public class UDPServer {
 
 	private boolean isRunning;
 
-	private ConcurrentLinkedQueue<UDPRequest> requestQueue;
+	private BlockingQueue<UDPRequest> requestQueue;
 	
 	private Thread requestThread;
 	
@@ -34,7 +36,7 @@ public class UDPServer {
 	public UDPServer(int port, UDPServerListener serverListener) throws IOException {
 		this.serverSocket = new ReliableServerSocket(port);
 		this.serverListener = serverListener;
-		this.requestQueue = new ConcurrentLinkedQueue<UDPRequest>();
+		this.requestQueue = new LinkedBlockingQueue<UDPRequest>();
 		
 		this.requestThread = new Thread(new Runnable() {
 
@@ -56,9 +58,13 @@ public class UDPServer {
 										try {
 											String requestMessage = input.readUTF();
 											UDPRequest request = new UDPRequest(socket, requestMessage);
-											requestQueue.add(request);
-											
+											requestQueue.put(request);
+
 										} catch (EOFException e) {}
+										 catch (InterruptedException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
 										input.close();
 									}
 								} catch (IOException e) {
