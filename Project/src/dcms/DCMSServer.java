@@ -132,16 +132,16 @@ public class DCMSServer {
 					@Override
 					public void run() {
 						
-						UDPClient client = new UDPClient((String) region.get("host"), (int) region.get("port"));
+						UDPClient client = new UDPClient((String) region.get("host"), (int) (long)region.get("port"));
 						LoggerFactory.Log(name,
-								"Request sent to get record data from "+(String) region.get("host")+":" + (int) region.get("port"));
+								"Request sent to get record data from "+(String) region.get("host")+":" + (int) (long) region.get("port"));
 						String reply = null;
 						try {
 							reply = client.sendMessage("GET_RECORD_COUNT");
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						LoggerFactory.Log(name,"Received this response " + reply + " from "+(String) region.get("host")+" :" + (int) region.get("port"));
+						LoggerFactory.Log(name,"Received this response " + reply + " from "+(String) region.get("host")+" :" + (int) (long) region.get("port"));
 						if (!reply.equals("INVALID_REQUEST")) {
 							results.add((String) region.get("name")+": "+reply);
 						}
