@@ -106,10 +106,15 @@ public class BullyAlgorithm extends TimerTask {
 
 		for (Region s : servers) {
 			if (s.IsAlive && s.ID != r.ID) {
+				
+//				UDPClient client = new UDPClient(s.Host, s.Port);
+//				String response = client.sendMessage("ARE_YOU_ALIVE");
+				
 				r.Host = s.Host;
 				r.ID = s.ID;
 				r.Port = s.Port;
 				r.IsAlive = s.IsAlive;
+				
 				LoggerFactory.LogServer(
 						"set leader for the region " + region + " on " + s.Host + ":" + s.Port);
 				break;
