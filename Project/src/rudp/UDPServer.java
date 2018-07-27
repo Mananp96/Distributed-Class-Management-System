@@ -110,6 +110,8 @@ public class UDPServer {
 						//e1.printStackTrace();
 					} catch (IOException e) {
 						//e.printStackTrace();
+					} catch (Exception e) {
+						
 					}
 				}
 			}

@@ -349,7 +349,7 @@ public class DCMSServer {
 	
 	
 	public String processRecordTransferRequest(String requestData, String type) {
-		requestData = requestData.replaceAll("TRANSFER_" + type.toUpperCase() + "|", "");
+		requestData = requestData.replaceAll("TRANSFER_" + type.toUpperCase() + "\\|", "");
 		if (type.equalsIgnoreCase("Teacher")) {
 			// convert the the string request to teacher record
 			TeacherRecord teacher = TeacherRecord.fromString(requestData);
@@ -367,8 +367,8 @@ public class DCMSServer {
 	public String processAddTransferRequest(String requestData, String type) {
 		LoggerFactory.Log(name, "Processing ADD_" + type.toUpperCase() + " request");
 
-		requestData = requestData.replaceAll("ADD_" + type.toUpperCase() + "|", "");
-		String[] str = requestData.split("|");
+		requestData = requestData.replaceAll("ADD_" + type.toUpperCase() + "\\|", "");
+		String[] str = requestData.split("\\|");
 		String managerID = str[0];
 		String recordID = str[1];
 		LoggerFactory.Log(name,

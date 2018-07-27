@@ -191,7 +191,7 @@ public class ClientManager {
 		//String str = String.format("FirstName:%s LastName:%s Address:%s Phone:%s Specialization:%s Location:%s",
 		//		firstName, lastName, address, phone, specialization, location);
 
-		System.out.println("---Teacher Record succesfully added---");
+		System.out.println(result);
 		LoggerFactory.Log(this.managerId, String.format("Teacher Record :%s", result));
 
 	}
@@ -222,7 +222,7 @@ public class ClientManager {
 		// String str = String.format("FirstName:%s LastName:%s Status:%s StatusDate:%s
 		// coursesRegistered:%s", firstName,lastName, status, statusDate,
 		// String.join(",", courseRegistered));
-
+		System.out.println(result);
 		LoggerFactory.Log(this.managerId, String.format("Student record : %s", result));
 
 	}
@@ -240,6 +240,8 @@ public class ClientManager {
 		String str = String.format("RecordID:%s FieldName:%s Value:%s", recordId, fieldName, newvalue);
 
 		LoggerFactory.Log(this.managerId, String.format("Record edited:%s", result));
+		
+		System.out.println(result);
 
 	}
 
@@ -253,6 +255,8 @@ public class ClientManager {
 		String result = frontEnd.transferRecord(this.managerId, recordID, loc.toUpperCase());
 
 		LoggerFactory.Log(this.managerId, String.format("RecordID:%s transfered to", result));
+		
+		System.out.println(result);
 
 	}
 
