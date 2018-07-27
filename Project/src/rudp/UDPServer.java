@@ -62,17 +62,17 @@ public class UDPServer {
 										} catch (EOFException e) {
 										} catch (InterruptedException e) {
 											// TODO Auto-generated catch block
-											e.printStackTrace();
+											//e.printStackTrace();
 										}
 										input.close();
 									}
 								} catch (IOException e) {
-									e.printStackTrace();
+									//e.printStackTrace();
 								}
 							}
 						}).start();
 					} catch (IOException e1) {
-						e1.printStackTrace();
+						//e1.printStackTrace();
 					}
 
 				}
@@ -107,9 +107,9 @@ public class UDPServer {
 
 					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						//e1.printStackTrace();
 					} catch (IOException e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 				}
 			}
@@ -136,7 +136,7 @@ public class UDPServer {
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 	}
