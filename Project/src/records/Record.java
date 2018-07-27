@@ -61,7 +61,7 @@ public class Record {
     
     public String toSplited()
     {
-    	return String.format("%s;%s;%s", this.getRecordId(), this.getFirstName(), this.getLastName());
+    	return String.format("%s|%s|%s", this.getRecordId(), this.getFirstName(), this.getLastName());
     }
 
 }

@@ -95,7 +95,63 @@ public class Server {
 		JSONArray config;
 		try {
 			config = (JSONArray)parser.parse(new FileReader("resources/studentData.json"));
-			
+			for(int i=0;i<config.size();i++) {
+				JSONObject record = (JSONObject) config.get(i);
+				String region = (String)record.get("region");
+				DCMSServer regionServer = null;
+				switch(region) {
+					case "MTL":
+						regionServer = this.MTLServer;
+						break;
+					case "LVL":
+						regionServer = this.LVLServer;
+						break;
+					case "DDO":
+						regionServer = this.DDOServer;
+						break;	
+				}
+				
+				String recordId = (String)record.get("id");
+				String firstName = (String)record.get("firstName");
+				String lastName = (String)record.get("lastName");
+				String[] courseRegistered = ((JSONArray)record.get("coursesRegistered")).toString().replace("},{", " ,").split(" ");
+				String status = (String)record.get("status");
+				String statusDate = (String)record.get("statusDate");
+				regionServer.createSRecord(recordId, firstName, lastName, courseRegistered, status, statusDate, "default");
+			}
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			config = (JSONArray)parser.parse(new FileReader("resources/teacherData.json"));
+			for(int i=0;i<config.size();i++) {
+				JSONObject record = (JSONObject) config.get(i);
+				String region = (String)record.get("location");
+				DCMSServer regionServer = null;
+				switch(region) {
+					case "MTL":
+						regionServer = this.MTLServer;
+						break;
+					case "LVL":
+						regionServer = this.LVLServer;
+						break;
+					case "DDO":
+						regionServer = this.DDOServer;
+						break;	
+				}
+				
+				String recordId = (String)record.get("id");
+				String firstName = (String) record.get("firstName");
+				String lastName = (String) record.get("lastName");
+				String address = (String) record.get("address");
+				String phone = (String) record.get("phone");
+				String specialization = (String) record.get("specialization");
+				
+				regionServer.createTRecord(recordId, firstName, lastName, address, phone, specialization, region, "default");
+				
+			}
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -164,23 +220,32 @@ public class Server {
 		} else if(requestData.startsWith("EDITRECORD")) {
 			
 			String[] data = requestData.split("|");
-			
+			result = regionServer.editRecords(data[2], data[3], data[4], data[1]);
 			
 		} else if(requestData.startsWith("TRANSFERRECORD")) {
 			
-			
+			String[] data = requestData.split("|");
+			result = regionServer.transferRecord(data[1], data[2], data[3]);
 			
 		} else if(requestData.startsWith("GET_RECORD_COUNT")) {
 			result = regionServer.getRecordCount(region+"_SERVER");
+		} else if(requestData.startsWith("TRANSFER_TEACHER")) {
+			result = regionServer.processRecordTransferRequest(requestData, "Teacher");
+		} else if(requestData.startsWith("ADD_TEACHER")) {
+			result = regionServer.processAddTransferRequest(requestData, "Teacher");
+		} else if(requestData.startsWith("TRANSFER_STUDENT")) {
+			result = regionServer.processRecordTransferRequest(requestData, "Student");
+		} else if(requestData.startsWith("ADD_STUDENT")) {
+			result = regionServer.processAddTransferRequest(requestData, "Student");
 		}
 		
 		return result;
 	}
+	
 
 	public static void main(String[] args) {
 		try {
 			Server server = new Server("leader");
-			
 			server.startMTLRegion();
 			System.out.println("Leader Server MTL Region started.");
 			

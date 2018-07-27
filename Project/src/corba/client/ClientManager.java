@@ -252,7 +252,7 @@ public class ClientManager {
 		System.out.println("----------Trasnfer Record----------");
 		String recordID = userInput("Enter RecordID:");
 		String loc = userInput("Enter New Server location:");
-		String result = frontEnd.transferRecord(this.managerId, recordID,loc);
+		String result = frontEnd.transferRecord(this.managerId, recordID,loc.toUpperCase());
 
 		
 			LoggerFactory.Log(this.managerId, String.format("RecordID:%s transfered to", result));

@@ -4,6 +4,9 @@
 package dcms;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -24,19 +27,14 @@ public class DCMSServer {
 	private ArrayList<Record> tempRecords;
 
 	private String name;
-
-	private int serverPort;
-
-	private HashMap<String, Integer> nodePorts;
 	
 	private JSONObject[] otherRegions;
-	
-	private boolean isLeader;
-	
+		
 	public DCMSServer(String name,JSONObject[] otherRegions) {
 		this.recordData = new HashMap<String, ArrayList<Record>>();
 		this.name = name;
 		this.otherRegions = otherRegions;		
+		this.tempRecords = new ArrayList<Record>();
 	}
 		
 	public String createTRecord(String recordId, String firstName, String lastName, String address, String phone, String specialization, String location, String managerId) {
@@ -81,6 +79,25 @@ public class DCMSServer {
 		} else {
 			LoggerFactory.Log(this.name, String.format("Something went wrong when creating student record :%s \n by Manager: %s",record.toString(), (managerId)));
 			return String.format("Something went wrong when creating student record :%s \n by Manager: %s",record.toString(), (managerId));
+		}
+	}
+	
+	private boolean addToRecordData(String firstCharacter, Record record) {
+		if (this.recordData.containsKey(firstCharacter)) {
+			ArrayList<Record> list = this.recordData.get(firstCharacter);
+			if (list != null && list.size() > 0) {
+				list.add(record);
+				return true;
+			} else {
+				list.add(record);
+				this.recordData.put(firstCharacter, list);
+				return true;
+			}
+		} else {
+			ArrayList<Record> list = new ArrayList<Record>();
+			list.add(record);
+			this.recordData.put(firstCharacter, list);
+			return true;
 		}
 	}
 
@@ -149,32 +166,33 @@ public class DCMSServer {
 			return this.name + ": " + count;
 		}
 	}
-	/*
-	public boolean editRecords(String recordId, String fieldName, String newValue, String managerId) {
+	
+	public String editRecords(String recordId, String fieldName, String newValue, String managerId) {
 
 		LoggerFactory.Log(this.name, "Manager :" + managerId + " requested to edit a record.");
 		LoggerFactory.Log(this.name, String.format("Editing record, RecordID:%s", recordId));
 
 		if (recordId == null || recordId.isEmpty()) {
 			LoggerFactory.Log(this.name, "Record ID required");
+			return "ERROR: Record ID required";
 			// throw new RequiredValueException("Record ID required");
 		}
 
 		if (fieldName == null || fieldName.isEmpty()) {
 			LoggerFactory.Log(this.name, "FieldName required");
-			// throw new RequiredValueException("FieldName required");
+			return "ERROR: FieldName required";
 		}
 
 		if (newValue == null || newValue.isEmpty()) {
 			LoggerFactory.Log(this.name, "FieldValue required");
-			// throw new RequiredValueException("FieldValue required");
+			return "ERROR: FieldValue required";
 		}
 
 		Record record = findRecord(recordId);
 
 		if (record == null) {
 			LoggerFactory.Log(this.name, String.format("Record not found, %s", recordId));
-			return false;
+			return "ERROR: Record not found";
 		}
 		// Set lock on the record, in case if it is editing or transfering by another
 		// thread
@@ -185,7 +203,7 @@ public class DCMSServer {
 			record = findRecord(recordId);
 			if (record == null) {
 				LoggerFactory.Log(this.name, String.format("Record not found, %s", recordId));
-				return false;
+				return "ERROR: Record not found";
 			}
 
 			LoggerFactory.Log(this.name, String.format("Record found, %s", record.toString()));
@@ -203,7 +221,7 @@ public class DCMSServer {
 
 					if (!newValue.toLowerCase().equals("active") && !newValue.toLowerCase().equals("inactive")) {
 						LoggerFactory.Log(this.name, "Status is invalid");
-						// throw new RequiredValueException("Status is invalid");
+						return "ERROR: Status is invalid";
 					}
 					student.setStatus(newValue.toLowerCase());
 					break;
@@ -214,7 +232,7 @@ public class DCMSServer {
 						student.setStatusDate(newValue);
 					} catch (ParseException e) {
 						LoggerFactory.Log(this.name, "Date is invalid");
-						// throw new RequiredValueException("Date is invalid");
+						return "ERROR: Date is invalid";
 					}
 					break;
 				case "coursesregistered":
@@ -222,10 +240,11 @@ public class DCMSServer {
 					break;
 				default:
 					LoggerFactory.Log(this.name, "FieldName is invalid");
-					// throw new RequiredValueException("FieldName is invalid");
+					return "ERROR: FieldName is invalid";
 				}
 
 				LoggerFactory.Log(this.name, String.format("Student record edited, %s", student));
+				return "SUCCESS: Student record edited";
 
 			} else {
 				TeacherRecord teacher = (TeacherRecord) record;
@@ -256,24 +275,25 @@ public class DCMSServer {
 					if (!newValue.toLowerCase().equals("mtl") && !newValue.toLowerCase().equals("lvl")
 							&& !newValue.toLowerCase().equals("ddo")) {
 						LoggerFactory.Log(this.name, "location is invalid");
-						// throw new RequiredValueException("location is invalid");
+						return "ERROR: location is invalid";
 					}
 					assert teacher != null;
 					teacher.setLocation(newValue.toLowerCase());
 					break;
 				default:
 					LoggerFactory.Log(this.name, "FieldName is invalid");
-					// throw new RequiredValueException("FieldName is invalid");
+					return "ERROR: FieldName is invalid";
 				}
 
 				LoggerFactory.Log(this.name, String.format("Teacher record edited, %s", teacher));
+				return "SUCCESS: Teacher record edited";
 			}
+			
 		}
 
-		return true;
 	}
-
-	public boolean transferRecord(String managerID, String recordID, String remoteCenterServerName) {
+	
+	public String transferRecord(String managerID, String recordID, String remoteCenterServerName) {
 
 		LoggerFactory.Log(this.name, "Manager :" + managerID + " requested to transfer a record.");
 		LoggerFactory.Log(this.name, String.format("Transering record, RecordID:%s", recordID));
@@ -283,7 +303,7 @@ public class DCMSServer {
 
 		if (record == null) {
 			LoggerFactory.Log(this.name, String.format("Record not found, %s", recordID));
-			return false;
+			return "ERROR: Record not found";
 		}
 		// Set lock on the record, in case if it is editing or transferring by another
 		// thread
@@ -294,49 +314,38 @@ public class DCMSServer {
 			record = findRecord(recordID);
 			if (record == null) {
 				LoggerFactory.Log(this.name, String.format("Record not found, %s", recordID));
-				return false;
+				return "ERROR: Record not found";
 			}
 
 			LoggerFactory.Log(this.name, String.format("Record found, %s", record.toString()));
 
-			// find the remote server
-			int port = this.nodePorts.get(remoteCenterServerName);
+			int port = 0;
+			String host = null;
+			
+			for(JSONObject regionServer: this.otherRegions) {
+				if (((String)regionServer.get("region")).equals(remoteCenterServerName)) {
+					port = (int) ((long) (regionServer.get("port")));
+					host = (String)regionServer.get("host");
+				}
+			}
 
 			if (record.getClass() == StudentRecord.class) {
 				StudentRecord student = (StudentRecord) record;
-				transferRecord(student, "Student", managerID, port, remoteCenterServerName);
+				transferRecord(student, "Student", managerID, port, host, remoteCenterServerName);
 
 			} else {
 				TeacherRecord teacher = (TeacherRecord) record;
-				transferRecord(teacher, "Teacher", managerID, port, remoteCenterServerName);
+				transferRecord(teacher, "Teacher", managerID, port, host, remoteCenterServerName);
 
 			}
 		}
 
-		return true;
+		return "SUCCESS: Record transfered";
 	}
-	*/
-	private boolean addToRecordData(String firstCharacter, Record record) {
-		if (this.recordData.containsKey(firstCharacter)) {
-			ArrayList<Record> list = this.recordData.get(firstCharacter);
-			if (list != null && list.size() > 0) {
-				list.add(record);
-				return true;
-			} else {
-				list.add(record);
-				this.recordData.put(firstCharacter, list);
-				return true;
-			}
-		} else {
-			ArrayList<Record> list = new ArrayList<Record>();
-			list.add(record);
-			this.recordData.put(firstCharacter, list);
-			return true;
-		}
-	}
-	/*
-	private String processRecordTransferRequest(String requestData, String type) {
-		requestData = requestData.replaceAll("TRANSFER_" + type.toUpperCase() + ";", "");
+	
+	
+	public String processRecordTransferRequest(String requestData, String type) {
+		requestData = requestData.replaceAll("TRANSFER_" + type.toUpperCase() + "|", "");
 		if (type.equalsIgnoreCase("Teacher")) {
 			// convert the the string request to teacher record
 			TeacherRecord teacher = TeacherRecord.fromString(requestData);
@@ -351,11 +360,11 @@ public class DCMSServer {
 		return "OK";
 	}
 
-	private String processAddTransferRequest(String requestData, String type) {
+	public String processAddTransferRequest(String requestData, String type) {
 		LoggerFactory.Log(name, "Processing ADD_" + type.toUpperCase() + " request");
 
-		requestData = requestData.replaceAll("ADD_" + type.toUpperCase() + ";", "");
-		String[] str = requestData.split(";");
+		requestData = requestData.replaceAll("ADD_" + type.toUpperCase() + "|", "");
+		String[] str = requestData.split("|");
 		String managerID = str[0];
 		String recordID = str[1];
 		LoggerFactory.Log(name,
@@ -381,11 +390,11 @@ public class DCMSServer {
 			// commit the changes and add the record to the main hashmap
 			if (type.equalsIgnoreCase("Teacher")) {
 				TeacherRecord teacher = (TeacherRecord) record;
-				createTRecord(teacher.getFirstName(), teacher.getLastName(), teacher.getAddress(), teacher.getPhone(),
+				this.createTRecord(teacher.getRecordId(),teacher.getFirstName(), teacher.getLastName(), teacher.getAddress(), teacher.getPhone(),
 						teacher.getSpecialization(), teacher.getLocation(), managerID);
 			} else {
 				StudentRecord student = (StudentRecord) record;
-				this.createSRecord(student.getFirstName(), student.getLastName(), student.getCoursesRegistered(),
+				this.createSRecord(student.getRecordId(), student.getFirstName(), student.getLastName(), student.getCoursesRegistered(),
 						student.getStatus(), student.getStatusDate(), managerID);
 			}
 
@@ -413,45 +422,25 @@ public class DCMSServer {
 		}
 	}
 
-	private String sendSocketRequest(DatagramSocket socket, String requestString, InetAddress host, int port,
-			String remoteServer) throws IOException {
-		LoggerFactory.Log(name, "Sending request to center " + remoteServer + " request details:" + requestString);
-		byte[] requestData = requestString.getBytes();
-		DatagramPacket request = new DatagramPacket(requestData, requestData.length, host, port);
-		socket.send(request);
-		LoggerFactory.Log(name, "Request sent to transfer teacher record data to " + host.getHostName() + ":" + port);
-		byte[] buffer = new byte[1000];
-		DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-		socket.receive(reply);
-		String replyData = new String(buffer).replaceAll("\u0000.*", "");
-		LoggerFactory.Log(name, "Received this response " + replyData + " from " + host.getHostName() + ":" + port);
-
-		return replyData;
-	}
-
-	private boolean transferRecord(final Record record, final String type, final String managerID, final int port,
+	private boolean transferRecord(final Record record, final String type, final String managerID, int port, String host,
 			final String remoteServer) {
 
 		final CountDownLatch latch = new CountDownLatch(1);
+		final UDPClient client = new UDPClient(host,port);
 		// Create a new thread to transfer the record
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				DatagramSocket socket = null;
 				try {
-					socket = new DatagramSocket();
-					InetAddress host = InetAddress.getLocalHost();
-
 					// add the record to temp list to provide transactional operation, we keep a
 					// copy of the record in the temp list
 					tempRecords.add(record);
 					LoggerFactory.Log(name, Integer.toString(port));
 
 					// create a request to transfer the record
-					String replyData = sendSocketRequest(socket,
-							"TRANSFER_" + type.toUpperCase() + ";" + record.toSplited(), host, port, remoteServer);
-
+					String replyData = client.sendMessage("TRANSFER_" + type.toUpperCase() + "|" + record.toSplited());
+					
 					// if the remote server couldn't accept the request we have to remove the record
 					// from the temp table, which means rollback
 					if (!replyData.equalsIgnoreCase("OK")) {
@@ -464,9 +453,8 @@ public class DCMSServer {
 
 						// send a request to the remote server to add the reocrd to main hash map of the
 						// remote server
-						replyData = sendSocketRequest(socket,
-								"ADD_" + type.toUpperCase() + ";" + managerID + ";" + record.getRecordId() + ";", host,
-								port, remoteServer);
+						replyData = client.sendMessage("ADD_" + type.toUpperCase() + "|" + managerID + "|" + record.getRecordId() + "|");
+						
 
 						if (!replyData.equalsIgnoreCase("OK")) {
 							LoggerFactory.Log(name, "Error occur to add " + type);
@@ -482,22 +470,10 @@ public class DCMSServer {
 						}
 
 					}
-
-				} catch (SocketException e) {
-					System.out.println(e);
-					LoggerFactory.Log(name, "Error occur to connect another region server");
-
-				} catch (UnknownHostException e) {
-					System.out.println(e);
-					LoggerFactory.Log(name, "Invalid host");
 				} catch (IOException e) {
 					System.out.println(e);
 					LoggerFactory.Log(name, "Invalid data");
 				} finally {
-					if (socket != null) {
-						socket.close();
-					}
-
 					latch.countDown();
 				}
 
@@ -513,7 +489,7 @@ public class DCMSServer {
 		}
 
 	}
-
+	
 	private Record findRecord(String recordId) {
 		LoggerFactory.Log(this.name, "Looking record id");
 		Record record = null;
@@ -535,5 +511,5 @@ public class DCMSServer {
 		return record;
 
 	}
-	*/
+	
 }

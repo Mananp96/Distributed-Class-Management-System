@@ -62,7 +62,7 @@ public class StudentRecord extends Record {
 	 * @return String containing Status, Date and Courses in which student is registered. 
 	 */
 	public String toSplited() {
-		return String.format("%s;%s;%s;%s", super.toSplited(),
+		return String.format("%s|%s|%s|%s", super.toSplited(),
 				this.getStatus(), this.getStatusDate(), String.join(",", this.getCoursesRegistered()));
 	}
 	
