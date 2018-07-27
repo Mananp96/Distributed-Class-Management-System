@@ -19,6 +19,9 @@ public class ClientManager {
 	private static FrontEnd frontEnd;
 	private String managerId;
 	private Scanner s;
+	
+	private static final String FE_HOST = "localhost";
+	private static final int ORB_PORT = 1050;
 
 	public static void main(String[] args) throws IOException, RequiredValueException, NotBoundException {
 
@@ -74,8 +77,9 @@ public class ClientManager {
 				LoggerFactory.Log(this.managerId, "Registering manager");
 				
 				try{
-					
-					ORB orb = ORB.init(args, null);
+					String orbInitStr = "-ORBInitialPort " + ORB_PORT + " -ORBInitialHost " + FE_HOST;
+					String[] orbInitArr = orbInitStr.split(" ");
+					ORB orb = ORB.init(orbInitArr, null);
 					org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
 					NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
 					frontEnd = (FrontEnd) FrontEndHelper.narrow(ncRef.resolve_str("fEnd"));
