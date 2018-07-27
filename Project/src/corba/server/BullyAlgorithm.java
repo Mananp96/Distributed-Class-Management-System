@@ -105,13 +105,13 @@ public class BullyAlgorithm extends TimerTask {
 			r = this.DDOLeader;
 
 		for (Region s : servers) {
-			if (s.IsAlive) {
+			if (s.IsAlive && s.ID != r.ID) {
 				r.Host = s.Host;
 				r.ID = s.ID;
 				r.Port = s.Port;
 				r.IsAlive = s.IsAlive;
 				LoggerFactory.LogServer(
-						"set leader for the region " + region + " on " + s.Host + ":" + s.Port + " is alive");
+						"set leader for the region " + region + " on " + s.Host + ":" + s.Port);
 				break;
 			}
 		}
