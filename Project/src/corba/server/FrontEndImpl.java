@@ -27,7 +27,7 @@ public class FrontEndImpl extends FrontEndPOA {
 	private Region LVLLeader;
 	private Region DDOLeader;
 
-	public void FrontEndImpl() throws FileNotFoundException, IOException, ParseException {
+	public FrontEndImpl() throws FileNotFoundException, IOException, ParseException {
 		initialLeaders();
 		BullyAlgorithm ba = new BullyAlgorithm(this.MTLLeader, this.LVLLeader, this.DDOLeader);
 	}
