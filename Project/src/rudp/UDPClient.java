@@ -21,7 +21,9 @@ public class UDPClient {
 	
 	public String sendMessage(String data) throws IOException {
 		ReliableSocket client = new ReliableSocket();
-		client.connect(this.serverAddress,6000);
+
+		client.connect(this.serverAddress);
+
 		
 		DataOutputStream stream = new DataOutputStream(client.getOutputStream());
 		stream.writeUTF(data);

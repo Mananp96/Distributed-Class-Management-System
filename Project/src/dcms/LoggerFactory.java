@@ -53,4 +53,15 @@ public class LoggerFactory {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void LogFrontEnd(String message) {
+
+		try {
+			Logger logger = LoggerFactory.getInstance("FronEnd");
+
+			logger.info(message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
