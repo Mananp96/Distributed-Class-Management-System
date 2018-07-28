@@ -301,8 +301,45 @@ public class Server {
 			}
 			result = "OK";
 		} else if(requestData.startsWith("CURRENT_STATUS")) {
+			String[] data = requestData.split("\\|");
+			
+			JSONObject newMtlLeader = new JSONObject();
+			newMtlLeader.put("host", data[2]);
+			newMtlLeader.put("port", Long.parseLong(data[3]));
+			newMtlLeader.put("region", data[1]);
+			newMtlLeader.put("id", data[4]);
+			newMtlLeader.put("status", "leader");
+			
+			JSONObject newLVLLeader = new JSONObject();
+			newLVLLeader.put("host", data[6]);
+			newLVLLeader.put("port", Long.parseLong(data[7]));
+			newLVLLeader.put("region", data[5]);
+			newLVLLeader.put("id", data[8]);
+			newLVLLeader.put("status", "leader");
+			
+			JSONObject newDDOLeader = new JSONObject();
+			newDDOLeader.put("host", data[10]);
+			newDDOLeader.put("port", Long.parseLong(data[11]));
+			newDDOLeader.put("region", data[9]);
+			newDDOLeader.put("id", data[12]);
+			newDDOLeader.put("status", "leader");
+			
+			switch(region) {
+				case "MTL":
+					regionServer.setRegions(new JSONObject[] {newLVLLeader,newDDOLeader});
+					break;
+				case "LVL":
+					regionServer.setRegions(new JSONObject[] {newMtlLeader,newDDOLeader});
+					break;
+				case "DDO":
+					regionServer.setRegions(new JSONObject[] {newMtlLeader,newLVLLeader});
+					break;	
+				
+			}
+			
 			result = "OK";
 		} else if(requestData.startsWith("STATUS")) {
+			/*
 			result = "";
 			Set keys = this.appConfig.keySet();
 			Iterator iterator = keys.iterator();
@@ -347,7 +384,7 @@ public class Server {
 				}
 			}
 			
-			
+			*/
 		}
 		
 		return result;

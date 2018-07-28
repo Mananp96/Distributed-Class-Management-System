@@ -127,9 +127,9 @@ public class BullyAlgorithm extends TimerTask {
 				r.IsAlive = s.IsAlive;
 				
 				String msg = "CURRENT_STATUS|" 
-						+ this.MTLLeader.Region + "|" + this.MTLLeader.Host + "|" + this.MTLLeader.Port + "|"
-					    + this.LVLLeader.Region + "|" + this.LVLLeader.Host + "|" + this.LVLLeader.Port + "|"
-					    + this.DDOLeader.Region + "|" + this.DDOLeader.Host + "|" + this.DDOLeader.Port;
+						+ this.MTLLeader.Region + "|" + this.MTLLeader.Host + "|" + this.MTLLeader.Port + "|" + this.MTLLeader.ID + "|"  
+					    + this.LVLLeader.Region + "|" + this.LVLLeader.Host + "|" + this.LVLLeader.Port + "|" + this.LVLLeader.ID + "|" 
+					    + this.DDOLeader.Region + "|" + this.DDOLeader.Host + "|" + this.DDOLeader.Port + "|" + this.DDOLeader.ID;
 				
 				
 				sendCurrentStatus(r, msgOLD);
