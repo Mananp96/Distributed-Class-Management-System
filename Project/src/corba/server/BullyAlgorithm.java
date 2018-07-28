@@ -42,7 +42,7 @@ public class BullyAlgorithm extends TimerTask {
 	public void run() {
 		LoggerFactory.LogFrontEnd("bully algorithm triggered");
 
-		final CountDownLatch latch = new CountDownLatch(1);
+		final CountDownLatch latch = new CountDownLatch(3);
 		new Thread(new Runnable() {
 
 			@Override
@@ -52,23 +52,23 @@ public class BullyAlgorithm extends TimerTask {
 			}
 		}).start();
 
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				runRegionBully("LVL");
-//				latch.countDown();
-//			}
-//		}).start();
-//
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				runRegionBully("DDO");
-//				latch.countDown();
-//			}
-//		}).start();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				runRegionBully("LVL");
+				latch.countDown();
+			}
+		}).start();
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				runRegionBully("DDO");
+				latch.countDown();
+			}
+		}).start();
 
 		try {
 			latch.await();
