@@ -62,7 +62,7 @@ public class FrontEndManager {
 							System.out.println("1. Kill MTL Server");
 							System.out.println("2. Kill LVL Server");
 							System.out.println("3. Kill DDO Server");
-							System.out.println("4. Check Sync Status");
+							//System.out.println("4. Check Sync Status");
 							System.out.println("===============================");
 							System.out.print("Enter your choice: ");
 							Scanner in = new Scanner(System.in);
@@ -81,6 +81,7 @@ public class FrontEndManager {
 									recMgrFE.checkSyncStatus();
 									break;
 							}
+							System.out.print("Press enter to continue...");
 							in.nextLine();
 						}
 						

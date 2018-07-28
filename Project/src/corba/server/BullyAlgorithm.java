@@ -132,11 +132,11 @@ public class BullyAlgorithm extends TimerTask {
 					    + this.DDOLeader.Region + "|" + this.DDOLeader.Host + "|" + this.DDOLeader.Port;
 				
 				
-//				sendCurrentStatus(r, msgOLD);
-//				
-//				sendCurrentStatus(this.MTLLeader, msg);
-//				sendCurrentStatus(this.LVLLeader, msg);
-//				sendCurrentStatus(this.DDOLeader, msg);
+				sendCurrentStatus(r, msgOLD);
+				
+				sendCurrentStatus(this.MTLLeader, msg);
+				sendCurrentStatus(this.LVLLeader, msg);
+				sendCurrentStatus(this.DDOLeader, msg);
 					
 				
 				LoggerFactory.LogFrontEnd(

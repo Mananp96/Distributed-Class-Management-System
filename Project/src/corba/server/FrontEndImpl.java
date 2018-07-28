@@ -26,6 +26,8 @@ public class FrontEndImpl extends FrontEndPOA {
 	private Region MTLLeader;
 	private Region LVLLeader;
 	private Region DDOLeader;
+	
+	
 
 	public FrontEndImpl() throws FileNotFoundException, IOException, ParseException {
 		initialLeaders();
@@ -254,11 +256,7 @@ public class FrontEndImpl extends FrontEndPOA {
 	public void checkSyncStatus() {
 		try {
 			UDPClient client = new UDPClient(this.MTLLeader.Host, this.MTLLeader.Port);
-			System.out.println(client.sendMessage("RECORDCOUNT|MTL0001"));
-			client = new UDPClient(this.LVLLeader.Host, this.LVLLeader.Port);
-			System.out.println(client.sendMessage("RECORDCOUNT|LVL0001"));
-			client = new UDPClient(this.DDOLeader.Host, this.DDOLeader.Port);
-			System.out.println(client.sendMessage("RECORDCOUNT|DDO0001"));
+			System.out.println(client.sendMessage("STATUS"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();

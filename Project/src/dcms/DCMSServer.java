@@ -123,10 +123,20 @@ public class DCMSServer {
 
 			String recordCountData = this.name + ": " + count + " ";
 			LoggerFactory.Log(this.name, "Total Records in " + this.name + " server are " + recordCountData);
-
-			final CountDownLatch latch = new CountDownLatch(this.otherRegions.length);
+			int length = 0;
+			for(JSONObject region: this.otherRegions) {
+				String status = (String)region.get("status");
+				if(! status.equalsIgnoreCase("down")) {
+					length++;
+				}
+			}
+			final CountDownLatch latch = new CountDownLatch(length);
 			final ArrayList<String> results = new ArrayList<String>(); 
 			for(final JSONObject region: this.otherRegions) {
+				String status = (String)region.get("status");
+				if(status.equalsIgnoreCase("down")) {
+					continue;
+				}
 				new Thread(new Runnable() {
 
 					@Override

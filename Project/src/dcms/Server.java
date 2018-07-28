@@ -285,6 +285,69 @@ public class Server {
 			}
 
 			result = "DONE";
+		} else if(requestData.startsWith("OLD_REGION")) {
+			String[] data = requestData.split("\\|");
+			Set keys = this.appConfig.keySet();
+			Iterator iterator = keys.iterator();
+			while(iterator.hasNext()) {
+				JSONObject currentConfig = (JSONObject)this.appConfig.get(((String)iterator.next()));
+				JSONObject regionConfig_temp = (JSONObject)currentConfig.get(data[1]);
+				String host = (String)regionConfig_temp.get("host");
+				String port = (int)(long)regionConfig_temp.get("port") + "";
+				
+				if(host.equalsIgnoreCase(data[2]) && port.equalsIgnoreCase(data[3])) {
+					regionConfig_temp.put("status", "down");
+				}
+			}
+			result = "OK";
+		} else if(requestData.startsWith("CURRENT_STATUS")) {
+			result = "OK";
+		} else if(requestData.startsWith("STATUS")) {
+			result = "";
+			Set keys = this.appConfig.keySet();
+			Iterator iterator = keys.iterator();
+			while(iterator.hasNext()) {
+				String server = ((String)iterator.next());
+				JSONObject currentConfig = (JSONObject)this.appConfig.get(server);
+				Set regionKeys = currentConfig.keySet();
+				Iterator regionIterator = regionKeys.iterator();
+				while(regionIterator.hasNext()) {
+					boolean status = false;
+					String regionStr = (String)regionIterator.next();
+					
+					JSONObject regionConfig1 = (JSONObject)currentConfig.get(regionStr);
+					if(!((String)regionConfig1.get("status")).equals("down")) {
+						String host = (String)regionConfig1.get("host");
+						int port = ((int)(long)regionConfig1.get("port"));
+						
+						String regionHost = (String)regionConfig.get("host");
+						int regionPort = ((int)(long)regionConfig.get("port"));
+						
+						if(!((host.equalsIgnoreCase(regionHost)) && (port == regionPort))) {
+							
+						
+							UDPClient client = new UDPClient(host, port);
+							
+							try {
+								
+								result += server+" status: "+client.sendMessage("RECORDCOUNT|MTL0001")+"\n";
+								status = true;
+								
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						
+						}
+						
+					}
+					
+					if(status) {
+						break;
+					}
+				}
+			}
+			
+			
 		}
 		
 		return result;
