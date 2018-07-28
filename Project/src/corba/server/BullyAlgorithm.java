@@ -36,13 +36,13 @@ public class BullyAlgorithm extends TimerTask {
 		this.DDOLeader = ddoLeader;
 
 		Timer timer = new Timer();
-		timer.schedule(this, 5000, 3000);
+		timer.schedule(this, 1000, 3000);
 	}
 
 	public void run() {
-		LoggerFactory.LogServer("bully algorithm triggered");
+		LoggerFactory.LogFrontEnd("bully algorithm triggered");
 
-		final CountDownLatch latch = new CountDownLatch(3);
+		final CountDownLatch latch = new CountDownLatch(1);
 		new Thread(new Runnable() {
 
 			@Override
@@ -52,50 +52,56 @@ public class BullyAlgorithm extends TimerTask {
 			}
 		}).start();
 
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				runRegionBully("LVL");
-				latch.countDown();
-			}
-		}).start();
-
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				runRegionBully("DDO");
-				latch.countDown();
-			}
-		}).start();
+//		new Thread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				runRegionBully("LVL");
+//				latch.countDown();
+//			}
+//		}).start();
+//
+//		new Thread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				runRegionBully("DDO");
+//				latch.countDown();
+//			}
+//		}).start();
 
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
-			LoggerFactory.LogServer("error happend durring running the bully " + e.toString());
+			LoggerFactory.LogFrontEnd("error happend durring running the bully " + e.toString());
 			e.printStackTrace();
 		}
 
-		LoggerFactory.LogServer("bully algorithm finished");
+		LoggerFactory.LogFrontEnd("bully algorithm finished");
 	}
 
 	private void runRegionBully(String region) {
-		LoggerFactory.LogServer("start to run bully algorithm for " + region);
+		LoggerFactory.LogFrontEnd("start to run bully algorithm for " + region);
 		ArrayList<Region> servers = getRegionServers(region);
 		for (Region s : servers) {
 			UDPClient client = new UDPClient(s.Host, s.Port);
 			try {
-				LoggerFactory.LogServer("Sending health check message to the " + s.Host + ":" + s.Port);
+				LoggerFactory.LogFrontEnd("Sending health check message to the " + s.Host + ":" + s.Port);
 				String response = client.sendMessage("ARE_YOU_ALIVE");
 				s.IsAlive = response.equalsIgnoreCase("YES");
-				LoggerFactory.LogServer("region " + region + " on " + s.Host + ":" + s.Port + " is alive");
+				LoggerFactory.LogFrontEnd("region " + region + " on " + s.Host + ":" + s.Port + " is alive");
 			} catch (IOException e) {
 				s.IsAlive = false;
-				LoggerFactory.LogServer("region " + region + " on " + s.Host + ":" + s.Port + " is NOT alive");
+				if (region.equalsIgnoreCase("MTL"))
+					this.MTLLeader.IsAlive = false;
+				else if (region.equalsIgnoreCase("LVL"))
+					this.LVLLeader.IsAlive = false;
+				else
+					this.DDOLeader.IsAlive = false;
+				LoggerFactory.LogFrontEnd("region " + region + " on " + s.Host + ":" + s.Port + " is NOT alive");
 			}
 		}
-
+		
 		Region r;
 		if (region.equalsIgnoreCase("MTL"))
 			r = this.MTLLeader;
@@ -103,11 +109,15 @@ public class BullyAlgorithm extends TimerTask {
 			r = this.LVLLeader;
 		else
 			r = this.DDOLeader;
-
+		
+		if(r.IsAlive)
+			return;
+					
 		for (Region s : servers) {
-			if (s.IsAlive && s.ID != r.ID) {
+			
+			if (s.IsAlive &&  s.ID != r.ID) {
 				
-
+			
 				String msgOLD = "OLD_REGION|" 
 						+ r.Region + "|" + r.Host + "|" + r.Port;
 				
@@ -122,19 +132,20 @@ public class BullyAlgorithm extends TimerTask {
 					    + this.DDOLeader.Region + "|" + this.DDOLeader.Host + "|" + this.DDOLeader.Port;
 				
 				
-				sendCurrentStatus(r, msgOLD);
-				
-				sendCurrentStatus(this.MTLLeader, msg);
-				sendCurrentStatus(this.LVLLeader, msg);
-				sendCurrentStatus(this.DDOLeader, msg);
+//				sendCurrentStatus(r, msgOLD);
+//				
+//				sendCurrentStatus(this.MTLLeader, msg);
+//				sendCurrentStatus(this.LVLLeader, msg);
+//				sendCurrentStatus(this.DDOLeader, msg);
 					
 				
-				LoggerFactory.LogServer(
+				LoggerFactory.LogFrontEnd(
 						"set leader for the region " + region + " on " + s.Host + ":" + s.Port);
 				break;
 			}
 		}
 
+		
 	}
 	
 	private void sendCurrentStatus(Region r, String msg)
@@ -153,7 +164,7 @@ public class BullyAlgorithm extends TimerTask {
 	}
 
 	private void initialServersList() throws FileNotFoundException, IOException, ParseException {
-		LoggerFactory.LogServer("Initializing the server list in bully algorithm");
+		LoggerFactory.LogFrontEnd("Initializing the server list in bully algorithm");
 		this.Servers = new HashMap<String, ArrayList<Region>>();
 		this.Servers.put("MTL", new ArrayList<Region>());
 		this.Servers.put("LVL", new ArrayList<Region>());
@@ -164,39 +175,39 @@ public class BullyAlgorithm extends TimerTask {
 		sortServerList("LVL");
 		sortServerList("DDO");
 
-		LoggerFactory.LogServer("Initialzing the servr list finished");
+		LoggerFactory.LogFrontEnd("Initialzing the servr list finished");
 
 	}
 
 	private void sortServerList(String region) {
-		LoggerFactory.LogServer("Sorting " + region + " list based on the ID");
+		LoggerFactory.LogFrontEnd("Sorting " + region + " list based on the ID");
 		ArrayList<Region> servers = getRegionServers(region);
 		Collections.sort(servers, new Comparator<Region>() {
 			@Override
 			public int compare(Region lhs, Region rhs) {
-				return lhs.ID < rhs.ID ? -1 : (lhs.ID > rhs.ID) ? 1 : 0;
+				return lhs.ID > rhs.ID ? -1 : (lhs.ID < rhs.ID) ? 1 : 0;
 			}
 		});
 	}
 
 	private void loadConfigFile() throws FileNotFoundException, IOException, ParseException {
-		LoggerFactory.LogServer("Loading config file");
+		LoggerFactory.LogFrontEnd("Loading config file");
 		JSONParser parser = new JSONParser();
 		JSONObject config = (JSONObject) parser.parse(new FileReader("resources/config.json"));
 
-		LoggerFactory.LogServer("config file loaded");
+		LoggerFactory.LogFrontEnd("config file loaded");
 
-		LoggerFactory.LogServer("load leader regions");
+		LoggerFactory.LogFrontEnd("load leader regions");
 		JSONObject leader = (JSONObject) config.get("leader");
 		loadServers(new JSONObject[] { (JSONObject) leader.get("MTL"), (JSONObject) leader.get("LVL"),
 				(JSONObject) leader.get("DDO") });
 
-		LoggerFactory.LogServer("load slave1 regions");
+		LoggerFactory.LogFrontEnd("load slave1 regions");
 		JSONObject slave1 = (JSONObject) config.get("slave1");
 		loadServers(new JSONObject[] { (JSONObject) slave1.get("MTL"), (JSONObject) slave1.get("LVL"),
 				(JSONObject) slave1.get("DDO") });
 
-		LoggerFactory.LogServer("load slave2 regions");
+		LoggerFactory.LogFrontEnd("load slave2 regions");
 		JSONObject slave2 = (JSONObject) config.get("slave2");
 		loadServers(new JSONObject[] { (JSONObject) slave2.get("MTL"), (JSONObject) slave2.get("LVL"),
 				(JSONObject) slave2.get("DDO") });

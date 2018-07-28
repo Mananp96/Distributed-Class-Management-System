@@ -1,5 +1,7 @@
 package corba.server;
 
+import java.util.Scanner;
+
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextExt;
@@ -31,7 +33,7 @@ public class FrontEndManager {
 				rootPOA.the_POAManager().activate();
 				
 				//Creating servant instance and registering it with the ORB
-				FrontEndImpl recMgrFE = new FrontEndImpl();
+				final FrontEndImpl recMgrFE = new FrontEndImpl();
 				
 				//Making servant instance a CORBA object by registering it with POA
 				org.omg.CORBA.Object feObjRef = rootPOA.servant_to_reference(recMgrFE);
@@ -51,8 +53,44 @@ public class FrontEndManager {
 				
 				System.out.println("Front end CORBA server has been started.");
 				
+				new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						while(true) {
+							
+							System.out.println("1. Kill MTL Server");
+							System.out.println("2. Kill LVL Server");
+							System.out.println("3. Kill DDO Server");
+							System.out.println("4. Check Sync Status");
+							System.out.println("===============================");
+							System.out.print("Enter your choice: ");
+							Scanner in = new Scanner(System.in);
+							String input = in.nextLine();
+							switch(input) {
+								case "1":
+									recMgrFE.sendFailRequest("MTL");
+									break;
+								case "2":
+									recMgrFE.sendFailRequest("LVL");
+									break;
+								case "3":
+									recMgrFE.sendFailRequest("DDO");
+									break;
+								case "4":
+									recMgrFE.checkSyncStatus();
+									break;
+							}
+							in.nextLine();
+						}
+						
+					}
+				}).start();
+				
 				//Waiting for CORBA invocations from clients
 				orb.run();
+				
+				
 			} 
 			catch (Exception e) 
 			{

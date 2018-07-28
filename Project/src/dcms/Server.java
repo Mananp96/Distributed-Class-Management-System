@@ -171,14 +171,17 @@ public class Server {
 	
 	public void stopMTLRegion() {
 		this.MTLUDPServer.killServer();
+		System.out.println("MTL Server stopped");
 	}
 	
 	public void stopLVLRegion() {
 		this.LVLUDPServer.killServer();
+		System.out.println("LVL Server stopped");
 	}
 	
 	public void stopDDORegion() {
-		this.DDOUDPServer.killServer();;
+		this.DDOUDPServer.killServer();
+		System.out.println("DDO Server stopped");
 	}
 	
 	
@@ -266,6 +269,22 @@ public class Server {
 			
 			result = "YES";
 			
+		} else if(requestData.startsWith("FAIL")) {
+			
+			switch(region) {
+				case "MTL":
+					this.stopMTLRegion();
+					break;
+				case "LVL":
+					this.stopLVLRegion();
+					break;
+				case "DDO":
+					this.stopDDORegion();
+					break;	
+				
+			}
+
+			result = "DONE";
 		}
 		
 		return result;
@@ -326,6 +345,7 @@ public class Server {
 				server.startLVLRegion();
 				System.out.println(key+" Server LVL Region started.");
 			}
+		
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}

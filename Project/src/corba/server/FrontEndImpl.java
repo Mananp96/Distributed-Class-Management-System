@@ -224,6 +224,46 @@ public class FrontEndImpl extends FrontEndPOA {
 
 		return 10000 + random.nextInt(89999);
 	}
+	
+	public void sendFailRequest(String region) {
+		Region testregion = null;
+		
+		switch(region) {
+			case "MTL":
+				testregion = this.MTLLeader;
+				break;
+			case "LVL":
+				testregion = this.LVLLeader;
+				break;
+			case "DDO":
+				testregion = this.DDOLeader;
+				break;
+		}
+		
+		
+		UDPClient client = new UDPClient(testregion.Host, testregion.Port);
+		try {
+			client.sendMessage("FAIL");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
+		
+	}
+	
+	public void checkSyncStatus() {
+		try {
+			UDPClient client = new UDPClient(this.MTLLeader.Host, this.MTLLeader.Port);
+			System.out.println(client.sendMessage("RECORDCOUNT|MTL0001"));
+			client = new UDPClient(this.LVLLeader.Host, this.LVLLeader.Port);
+			System.out.println(client.sendMessage("RECORDCOUNT|LVL0001"));
+			client = new UDPClient(this.DDOLeader.Host, this.DDOLeader.Port);
+			System.out.println(client.sendMessage("RECORDCOUNT|DDO0001"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
+	}
 }
 
 	

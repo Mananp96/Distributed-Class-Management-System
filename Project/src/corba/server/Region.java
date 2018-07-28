@@ -7,5 +7,10 @@ public class Region {
 	public String Region;
 	public int ID;
 	public boolean IsAlive;
+	
+	public Region()
+	{
+		this.IsAlive = true;
+	}
 
 }
