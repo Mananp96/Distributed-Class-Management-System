@@ -355,6 +355,7 @@ public class Server {
 	
 	
 	private void syncRequest(String requestData, String region) {
+		LoggerFactory.Log(region, "SENDING request to sync to every slave server "+requestData);
 		Set keys = this.appConfig.keySet();
 		Iterator iterator = keys.iterator();
 		while(iterator.hasNext()) {
